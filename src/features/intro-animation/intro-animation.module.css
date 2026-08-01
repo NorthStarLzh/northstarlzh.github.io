@@ -1,0 +1,57 @@
+.overlay {
+  position: fixed;
+  z-index: var(--layer-intro);
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: wait;
+  animation: overlay-exit 760ms var(--ease-standard) both;
+  will-change: opacity, transform;
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: clamp(1rem, 2vw, 1.375rem);
+  font-weight: 650;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.line {
+  width: clamp(2.5rem, 8vw, 7rem);
+  height: 1px;
+  background: currentColor;
+}
+
+.reduced {
+  cursor: default;
+  animation: reduced-exit 120ms linear both;
+}
+
+@keyframes overlay-exit {
+  0%,
+  58% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+}
+
+@keyframes reduced-exit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

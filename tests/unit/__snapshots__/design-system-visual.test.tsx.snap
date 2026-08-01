@@ -1,0 +1,961 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`design-system showcase visual stories > matches the dark theme at the desktop viewport 1`] = `
+<div
+  class="ds-showcase"
+  data-preview-viewport="desktop"
+  data-theme="dark"
+  style="max-width: 1440px;"
+>
+  <div
+    class="ds-container"
+    style="--container-max: var(--content-wide);"
+  >
+    <section
+      aria-labelledby="showcase-dark-desktop"
+      class="ds-section"
+      style="--section-space: var(--space-xl);"
+    >
+      <div
+        class="ds-stack"
+        style="--stack-gap: var(--space-xl);"
+      >
+        <div
+          class="ds-stack"
+          style="--stack-gap: var(--space-xs);"
+        >
+          <span>
+            Design system · 
+            desktop
+          </span>
+          <h1
+            id="showcase-dark-desktop"
+          >
+            Photography-first foundations
+          </h1>
+          <p>
+            Low-saturation surfaces keep the image and writing in the foreground.
+          </p>
+        </div>
+        <img
+          alt="Muted mountain landscape placeholder"
+          class="ds-app-image"
+          data-nimg="1"
+          decoding="async"
+          height="900"
+          loading="lazy"
+          sizes="(min-width: 75rem) 1120px, 100vw"
+          src="/_next/image?url=%2Fshowcase-landscape.jpg&w=3840&q=75"
+          srcset="/_next/image?url=%2Fshowcase-landscape.jpg&w=640&q=75 640w, /_next/image?url=%2Fshowcase-landscape.jpg&w=750&q=75 750w, /_next/image?url=%2Fshowcase-landscape.jpg&w=828&q=75 828w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1920&q=75 1920w, /_next/image?url=%2Fshowcase-landscape.jpg&w=2048&q=75 2048w, /_next/image?url=%2Fshowcase-landscape.jpg&w=3840&q=75 3840w"
+          style="color: transparent;"
+          width="1600"
+        />
+        <div
+          class="ds-cluster"
+          style="--cluster-align: center; --cluster-gap: var(--space-sm); --cluster-justify: flex-start;"
+        >
+          <button
+            class="ds-button ds-button--primary ds-button--md"
+            type="button"
+          >
+            <span>
+              Primary action
+            </span>
+          </button>
+          <button
+            class="ds-button ds-button--secondary ds-button--md"
+            type="button"
+          >
+            <span>
+              Secondary action
+            </span>
+          </button>
+          <button
+            aria-busy="true"
+            class="ds-button ds-button--primary ds-button--md"
+            data-loading="true"
+            disabled=""
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+              class="ds-button__spinner"
+            />
+            <span>
+              Loading
+            </span>
+          </button>
+          <button
+            aria-label="Favorite"
+            class="ds-button ds-button--ghost ds-button--md ds-icon-button"
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+            >
+              ♡
+            </span>
+          </button>
+          <a
+            class="ds-button ds-button--ghost ds-button--md"
+            href="#showcase-states"
+          >
+            <span>
+              Link action
+            </span>
+          </a>
+          <button
+            class="ds-button ds-button--secondary ds-button--md"
+            type="button"
+          >
+            <span>
+              Open dialog
+            </span>
+          </button>
+        </div>
+        <div
+          id="showcase-states"
+        >
+          <div
+            class="ds-module-state"
+            data-state="empty"
+            role="status"
+            style="--module-state-min-height: 10rem;"
+          >
+            <div
+              class="ds-stack"
+              style="--stack-gap: var(--space-md);"
+            >
+              <h2
+                class="ds-module-state__title"
+              >
+                Nothing here yet
+              </h2>
+              <p
+                class="ds-module-state__description"
+              >
+                There is no content to show here yet.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ds-cluster"
+          style="--cluster-align: stretch; --cluster-gap: var(--space-md); --cluster-justify: flex-start;"
+        >
+          <span
+            aria-hidden="true"
+            class="ds-skeleton ds-skeleton--card"
+            style="--skeleton-height: 12rem; --skeleton-width: 18rem;"
+          />
+          <span
+            aria-hidden="true"
+            class="ds-skeleton ds-skeleton--media"
+            style="--skeleton-aspect-ratio: 4 / 3; --skeleton-width: 18rem;"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+`;
+
+exports[`design-system showcase visual stories > matches the dark theme at the mobile viewport 1`] = `
+<div
+  class="ds-showcase"
+  data-preview-viewport="mobile"
+  data-theme="dark"
+  style="max-width: 390px;"
+>
+  <div
+    class="ds-container"
+    style="--container-max: var(--content-wide);"
+  >
+    <section
+      aria-labelledby="showcase-dark-mobile"
+      class="ds-section"
+      style="--section-space: var(--space-xl);"
+    >
+      <div
+        class="ds-stack"
+        style="--stack-gap: var(--space-xl);"
+      >
+        <div
+          class="ds-stack"
+          style="--stack-gap: var(--space-xs);"
+        >
+          <span>
+            Design system · 
+            mobile
+          </span>
+          <h1
+            id="showcase-dark-mobile"
+          >
+            Photography-first foundations
+          </h1>
+          <p>
+            Low-saturation surfaces keep the image and writing in the foreground.
+          </p>
+        </div>
+        <img
+          alt="Muted mountain landscape placeholder"
+          class="ds-app-image"
+          data-nimg="1"
+          decoding="async"
+          height="900"
+          loading="lazy"
+          sizes="(min-width: 75rem) 1120px, 100vw"
+          src="/_next/image?url=%2Fshowcase-landscape.jpg&w=3840&q=75"
+          srcset="/_next/image?url=%2Fshowcase-landscape.jpg&w=640&q=75 640w, /_next/image?url=%2Fshowcase-landscape.jpg&w=750&q=75 750w, /_next/image?url=%2Fshowcase-landscape.jpg&w=828&q=75 828w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1920&q=75 1920w, /_next/image?url=%2Fshowcase-landscape.jpg&w=2048&q=75 2048w, /_next/image?url=%2Fshowcase-landscape.jpg&w=3840&q=75 3840w"
+          style="color: transparent;"
+          width="1600"
+        />
+        <div
+          class="ds-cluster"
+          style="--cluster-align: center; --cluster-gap: var(--space-sm); --cluster-justify: flex-start;"
+        >
+          <button
+            class="ds-button ds-button--primary ds-button--md"
+            type="button"
+          >
+            <span>
+              Primary action
+            </span>
+          </button>
+          <button
+            class="ds-button ds-button--secondary ds-button--md"
+            type="button"
+          >
+            <span>
+              Secondary action
+            </span>
+          </button>
+          <button
+            aria-busy="true"
+            class="ds-button ds-button--primary ds-button--md"
+            data-loading="true"
+            disabled=""
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+              class="ds-button__spinner"
+            />
+            <span>
+              Loading
+            </span>
+          </button>
+          <button
+            aria-label="Favorite"
+            class="ds-button ds-button--ghost ds-button--md ds-icon-button"
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+            >
+              ♡
+            </span>
+          </button>
+          <a
+            class="ds-button ds-button--ghost ds-button--md"
+            href="#showcase-states"
+          >
+            <span>
+              Link action
+            </span>
+          </a>
+          <button
+            class="ds-button ds-button--secondary ds-button--md"
+            type="button"
+          >
+            <span>
+              Open dialog
+            </span>
+          </button>
+        </div>
+        <div
+          id="showcase-states"
+        >
+          <div
+            class="ds-module-state"
+            data-state="empty"
+            role="status"
+            style="--module-state-min-height: 10rem;"
+          >
+            <div
+              class="ds-stack"
+              style="--stack-gap: var(--space-md);"
+            >
+              <h2
+                class="ds-module-state__title"
+              >
+                Nothing here yet
+              </h2>
+              <p
+                class="ds-module-state__description"
+              >
+                There is no content to show here yet.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ds-cluster"
+          style="--cluster-align: stretch; --cluster-gap: var(--space-md); --cluster-justify: flex-start;"
+        >
+          <span
+            aria-hidden="true"
+            class="ds-skeleton ds-skeleton--card"
+            style="--skeleton-height: 12rem; --skeleton-width: 18rem;"
+          />
+          <span
+            aria-hidden="true"
+            class="ds-skeleton ds-skeleton--media"
+            style="--skeleton-aspect-ratio: 4 / 3; --skeleton-width: 18rem;"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+`;
+
+exports[`design-system showcase visual stories > matches the dark theme at the tablet viewport 1`] = `
+<div
+  class="ds-showcase"
+  data-preview-viewport="tablet"
+  data-theme="dark"
+  style="max-width: 768px;"
+>
+  <div
+    class="ds-container"
+    style="--container-max: var(--content-wide);"
+  >
+    <section
+      aria-labelledby="showcase-dark-tablet"
+      class="ds-section"
+      style="--section-space: var(--space-xl);"
+    >
+      <div
+        class="ds-stack"
+        style="--stack-gap: var(--space-xl);"
+      >
+        <div
+          class="ds-stack"
+          style="--stack-gap: var(--space-xs);"
+        >
+          <span>
+            Design system · 
+            tablet
+          </span>
+          <h1
+            id="showcase-dark-tablet"
+          >
+            Photography-first foundations
+          </h1>
+          <p>
+            Low-saturation surfaces keep the image and writing in the foreground.
+          </p>
+        </div>
+        <img
+          alt="Muted mountain landscape placeholder"
+          class="ds-app-image"
+          data-nimg="1"
+          decoding="async"
+          height="900"
+          loading="lazy"
+          sizes="(min-width: 75rem) 1120px, 100vw"
+          src="/_next/image?url=%2Fshowcase-landscape.jpg&w=3840&q=75"
+          srcset="/_next/image?url=%2Fshowcase-landscape.jpg&w=640&q=75 640w, /_next/image?url=%2Fshowcase-landscape.jpg&w=750&q=75 750w, /_next/image?url=%2Fshowcase-landscape.jpg&w=828&q=75 828w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1920&q=75 1920w, /_next/image?url=%2Fshowcase-landscape.jpg&w=2048&q=75 2048w, /_next/image?url=%2Fshowcase-landscape.jpg&w=3840&q=75 3840w"
+          style="color: transparent;"
+          width="1600"
+        />
+        <div
+          class="ds-cluster"
+          style="--cluster-align: center; --cluster-gap: var(--space-sm); --cluster-justify: flex-start;"
+        >
+          <button
+            class="ds-button ds-button--primary ds-button--md"
+            type="button"
+          >
+            <span>
+              Primary action
+            </span>
+          </button>
+          <button
+            class="ds-button ds-button--secondary ds-button--md"
+            type="button"
+          >
+            <span>
+              Secondary action
+            </span>
+          </button>
+          <button
+            aria-busy="true"
+            class="ds-button ds-button--primary ds-button--md"
+            data-loading="true"
+            disabled=""
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+              class="ds-button__spinner"
+            />
+            <span>
+              Loading
+            </span>
+          </button>
+          <button
+            aria-label="Favorite"
+            class="ds-button ds-button--ghost ds-button--md ds-icon-button"
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+            >
+              ♡
+            </span>
+          </button>
+          <a
+            class="ds-button ds-button--ghost ds-button--md"
+            href="#showcase-states"
+          >
+            <span>
+              Link action
+            </span>
+          </a>
+          <button
+            class="ds-button ds-button--secondary ds-button--md"
+            type="button"
+          >
+            <span>
+              Open dialog
+            </span>
+          </button>
+        </div>
+        <div
+          id="showcase-states"
+        >
+          <div
+            class="ds-module-state"
+            data-state="empty"
+            role="status"
+            style="--module-state-min-height: 10rem;"
+          >
+            <div
+              class="ds-stack"
+              style="--stack-gap: var(--space-md);"
+            >
+              <h2
+                class="ds-module-state__title"
+              >
+                Nothing here yet
+              </h2>
+              <p
+                class="ds-module-state__description"
+              >
+                There is no content to show here yet.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ds-cluster"
+          style="--cluster-align: stretch; --cluster-gap: var(--space-md); --cluster-justify: flex-start;"
+        >
+          <span
+            aria-hidden="true"
+            class="ds-skeleton ds-skeleton--card"
+            style="--skeleton-height: 12rem; --skeleton-width: 18rem;"
+          />
+          <span
+            aria-hidden="true"
+            class="ds-skeleton ds-skeleton--media"
+            style="--skeleton-aspect-ratio: 4 / 3; --skeleton-width: 18rem;"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+`;
+
+exports[`design-system showcase visual stories > matches the light theme at the desktop viewport 1`] = `
+<div
+  class="ds-showcase"
+  data-preview-viewport="desktop"
+  data-theme="light"
+  style="max-width: 1440px;"
+>
+  <div
+    class="ds-container"
+    style="--container-max: var(--content-wide);"
+  >
+    <section
+      aria-labelledby="showcase-light-desktop"
+      class="ds-section"
+      style="--section-space: var(--space-xl);"
+    >
+      <div
+        class="ds-stack"
+        style="--stack-gap: var(--space-xl);"
+      >
+        <div
+          class="ds-stack"
+          style="--stack-gap: var(--space-xs);"
+        >
+          <span>
+            Design system · 
+            desktop
+          </span>
+          <h1
+            id="showcase-light-desktop"
+          >
+            Photography-first foundations
+          </h1>
+          <p>
+            Low-saturation surfaces keep the image and writing in the foreground.
+          </p>
+        </div>
+        <img
+          alt="Muted mountain landscape placeholder"
+          class="ds-app-image"
+          data-nimg="1"
+          decoding="async"
+          height="900"
+          loading="lazy"
+          sizes="(min-width: 75rem) 1120px, 100vw"
+          src="/_next/image?url=%2Fshowcase-landscape.jpg&w=3840&q=75"
+          srcset="/_next/image?url=%2Fshowcase-landscape.jpg&w=640&q=75 640w, /_next/image?url=%2Fshowcase-landscape.jpg&w=750&q=75 750w, /_next/image?url=%2Fshowcase-landscape.jpg&w=828&q=75 828w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1920&q=75 1920w, /_next/image?url=%2Fshowcase-landscape.jpg&w=2048&q=75 2048w, /_next/image?url=%2Fshowcase-landscape.jpg&w=3840&q=75 3840w"
+          style="color: transparent;"
+          width="1600"
+        />
+        <div
+          class="ds-cluster"
+          style="--cluster-align: center; --cluster-gap: var(--space-sm); --cluster-justify: flex-start;"
+        >
+          <button
+            class="ds-button ds-button--primary ds-button--md"
+            type="button"
+          >
+            <span>
+              Primary action
+            </span>
+          </button>
+          <button
+            class="ds-button ds-button--secondary ds-button--md"
+            type="button"
+          >
+            <span>
+              Secondary action
+            </span>
+          </button>
+          <button
+            aria-busy="true"
+            class="ds-button ds-button--primary ds-button--md"
+            data-loading="true"
+            disabled=""
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+              class="ds-button__spinner"
+            />
+            <span>
+              Loading
+            </span>
+          </button>
+          <button
+            aria-label="Favorite"
+            class="ds-button ds-button--ghost ds-button--md ds-icon-button"
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+            >
+              ♡
+            </span>
+          </button>
+          <a
+            class="ds-button ds-button--ghost ds-button--md"
+            href="#showcase-states"
+          >
+            <span>
+              Link action
+            </span>
+          </a>
+          <button
+            class="ds-button ds-button--secondary ds-button--md"
+            type="button"
+          >
+            <span>
+              Open dialog
+            </span>
+          </button>
+        </div>
+        <div
+          id="showcase-states"
+        >
+          <div
+            class="ds-module-state"
+            data-state="empty"
+            role="status"
+            style="--module-state-min-height: 10rem;"
+          >
+            <div
+              class="ds-stack"
+              style="--stack-gap: var(--space-md);"
+            >
+              <h2
+                class="ds-module-state__title"
+              >
+                Nothing here yet
+              </h2>
+              <p
+                class="ds-module-state__description"
+              >
+                There is no content to show here yet.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ds-cluster"
+          style="--cluster-align: stretch; --cluster-gap: var(--space-md); --cluster-justify: flex-start;"
+        >
+          <span
+            aria-hidden="true"
+            class="ds-skeleton ds-skeleton--card"
+            style="--skeleton-height: 12rem; --skeleton-width: 18rem;"
+          />
+          <span
+            aria-hidden="true"
+            class="ds-skeleton ds-skeleton--media"
+            style="--skeleton-aspect-ratio: 4 / 3; --skeleton-width: 18rem;"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+`;
+
+exports[`design-system showcase visual stories > matches the light theme at the mobile viewport 1`] = `
+<div
+  class="ds-showcase"
+  data-preview-viewport="mobile"
+  data-theme="light"
+  style="max-width: 390px;"
+>
+  <div
+    class="ds-container"
+    style="--container-max: var(--content-wide);"
+  >
+    <section
+      aria-labelledby="showcase-light-mobile"
+      class="ds-section"
+      style="--section-space: var(--space-xl);"
+    >
+      <div
+        class="ds-stack"
+        style="--stack-gap: var(--space-xl);"
+      >
+        <div
+          class="ds-stack"
+          style="--stack-gap: var(--space-xs);"
+        >
+          <span>
+            Design system · 
+            mobile
+          </span>
+          <h1
+            id="showcase-light-mobile"
+          >
+            Photography-first foundations
+          </h1>
+          <p>
+            Low-saturation surfaces keep the image and writing in the foreground.
+          </p>
+        </div>
+        <img
+          alt="Muted mountain landscape placeholder"
+          class="ds-app-image"
+          data-nimg="1"
+          decoding="async"
+          height="900"
+          loading="lazy"
+          sizes="(min-width: 75rem) 1120px, 100vw"
+          src="/_next/image?url=%2Fshowcase-landscape.jpg&w=3840&q=75"
+          srcset="/_next/image?url=%2Fshowcase-landscape.jpg&w=640&q=75 640w, /_next/image?url=%2Fshowcase-landscape.jpg&w=750&q=75 750w, /_next/image?url=%2Fshowcase-landscape.jpg&w=828&q=75 828w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1920&q=75 1920w, /_next/image?url=%2Fshowcase-landscape.jpg&w=2048&q=75 2048w, /_next/image?url=%2Fshowcase-landscape.jpg&w=3840&q=75 3840w"
+          style="color: transparent;"
+          width="1600"
+        />
+        <div
+          class="ds-cluster"
+          style="--cluster-align: center; --cluster-gap: var(--space-sm); --cluster-justify: flex-start;"
+        >
+          <button
+            class="ds-button ds-button--primary ds-button--md"
+            type="button"
+          >
+            <span>
+              Primary action
+            </span>
+          </button>
+          <button
+            class="ds-button ds-button--secondary ds-button--md"
+            type="button"
+          >
+            <span>
+              Secondary action
+            </span>
+          </button>
+          <button
+            aria-busy="true"
+            class="ds-button ds-button--primary ds-button--md"
+            data-loading="true"
+            disabled=""
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+              class="ds-button__spinner"
+            />
+            <span>
+              Loading
+            </span>
+          </button>
+          <button
+            aria-label="Favorite"
+            class="ds-button ds-button--ghost ds-button--md ds-icon-button"
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+            >
+              ♡
+            </span>
+          </button>
+          <a
+            class="ds-button ds-button--ghost ds-button--md"
+            href="#showcase-states"
+          >
+            <span>
+              Link action
+            </span>
+          </a>
+          <button
+            class="ds-button ds-button--secondary ds-button--md"
+            type="button"
+          >
+            <span>
+              Open dialog
+            </span>
+          </button>
+        </div>
+        <div
+          id="showcase-states"
+        >
+          <div
+            class="ds-module-state"
+            data-state="empty"
+            role="status"
+            style="--module-state-min-height: 10rem;"
+          >
+            <div
+              class="ds-stack"
+              style="--stack-gap: var(--space-md);"
+            >
+              <h2
+                class="ds-module-state__title"
+              >
+                Nothing here yet
+              </h2>
+              <p
+                class="ds-module-state__description"
+              >
+                There is no content to show here yet.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ds-cluster"
+          style="--cluster-align: stretch; --cluster-gap: var(--space-md); --cluster-justify: flex-start;"
+        >
+          <span
+            aria-hidden="true"
+            class="ds-skeleton ds-skeleton--card"
+            style="--skeleton-height: 12rem; --skeleton-width: 18rem;"
+          />
+          <span
+            aria-hidden="true"
+            class="ds-skeleton ds-skeleton--media"
+            style="--skeleton-aspect-ratio: 4 / 3; --skeleton-width: 18rem;"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+`;
+
+exports[`design-system showcase visual stories > matches the light theme at the tablet viewport 1`] = `
+<div
+  class="ds-showcase"
+  data-preview-viewport="tablet"
+  data-theme="light"
+  style="max-width: 768px;"
+>
+  <div
+    class="ds-container"
+    style="--container-max: var(--content-wide);"
+  >
+    <section
+      aria-labelledby="showcase-light-tablet"
+      class="ds-section"
+      style="--section-space: var(--space-xl);"
+    >
+      <div
+        class="ds-stack"
+        style="--stack-gap: var(--space-xl);"
+      >
+        <div
+          class="ds-stack"
+          style="--stack-gap: var(--space-xs);"
+        >
+          <span>
+            Design system · 
+            tablet
+          </span>
+          <h1
+            id="showcase-light-tablet"
+          >
+            Photography-first foundations
+          </h1>
+          <p>
+            Low-saturation surfaces keep the image and writing in the foreground.
+          </p>
+        </div>
+        <img
+          alt="Muted mountain landscape placeholder"
+          class="ds-app-image"
+          data-nimg="1"
+          decoding="async"
+          height="900"
+          loading="lazy"
+          sizes="(min-width: 75rem) 1120px, 100vw"
+          src="/_next/image?url=%2Fshowcase-landscape.jpg&w=3840&q=75"
+          srcset="/_next/image?url=%2Fshowcase-landscape.jpg&w=640&q=75 640w, /_next/image?url=%2Fshowcase-landscape.jpg&w=750&q=75 750w, /_next/image?url=%2Fshowcase-landscape.jpg&w=828&q=75 828w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fshowcase-landscape.jpg&w=1920&q=75 1920w, /_next/image?url=%2Fshowcase-landscape.jpg&w=2048&q=75 2048w, /_next/image?url=%2Fshowcase-landscape.jpg&w=3840&q=75 3840w"
+          style="color: transparent;"
+          width="1600"
+        />
+        <div
+          class="ds-cluster"
+          style="--cluster-align: center; --cluster-gap: var(--space-sm); --cluster-justify: flex-start;"
+        >
+          <button
+            class="ds-button ds-button--primary ds-button--md"
+            type="button"
+          >
+            <span>
+              Primary action
+            </span>
+          </button>
+          <button
+            class="ds-button ds-button--secondary ds-button--md"
+            type="button"
+          >
+            <span>
+              Secondary action
+            </span>
+          </button>
+          <button
+            aria-busy="true"
+            class="ds-button ds-button--primary ds-button--md"
+            data-loading="true"
+            disabled=""
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+              class="ds-button__spinner"
+            />
+            <span>
+              Loading
+            </span>
+          </button>
+          <button
+            aria-label="Favorite"
+            class="ds-button ds-button--ghost ds-button--md ds-icon-button"
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+            >
+              ♡
+            </span>
+          </button>
+          <a
+            class="ds-button ds-button--ghost ds-button--md"
+            href="#showcase-states"
+          >
+            <span>
+              Link action
+            </span>
+          </a>
+          <button
+            class="ds-button ds-button--secondary ds-button--md"
+            type="button"
+          >
+            <span>
+              Open dialog
+            </span>
+          </button>
+        </div>
+        <div
+          id="showcase-states"
+        >
+          <div
+            class="ds-module-state"
+            data-state="empty"
+            role="status"
+            style="--module-state-min-height: 10rem;"
+          >
+            <div
+              class="ds-stack"
+              style="--stack-gap: var(--space-md);"
+            >
+              <h2
+                class="ds-module-state__title"
+              >
+                Nothing here yet
+              </h2>
+              <p
+                class="ds-module-state__description"
+              >
+                There is no content to show here yet.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ds-cluster"
+          style="--cluster-align: stretch; --cluster-gap: var(--space-md); --cluster-justify: flex-start;"
+        >
+          <span
+            aria-hidden="true"
+            class="ds-skeleton ds-skeleton--card"
+            style="--skeleton-height: 12rem; --skeleton-width: 18rem;"
+          />
+          <span
+            aria-hidden="true"
+            class="ds-skeleton ds-skeleton--media"
+            style="--skeleton-aspect-ratio: 4 / 3; --skeleton-width: 18rem;"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+`;

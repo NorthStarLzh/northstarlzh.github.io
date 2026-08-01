@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title description">
+  <title id="title">Content image placeholder</title>
+  <desc id="description">A neutral abstract surface used when a published image is unavailable.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d9d8d2"/>
+      <stop offset="1" stop-color="#a8aea8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#background)"/>
+  <circle cx="325" cy="315" r="190" fill="#f2f1ec" opacity=".35"/>
+  <path d="M0 680 360 420l240 180 210-145 390 270v75H0Z" fill="#747d76" opacity=".42"/>
+</svg>

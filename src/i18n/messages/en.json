@@ -1,0 +1,136 @@
+{
+  "home": {
+    "title": "Wind, Flowers, Poetry, Wine & Tea",
+    "preview": "Personal portfolio development preview",
+    "featuredPhotography": "Featured photography",
+    "profileTitle": "About",
+    "photographyEmptyDescription": "Selected photographs will appear here when they are published.",
+    "photographyErrorTitle": "Photography is unavailable",
+    "photographyErrorDescription": "The content service is temporarily unavailable. Please try again later."
+  },
+  "photography": {
+    "eyebrow": "Photography",
+    "title": "Between light and shadow",
+    "intro": "Explore landscape and portrait photographs in their original proportions.",
+    "categoryLabel": "Photography categories",
+    "categories": {
+      "landscape": "Landscape",
+      "portrait": "Portrait"
+    },
+    "loadMore": "Load more",
+    "loading": "Loading photographs…",
+    "retry": "Retry",
+    "complete": "All photographs loaded",
+    "empty": "No photographs yet",
+    "error": "Loading failed. Please try again",
+    "pagination": {
+      "prev": "Previous page",
+      "next": "Next page",
+      "pageInfo": "Page {current} of {total}"
+    }
+  },
+  "metadata": {
+    "title": "Wind, Flowers, Poetry, Wine & Tea",
+    "description": "Personal portfolio development preview"
+  },
+  "navigation": {
+    "brand": "Wind, Flowers, Poetry, Wine & Tea",
+    "skipToMain": "Skip to main content",
+    "primaryLabel": "Primary navigation",
+    "mobileLabel": "Mobile primary navigation",
+    "menuTitle": "Site navigation",
+    "menuDescription": "Visit every page and change the language or theme.",
+    "home": "Home",
+    "photography": "Photography",
+    "research": "Research",
+    "resume": "Résumé",
+    "contact": "Contact"
+  },
+  "buttons": {
+    "loadMore": "Load more",
+    "retry": "Retry",
+    "close": "Close",
+    "previous": "Previous",
+    "next": "Next",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "loading": {
+    "general": "Loading…",
+    "photography": "Loading photographs…",
+    "research": "Loading research projects…"
+  },
+  "empty": {
+    "photography": "No photographs yet",
+    "research": "No research projects yet",
+    "education": "No education entries yet",
+    "awards": "No awards yet"
+  },
+  "errors": {
+    "generic": "This content is temporarily unavailable",
+    "contentUnavailable": "Content is temporarily unavailable",
+    "loadFailed": "Loading failed. Please try again",
+    "viewerUnavailable": "The photo viewer is temporarily unavailable"
+  },
+  "download": {
+    "resume": "Download PDF résumé",
+    "unavailable": "The résumé is not available for download"
+  },
+  "dialogs": {
+    "close": "Close dialog",
+    "researchTitle": "Research project details",
+    "photoViewerTitle": "Photography viewer"
+  },
+  "localeSwitcher": {
+    "languages": {
+      "zh": "Chinese",
+      "en": "English"
+    },
+    "switchTo": "Switch to {target}",
+    "ariaLabel": "Current language: {current}; switch to {target}"
+  },
+  "research": {
+    "title": "Research",
+    "description": "Explore project contexts, research processes, and paper results.",
+    "featuredTitle": "Featured research",
+    "featuredDescription": "A selection of recent research and practice.",
+    "openProject": "View project: {title}",
+    "papers": "Paper results",
+    "noPapers": "No paper results yet",
+    "emptyTitle": "No research projects yet",
+    "emptyDescription": "Published research projects will appear here.",
+    "errorTitle": "Research is unavailable",
+    "errorDescription": "The content service is temporarily unavailable. Please try again later."
+  },
+  "resume": {
+    "title": "Résumé",
+    "description": "Profile, education, and awards.",
+    "summaryTitle": "Résumé summary",
+    "educationTitle": "Education",
+    "awardsTitle": "Awards",
+    "errorTitle": "The résumé is unavailable",
+    "errorDescription": "The content service is temporarily unavailable. Please try again later."
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "You are welcome to get in touch by email.",
+    "emailLabel": "Email"
+  },
+  "theme": {
+    "label": "Theme",
+    "loading": "Theme is loading",
+    "ariaLabel": "Current theme: {current}; switch to {target}",
+    "title": "Theme: {current}",
+    "modes": {
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "resolved": {
+      "light": "currently light",
+      "dark": "currently dark"
+    }
+  }
+}

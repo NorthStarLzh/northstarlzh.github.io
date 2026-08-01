@@ -1,0 +1,26 @@
+import type {StructureResolver} from '../../node_modules/sanity/lib/structure.js';
+export {structureTool} from '../../node_modules/sanity/lib/structure.js';
+
+import {PROFILE_DOCUMENT_ID} from '../schemaTypes/profile';
+
+export const structure: StructureResolver = (S) =>
+  S.list()
+    .id('content-management')
+    .title('内容管理')
+    .items([
+      S.listItem()
+        .id('profile-singleton')
+        .title('个人资料（单例）')
+        .child(S.document().schemaType('profile').documentId(PROFILE_DOCUMENT_ID)),
+      S.divider(),
+      S.documentTypeListItem('education').title('教育经历'),
+      S.documentTypeListItem('award').title('获奖经历'),
+      S.documentTypeListItem('photo').title('摄影作品'),
+      S.documentTypeListItem('researchProject').title('科研项目'),
+    ]);
+
+export function filterSingletonTemplates<Template extends {schemaType: string}>(
+  templates: Template[],
+): Template[] {
+  return templates.filter((template) => template.schemaType !== 'profile');
+}

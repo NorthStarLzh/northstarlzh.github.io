@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title description">
+  <title id="title">Photography placeholder</title>
+  <desc id="description">A quiet neutral gradient used while a photography asset is unavailable.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d8d8d1"/>
+      <stop offset="1" stop-color="#aeb5ad"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#background)"/>
+  <path d="M0 660 310 390l205 180 170-145 515 375H0Z" fill="#7f8a81" opacity=".52"/>
+</svg>

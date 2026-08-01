@@ -1,0 +1,9 @@
+.DS_Store
+.playwright-browsers/
+coverage/
+doc/
+playwright-report/
+test-results/
+tests/
+*.tsbuildinfo
+.env*

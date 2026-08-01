@@ -1,0 +1,136 @@
+{
+  "home": {
+    "title": "风花诗酒茶",
+    "preview": "个人作品网站开发预览",
+    "featuredPhotography": "精选摄影",
+    "profileTitle": "个人介绍",
+    "photographyEmptyDescription": "精选摄影作品发布后将在这里展示。",
+    "photographyErrorTitle": "精选摄影暂不可用",
+    "photographyErrorDescription": "内容服务暂时不可用，请稍后再试。"
+  },
+  "photography": {
+    "eyebrow": "摄影作品",
+    "title": "光影之间",
+    "intro": "按原始比例浏览风光与人像摄影作品。",
+    "categoryLabel": "摄影作品分类",
+    "categories": {
+      "landscape": "风光",
+      "portrait": "人像"
+    },
+    "loadMore": "加载更多",
+    "loading": "正在加载摄影作品…",
+    "retry": "重试",
+    "complete": "已加载全部摄影作品",
+    "empty": "暂无摄影作品",
+    "error": "加载失败，请重试",
+    "pagination": {
+      "prev": "上一页",
+      "next": "下一页",
+      "pageInfo": "第 {current} 页，共 {total} 页"
+    }
+  },
+  "metadata": {
+    "title": "风花诗酒茶",
+    "description": "个人作品网站开发预览"
+  },
+  "navigation": {
+    "brand": "风花诗酒茶",
+    "skipToMain": "跳到主要内容",
+    "primaryLabel": "主导航",
+    "mobileLabel": "移动端主导航",
+    "menuTitle": "网站导航",
+    "menuDescription": "访问全部页面并切换语言或主题。",
+    "home": "首页",
+    "photography": "摄影作品",
+    "research": "科研成果",
+    "resume": "个人简历",
+    "contact": "联系方式"
+  },
+  "buttons": {
+    "loadMore": "加载更多",
+    "retry": "重试",
+    "close": "关闭",
+    "previous": "上一张",
+    "next": "下一张",
+    "zoomIn": "放大",
+    "zoomOut": "缩小",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单"
+  },
+  "loading": {
+    "general": "正在加载…",
+    "photography": "正在加载摄影作品…",
+    "research": "正在加载科研项目…"
+  },
+  "empty": {
+    "photography": "暂无摄影作品",
+    "research": "暂无科研项目",
+    "education": "暂无教育经历",
+    "awards": "暂无获奖经历"
+  },
+  "errors": {
+    "generic": "暂时无法显示此内容",
+    "contentUnavailable": "内容暂不可用",
+    "loadFailed": "加载失败，请重试",
+    "viewerUnavailable": "大图查看器暂不可用"
+  },
+  "download": {
+    "resume": "下载 PDF 简历",
+    "unavailable": "简历暂不可下载"
+  },
+  "dialogs": {
+    "close": "关闭弹窗",
+    "researchTitle": "科研项目详情",
+    "photoViewerTitle": "摄影作品查看器"
+  },
+  "localeSwitcher": {
+    "languages": {
+      "zh": "中文",
+      "en": "英文"
+    },
+    "switchTo": "切换到{target}",
+    "ariaLabel": "当前语言：{current}；切换到{target}"
+  },
+  "research": {
+    "title": "科研成果",
+    "description": "探索项目背景、研究过程与论文成果。",
+    "featuredTitle": "精选科研项目",
+    "featuredDescription": "近期具有代表性的研究与实践。",
+    "openProject": "查看项目：{title}",
+    "papers": "论文成果",
+    "noPapers": "暂无论文成果",
+    "emptyTitle": "暂无科研项目",
+    "emptyDescription": "科研项目发布后将在这里展示。",
+    "errorTitle": "科研成果暂不可用",
+    "errorDescription": "内容服务暂时不可用，请稍后再试。"
+  },
+  "resume": {
+    "title": "个人简历",
+    "description": "个人简介、教育经历与获奖经历。",
+    "summaryTitle": "简历摘要",
+    "educationTitle": "教育经历",
+    "awardsTitle": "获奖经历",
+    "errorTitle": "简历暂不可用",
+    "errorDescription": "内容服务暂时不可用，请稍后再试。"
+  },
+  "contact": {
+    "title": "联系方式",
+    "description": "欢迎通过电子邮件联系。",
+    "emailLabel": "电子邮箱"
+  },
+  "theme": {
+    "label": "主题",
+    "loading": "主题正在加载",
+    "ariaLabel": "当前主题: {current}; 切换到 {target}",
+    "title": "主题: {current}",
+    "modes": {
+      "system": "跟随系统",
+      "light": "浅色",
+      "dark": "深色"
+    },
+    "resolved": {
+      "light": "当前为浅色",
+      "dark": "当前为深色"
+    }
+  }
+}

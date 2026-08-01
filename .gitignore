@@ -1,0 +1,21 @@
+# dependencies
+/node_modules
+
+# Next.js build output
+/.next
+/out
+
+# test output
+/coverage
+/playwright-report
+/test-results
+/.playwright-browsers
+
+# environment files (examples remain tracked)
+.env*
+!.env.example
+
+# local files
+.DS_Store
+*.tsbuildinfo
+npm-debug.log*
