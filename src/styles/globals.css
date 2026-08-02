@@ -43,23 +43,23 @@
 :root {
   color-scheme: light;
 
-  --color-bg: #f4f3ef;
-  --ds-color-surface: #fbfaf7;
+  --color-bg: #f4f5f7;
+  --ds-color-surface: #fbfbfc;
   --color-surface: var(--ds-color-surface);
   --color-surface-raised: #ffffff;
-  --color-text: #191a18;
-  --color-text-muted: #646760;
-  --ds-color-border: #cfd1ca;
+  --color-text: #1a1d22;
+  --color-text-muted: #5f6673;
+  --ds-color-border: #d6dae1;
   --color-border: var(--ds-color-border);
-  --ds-color-accent: #315f55;
+  --ds-color-accent: #2a5d8f;
   --color-accent: var(--ds-color-accent);
-  --color-accent-hover: #244c44;
+  --color-accent-hover: #224c78;
   --ds-color-accent-contrast: #ffffff;
   --color-accent-contrast: var(--ds-color-accent-contrast);
-  --color-danger: #9a3e36;
-  --ds-color-overlay: rgb(13 15 14 / 76%);
+  --color-danger: #a03b3b;
+  --ds-color-overlay: rgb(9 13 18 / 76%);
   --color-overlay: var(--ds-color-overlay);
-  --color-focus: #0f766e;
+  --color-focus: #1a6fc4;
 
   --space-2xs: 0.25rem;
   --space-xs: 0.5rem;
@@ -79,9 +79,9 @@
   --ds-radius-pill: 999px;
   --radius-pill: var(--ds-radius-pill);
 
-  --ds-shadow-subtle: 0 1px 2px rgb(15 18 16 / 8%);
+  --ds-shadow-subtle: 0 1px 2px rgb(10 18 30 / 8%);
   --shadow-subtle: var(--ds-shadow-subtle);
-  --ds-shadow-elevated: 0 12px 36px rgb(15 18 16 / 12%);
+  --ds-shadow-elevated: 0 12px 36px rgb(10 18 30 / 14%);
   --shadow-elevated: var(--ds-shadow-elevated);
   --ds-shadow-dialog: 0 28px 80px rgb(0 0 0 / 30%);
   --shadow-dialog: var(--ds-shadow-dialog);
@@ -115,21 +115,21 @@
 
 [data-theme='dark'] {
   color-scheme: dark;
-  --color-bg: #101210;
-  --ds-color-surface: #171a17;
-  --color-surface-raised: #1e211e;
-  --color-text: #f0f1ed;
-  --color-text-muted: #b2b6ae;
-  --ds-color-border: #393e39;
-  --ds-color-accent: #9abfb3;
-  --color-accent-hover: #b1d0c6;
-  --ds-color-accent-contrast: #10201c;
+  --color-bg: #0f1216;
+  --ds-color-surface: #161a20;
+  --color-surface-raised: #1c222b;
+  --color-text: #eef1f5;
+  --color-text-muted: #aab3c0;
+  --ds-color-border: #333d4a;
+  --ds-color-accent: #8eb8e8;
+  --color-accent-hover: #a6c9f2;
+  --ds-color-accent-contrast: #0c1622;
   --color-danger: #ef9a91;
-  --ds-color-overlay: rgb(2 4 3 / 82%);
-  --color-focus: #65d2c2;
-  --ds-shadow-subtle: 0 1px 2px rgb(0 0 0 / 28%);
-  --ds-shadow-elevated: 0 12px 36px rgb(0 0 0 / 36%);
-  --ds-shadow-dialog: 0 28px 80px rgb(0 0 0 / 58%);
+  --ds-color-overlay: rgb(2 4 6 / 82%);
+  --color-focus: #6fb2f2;
+  --ds-shadow-subtle: 0 1px 2px rgb(0 0 0 / 30%);
+  --ds-shadow-elevated: 0 12px 36px rgb(0 0 0 / 40%);
+  --ds-shadow-dialog: 0 28px 80px rgb(0 0 0 / 60%);
 }
 
 *,
@@ -175,7 +175,8 @@ a:hover {
 
 :focus-visible {
   outline: 3px solid var(--color-focus);
-  outline-offset: 3px;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-focus) 22%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -447,7 +448,7 @@ a:hover {
 
   .photo-viewer-lightbox {
     --yarl__portal_zindex: calc(var(--layer-dialog) + 1);
-    --yarl__color_backdrop: rgb(2 4 3 / 96%);
+    --yarl__color_backdrop: rgb(2 4 6 / 96%);
     --yarl__color_button: rgb(255 255 255 / 82%);
     --yarl__color_button_active: #fff;
     --yarl__slide_captions_container_background: linear-gradient(

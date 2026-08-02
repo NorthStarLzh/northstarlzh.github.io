@@ -28,7 +28,8 @@ describe('Sanity field validation', () => {
     expect(validateBilingualList({zh: ['一'], en: ['One']})).toBe(true);
     expect(validateBilingualList({zh: ['一'], en: ['One', 'Two']})).toBeTypeOf('string');
     expect(validateCategories(['landscape', 'portrait'])).toBe(true);
-    expect(validateCategories([])).toBeTypeOf('string');
+    expect(validateCategories([])).toBe(true);
+    expect(validateCategories(undefined)).toBe(true);
     expect(validateCategories(['street'])).toBeTypeOf('string');
     expect(validateYearMonth('2026-07')).toBe(true);
     expect(validateYearMonth('2026-13')).toBeTypeOf('string');
@@ -101,7 +102,7 @@ describe('cross-document featured validation', () => {
     await expect(validator(undefined, context as never)).resolves.toBe(true);
     expect(withConfig).toHaveBeenCalledWith({perspective: 'raw'});
     expect(fetch).toHaveBeenCalledWith(
-      '*[_type == $type && featured == true]{_id, featuredOrder}',
+      '*[_type == $type && featured == true]{_id, featuredOrder}[0...6]',
       {type: 'photo'},
     );
   });

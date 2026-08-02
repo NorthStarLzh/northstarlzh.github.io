@@ -83,6 +83,7 @@ describe('Studio schema and singleton structure', () => {
       document: () => document,
       divider: () => ({}),
       documentTypeListItem: () => documentTypeListItem,
+      component: () => listItem,
     } as never, {} as never);
 
     expect(rootId).toBe('content-management');

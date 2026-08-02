@@ -26,24 +26,26 @@ export function LightboxAdapter({
   const index = derivePhotoIndex(photos, activeId);
   const slides = photos.map((photo) => {
     const sources = buildViewerImageSources(photo.image);
+    const title = photo.shotAt || photo.city ? (
+      <span className="photo-viewer-caption__title">
+        {photo.shotAt ? <time dateTime={photo.shotAt}>{photo.shotAt}</time> : null}
+        {photo.shotAt && photo.city ? <span aria-hidden="true"> · </span> : null}
+        {photo.city ? localize(photo.city, locale) : null}
+      </span>
+    ) : undefined;
+    const description = photo.description ? (
+      <span className="photo-viewer-caption__description">
+        {localize(photo.description, locale)}
+      </span>
+    ) : undefined;
     return {
       src: sources.src,
       srcSet: sources.srcSet,
       width: photo.image.width,
       height: photo.image.height,
       alt: localize(photo.image.alt, locale),
-      title: (
-        <span className="photo-viewer-caption__title">
-          <time dateTime={photo.shotAt}>{photo.shotAt}</time>
-          <span aria-hidden="true"> · </span>
-          {localize(photo.city, locale)}
-        </span>
-      ),
-      description: (
-        <span className="photo-viewer-caption__description">
-          {localize(photo.description, locale)}
-        </span>
-      ),
+      ...(title ? {title} : {}),
+      ...(description ? {description} : {}),
     };
   });
 

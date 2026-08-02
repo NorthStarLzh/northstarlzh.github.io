@@ -142,14 +142,29 @@ describe('photo mapper', () => {
   });
 
   it.each([
-    {categories: []},
     {categories: ['unknown']},
     {categories: ['landscape', 'landscape']},
     {shotAt: '2026-13'},
     {image: {...rawImage(), width: 0}},
-    {image: {...rawImage(), alt: {zh: '', en: 'English'}}},
   ])('rejects malformed photo data %#', (overrides) => {
     expect(() => mapPhoto(rawPhoto(overrides))).toThrow(InvalidContentError);
+  });
+
+  it('maps a photo whose metadata is all optional as empty values', () => {
+    const mapped = mapPhoto(rawPhoto({categories: [], shotAt: '', city: undefined, description: undefined}));
+    expect(mapped.categories).toEqual([]);
+    expect(mapped).not.toHaveProperty('shotAt');
+    expect(mapped).not.toHaveProperty('city');
+    expect(mapped).not.toHaveProperty('description');
+    expect(mapped.image.alt).toEqual(bilingual('替代文本', 'Alternative text'));
+  });
+
+  it('falls back to a neutral alt when the photo alt is missing or partial', () => {
+    const missing = mapPhoto(rawPhoto({image: {...rawImage(), alt: undefined}}));
+    expect(missing.image.alt).toEqual(bilingual('摄影作品', 'Photograph'));
+
+    const partial = mapPhoto(rawPhoto({image: {...rawImage(), alt: {zh: '', en: 'English'}}}));
+    expect(partial.image.alt).toEqual(bilingual('摄影作品', 'Photograph'));
   });
 
   it('does not require featuredOrder for a non-featured photo', () => {

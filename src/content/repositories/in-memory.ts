@@ -38,7 +38,7 @@ function comparePhotos(left: Photo, right: Photo): number {
     }
   }
 
-  const dateDifference = right.shotAt.localeCompare(left.shotAt);
+  const dateDifference = (right.shotAt ?? '').localeCompare(left.shotAt ?? '');
   return dateDifference === 0 ? left.id.localeCompare(right.id) : dateDifference;
 }
 

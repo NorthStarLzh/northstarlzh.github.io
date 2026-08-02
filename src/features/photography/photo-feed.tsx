@@ -44,7 +44,6 @@ function formatPageInfo(
 }
 
 function PhotoFeedController({
-  category,
   currentPage,
   hasMore,
   initialPage,

@@ -49,6 +49,8 @@ export function validateEmail(value: unknown): true | string {
 }
 
 export function validateYearMonth(value: unknown): true | string {
+  if (value === undefined || value === null) return true;
+  if (typeof value === 'string' && value.trim() === '') return true;
   return nonEmptyString(value) && YEAR_MONTH_PATTERN.test(String(value))
     ? true
     : '请使用 YYYY-MM 格式';
@@ -67,7 +69,9 @@ export function validateNonNegativeInteger(value: unknown): true | string {
 }
 
 export function validateCategories(value: unknown): true | string {
-  if (!Array.isArray(value) || value.length === 0) return '至少选择一个分类';
+  if (value === undefined || value === null) return true;
+  if (!Array.isArray(value)) return '分类必须是风光或人像';
+  if (value.length === 0) return true;
   const allowed = new Set<string>(ALLOWED_PHOTO_CATEGORIES);
   return value.every((category) => typeof category === 'string' && allowed.has(category))
     ? true
@@ -169,7 +173,7 @@ export function createFeaturedDocumentValidator(limit: number, label: string) {
       .getClient({apiVersion: '2026-07-27'})
       .withConfig({perspective: 'raw'});
     const siblings = await client.fetch<FeaturedSibling[]>(
-      '*[_type == $type && featured == true]{_id, featuredOrder}',
+      `*[_type == $type && featured == true]{_id, featuredOrder}[0...${limit + 1}]`,
       {type: document._type},
     );
     return validateFeaturedSiblings(document, siblings, limit, label);

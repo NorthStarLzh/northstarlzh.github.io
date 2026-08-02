@@ -55,9 +55,9 @@ export function hasValidImageDimensions(
 export function hasValidPhotoCategories(
   value: unknown,
 ): value is PhotoCategory[] {
+  // An empty array is valid: categories are optional for a photo.
   return (
     Array.isArray(value) &&
-    value.length > 0 &&
     value.every(
       (category, index) =>
         typeof category === 'string' &&

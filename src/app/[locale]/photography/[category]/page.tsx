@@ -2,7 +2,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
 import { Container, Section, Stack } from '@/components/layout';
-import type { Locale, PageResult, Photo, PhotoCategory } from '@/content/contracts';
+import type { Locale, PageResult, Photo } from '@/content/contracts';
 import { PHOTO_CATEGORIES } from '@/content/contracts';
 import { createSanityRepositories, MAX_PHOTO_PAGE_SIZE } from '@/content/repositories';
 import {
@@ -47,9 +47,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     // Error state rendered below.
   }
 
-  const totalPages = page && page.hasMore ? 2 : 1; // Lower bound; real count unknown with cursors
-  // For cursor-based pagination we cannot know the exact total.
-  // Use hasMore to indicate "at least one more page exists."
+  // For cursor-based pagination we cannot know the exact total page count;
+  // `hasMore` already signals "at least one more page exists".
 
   return (
     <Section as="section" className="photography-page">

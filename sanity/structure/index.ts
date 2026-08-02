@@ -1,6 +1,7 @@
 import type {StructureResolver} from '../../node_modules/sanity/lib/structure.js';
 export {structureTool} from '../../node_modules/sanity/lib/structure.js';
 
+import {BatchUploadPane} from '../components/batch-upload';
 import {PROFILE_DOCUMENT_ID} from '../schemaTypes/profile';
 
 export const structure: StructureResolver = (S) =>
@@ -17,6 +18,11 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('award').title('获奖经历'),
       S.documentTypeListItem('photo').title('摄影作品'),
       S.documentTypeListItem('researchProject').title('科研项目'),
+      S.divider(),
+      S.listItem()
+        .id('batch-photo-upload')
+        .title('批量上传摄影图')
+        .child(S.component(BatchUploadPane).id('batch-photo-upload-pane')),
     ]);
 
 export function filterSingletonTemplates<Template extends {schemaType: string}>(

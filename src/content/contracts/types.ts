@@ -52,9 +52,12 @@ export interface Photo {
   id: string;
   image: ImageAsset;
   categories: PhotoCategory[];
-  shotAt: string;
-  city: LocalizedText;
-  description: LocalizedText;
+  /** Optional shooting date (YYYY-MM). */
+  shotAt?: string;
+  /** Optional shooting city. */
+  city?: LocalizedText;
+  /** Optional description. */
+  description?: LocalizedText;
   featured: boolean;
   featuredOrder?: number;
 }

@@ -202,7 +202,7 @@ describe('SanityPhotoRepository', () => {
     const client = new QueueClient([
       rawPhoto('broken-hero', {shotAt: 'invalid'}),
       [
-        rawPhoto('broken-featured', {featured: true, featuredOrder: 0, categories: []}),
+        rawPhoto('broken-featured', {featured: true, featuredOrder: 0, categories: ['unknown']}),
         rawPhoto('featured-fallback', {featured: true, featuredOrder: 1}),
       ],
     ]);

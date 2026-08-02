@@ -98,25 +98,25 @@ describe('hasValidImageDimensions', () => {
 
 describe('hasValidPhotoCategories', () => {
   it.each([
-    { categories: ['landscape'] },
-    { categories: ['portrait'] },
-    { categories: ['landscape', 'portrait'] },
+    {categories: []},
+    {categories: ['landscape']},
+    {categories: ['portrait']},
+    {categories: ['landscape', 'portrait']},
   ])(
-    'accepts supported, unique categories %#',
+    'accepts empty or supported, unique categories %#',
     ({ categories }) => {
       expect(hasValidPhotoCategories(categories)).toBe(true);
     },
   );
 
   it.each([
-    [],
     ['unknown'],
     ['landscape', 'unknown'],
     ['landscape', 'landscape'],
     null,
     undefined,
     '',
-  ])('rejects empty, unknown, duplicate, or non-array categories %#', (value) => {
+  ])('rejects unknown, duplicate, or non-array categories %#', (value) => {
     expect(hasValidPhotoCategories(value)).toBe(false);
   });
 });
