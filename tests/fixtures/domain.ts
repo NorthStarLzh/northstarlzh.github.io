@@ -6,6 +6,7 @@ import type {
   PaperResult,
   Photo,
   PhotoCategory,
+  PhotoCollection,
   Profile,
   ResearchProject,
 } from '@/content/contracts';
@@ -184,4 +185,29 @@ export const researchProjectFixtures: ResearchProject[] = [
   researchProjectOneImageFixture,
   researchProjectTwoImagesFixture,
   createResearchProject('research-004', 1),
+];
+
+export function createPhotoCollection(
+  slug: string,
+  photos: Photo[],
+  overrides: Partial<PhotoCollection> = {},
+): PhotoCollection {
+  return {
+    id: `collection-${slug}`,
+    title: localized(`合集 ${slug}`, `Collection ${slug}`),
+    description: localized(`合集 ${slug} 简介。`, `Collection ${slug} description.`),
+    slug,
+    photos: [...photos],
+    ...overrides,
+  };
+}
+
+export const collectionFixtures: PhotoCollection[] = [
+  createPhotoCollection('zhejiang-university', photoDataset.slice(0, 4), {
+    cover: createImageAsset('image-collection-zju-cover'),
+    sortOrder: 1,
+  }),
+  createPhotoCollection('travel', photoDataset.slice(4, 7), {
+    sortOrder: 2,
+  }),
 ];

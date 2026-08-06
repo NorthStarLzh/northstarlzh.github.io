@@ -25,11 +25,12 @@ describe('E2E fixture repository seam', () => {
 
   it('provides a deterministic bilingual 100-photo public dataset', async () => {
     const repositories = createE2EFixtureRepositories();
-    const [landscape, portrait, profile, projects] = await Promise.all([
+    const [landscape, portrait, profile, projects, collections] = await Promise.all([
       repositories.photos.listPage({ category: 'landscape', limit: 100 }),
       repositories.photos.listPage({ category: 'portrait', limit: 100 }),
       repositories.profile.getProfile(),
       repositories.research.listAll(),
+      repositories.photoCollections.listCollections(),
     ]);
     const ids = new Set([
       ...landscape.items.map(({ id }) => id),
@@ -40,5 +41,15 @@ describe('E2E fixture repository seam', () => {
     expect(profile.bio.zh).toContain('自动化测试');
     expect(profile.bio.en).toContain('automated testing');
     expect(projects.map(({ images }) => images.length)).toEqual([1, 2, 3, 1]);
+    expect(collections.map(({ slug }) => slug)).toEqual([
+      'zhejiang-university',
+      'travel',
+    ]);
+    await expect(
+      repositories.photoCollections.getCollectionBySlug('travel'),
+    ).resolves.toMatchObject({ id: 'fixture-collection-travel' });
+    await expect(
+      repositories.photoCollections.getCollectionBySlug('missing'),
+    ).resolves.toBeNull();
   });
 });

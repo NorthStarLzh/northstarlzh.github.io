@@ -16,6 +16,25 @@ export function buildPhotographyCategoryIndexUrl(
 }
 
 /**
+ * Build the path-based URL for the collections list page.
+ * Example: /zh/photography/collections/
+ */
+export function buildPhotographyCollectionsUrl(locale: Locale): string {
+  return `/${locale}/photography/collections/`;
+}
+
+/**
+ * Build the path-based URL for a single collection detail page.
+ * Example: /zh/photography/collections/zhejiang-university/
+ */
+export function buildPhotographyCollectionsDetailUrl(
+  locale: Locale,
+  slug: string,
+): string {
+  return `/${locale}/photography/collections/${slug}/`;
+}
+
+/**
  * Build the path-based URL for a specific photography page.
  * Page 1 returns the category index URL.
  * Example: /zh/photography/landscape/3/

@@ -51,7 +51,6 @@
 }
 
 .heroCopy h1,
-.eyebrow,
 .heroPosition,
 .sectionTitle {
   margin: 0;
@@ -62,15 +61,6 @@
   font-size: var(--font-size-display);
   line-height: 0.92;
   letter-spacing: -0.045em;
-}
-
-.eyebrow {
-  max-width: 42rem;
-  color: var(--color-text-muted);
-  font-size: var(--font-size-caption);
-  font-weight: 750;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
 }
 
 .heroPosition {
@@ -134,10 +124,6 @@
   .heroCopy {
     grid-template-columns: minmax(0, 2fr) minmax(18rem, 1fr);
     align-items: end;
-  }
-
-  .eyebrow {
-    grid-column: 1 / -1;
   }
 
   .heroPosition {

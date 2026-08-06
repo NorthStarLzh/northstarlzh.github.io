@@ -2,9 +2,11 @@
 
 import Lightbox from 'yet-another-react-lightbox';
 import Captions from 'yet-another-react-lightbox/plugins/captions';
+import Counter from 'yet-another-react-lightbox/plugins/counter';
 import Zoom from 'yet-another-react-lightbox/plugins/zoom';
 import 'yet-another-react-lightbox/styles.css';
 import 'yet-another-react-lightbox/plugins/captions.css';
+import 'yet-another-react-lightbox/plugins/counter.css';
 import {useCallback, useRef} from 'react';
 
 import {localize} from '@/i18n';
@@ -74,6 +76,7 @@ export function LightboxAdapter({
       className="photo-viewer-lightbox"
       close={onClose}
       controller={{closeOnBackdropClick: true}}
+      counter={{separator: ' / '}}
       index={index}
       labels={{
         Close: labels.close,
@@ -86,7 +89,7 @@ export function LightboxAdapter({
       }}
       on={{view: handleView}}
       open
-      plugins={[Captions, Zoom]}
+      plugins={[Captions, Zoom, Counter]}
       slides={slides}
       toolbar={{buttons: ['zoom', 'close']}}
       zoom={{maxZoomPixelRatio: 2, scrollToZoom: true}}

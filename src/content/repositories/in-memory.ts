@@ -3,6 +3,8 @@ import type {
   EducationEntry,
   PageResult,
   Photo,
+  PhotoCollection,
+  PhotoCollectionRepository,
   PhotoPageInput,
   PhotoRepository,
   Profile,
@@ -24,6 +26,11 @@ function byOrder<T extends { order: number }>(left: T, right: T): number {
 function byFeaturedOrder<T extends { featuredOrder?: number }>(left: T, right: T): number {
   return (left.featuredOrder ?? Number.MAX_SAFE_INTEGER) -
     (right.featuredOrder ?? Number.MAX_SAFE_INTEGER);
+}
+
+function bySortOrder<T extends { sortOrder?: number }>(left: T, right: T): number {
+  return (left.sortOrder ?? Number.MAX_SAFE_INTEGER) -
+    (right.sortOrder ?? Number.MAX_SAFE_INTEGER);
 }
 
 function comparePhotos(left: Photo, right: Photo): number {
@@ -136,6 +143,23 @@ export class InMemoryPhotoRepository implements PhotoRepository {
       nextCursor: hasMore ? `${MEMORY_CURSOR_PREFIX}${nextOffset}` : null,
       hasMore,
     };
+  }
+}
+
+export class InMemoryPhotoCollectionRepository implements PhotoCollectionRepository {
+  private readonly collections: PhotoCollection[];
+
+  constructor(collections: PhotoCollection[]) {
+    this.collections = clone(collections);
+  }
+
+  async listCollections(): Promise<PhotoCollection[]> {
+    return clone(this.collections).sort(bySortOrder);
+  }
+
+  async getCollectionBySlug(slug: string): Promise<PhotoCollection | null> {
+    const collection = this.collections.find((candidate) => candidate.slug === slug);
+    return collection ? clone(collection) : null;
   }
 }
 

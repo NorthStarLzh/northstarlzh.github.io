@@ -5,10 +5,12 @@ import type {
   LocalizedText,
   Photo,
   PhotoCategory,
+  PhotoCollection,
   Profile,
   ResearchProject,
 } from '../contracts';
 import {
+  InMemoryPhotoCollectionRepository,
   InMemoryPhotoRepository,
   InMemoryProfileRepository,
   InMemoryResearchRepository,
@@ -145,7 +147,36 @@ function project(index: number, imageCount: 1 | 2 | 3): ResearchProject {
 }
 
 const photos = createPhotos();
+
+function createCollections(): PhotoCollection[] {
+  return [
+    {
+      id: 'fixture-collection-zju',
+      title: localized('浙江大学摄影合集', 'Zhejiang University collection'),
+      description: localized(
+        '自动化测试合集：浙江大学校园风光。',
+        'Automated test collection: Zhejiang University campus.',
+      ),
+      slug: 'zhejiang-university',
+      photos: [photos[0], photos[1], photos[2], photos[10]],
+      sortOrder: 1,
+    },
+    {
+      id: 'fixture-collection-travel',
+      title: localized('旅行摄影合集', 'Travel collection'),
+      description: localized(
+        '自动化测试合集：旅途中的风景与人。',
+        'Automated test collection: scenery and people on the road.',
+      ),
+      slug: 'travel',
+      photos: [photos[4], photos[5], photos[6]],
+      sortOrder: 2,
+    },
+  ];
+}
+
 const projects = [project(1, 1), project(2, 2), project(3, 3), project(4, 1)];
+const collections = createCollections();
 
 export function isE2EFixtureMode(): boolean {
   return process.env.E2E_FIXTURE_MODE === E2E_FIXTURE_FLAG;
@@ -155,6 +186,7 @@ export function createE2EFixtureRepositories() {
   return {
     profile: new InMemoryProfileRepository(profile, education, awards),
     photos: new InMemoryPhotoRepository(photos, profile.heroPhotoId),
+    photoCollections: new InMemoryPhotoCollectionRepository(collections),
     research: new InMemoryResearchRepository(projects),
   };
 }

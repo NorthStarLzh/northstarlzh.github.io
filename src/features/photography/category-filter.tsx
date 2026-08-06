@@ -3,12 +3,15 @@
 import type { Locale, PhotoCategory } from '@/content/contracts';
 import { PHOTO_CATEGORIES } from '@/content/contracts';
 
-import { buildPhotographyCategoryIndexUrl } from './category';
+import {
+  buildPhotographyCategoryIndexUrl,
+  buildPhotographyCollectionsUrl,
+} from './category';
 
 export interface CategoryFilterProps {
-  activeCategory: PhotoCategory;
+  activeCategory: PhotoCategory | 'collections';
   ariaLabel?: string;
-  labels: Record<PhotoCategory, string>;
+  labels: Record<PhotoCategory, string> & { collections: string };
   locale: Locale;
 }
 
@@ -18,6 +21,8 @@ export function CategoryFilter({
   labels,
   locale,
 }: CategoryFilterProps) {
+  const collectionsHref = `${buildPhotographyCollectionsUrl(locale)}#gallery`;
+
   return (
     <nav aria-label={ariaLabel} className="photography-filter">
       {PHOTO_CATEGORIES.map((category) => {
@@ -33,6 +38,13 @@ export function CategoryFilter({
           </a>
         );
       })}
+      <a
+        aria-current={activeCategory === 'collections' ? 'true' : undefined}
+        className="photography-filter__link"
+        href={collectionsHref}
+      >
+        {labels.collections}
+      </a>
     </nav>
   );
 }

@@ -24,7 +24,9 @@ describe('home page SSR without JavaScript', () => {
     const html = renderToStaticMarkup(page);
 
     expect(html).toContain('<h1>风花诗酒茶</h1>');
-    expect(html).toContain('服务端首页正文');
+    // The development-preview eyebrow was removed from the hero in Task 1;
+    // its translation key is no longer requested, so the sentinel must be absent.
+    expect(html).not.toContain('服务端首页正文');
     expect(html).toContain('id="contact"');
     expect(html).not.toContain('data-testid="intro-animation"');
     expect(getTranslations).toHaveBeenCalledTimes(1);

@@ -34,7 +34,6 @@ export default async function LocaleHomePage({ params }: LocaleHomePageProps) {
   const t = await getTranslations({ locale, namespace: 'home' });
   const fallbackCopy = {
     title: t('title'),
-    description: t('preview'),
   };
   let requests: HomeContentRequests | undefined;
 
@@ -46,7 +45,6 @@ export default async function LocaleHomePage({ params }: LocaleHomePageProps) {
 
   const body = requests ? (
     <StreamingHomePage
-      fallbackDescription={fallbackCopy.description}
       fallbackTitle={fallbackCopy.title}
       locale={locale}
       requests={requests}
@@ -54,7 +52,6 @@ export default async function LocaleHomePage({ params }: LocaleHomePageProps) {
   ) : (
     <HomePageView
       content={unavailableHomeContent()}
-      fallbackDescription={fallbackCopy.description}
       fallbackTitle={fallbackCopy.title}
       locale={locale}
     />

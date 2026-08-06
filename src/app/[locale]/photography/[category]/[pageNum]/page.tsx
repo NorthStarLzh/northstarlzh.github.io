@@ -93,6 +93,7 @@ export default async function PageNumPage({ params }: PageNumProps) {
             labels={{
               landscape: t('categories.landscape'),
               portrait: t('categories.portrait'),
+              collections: t('collections'),
             }}
             locale={locale}
           />

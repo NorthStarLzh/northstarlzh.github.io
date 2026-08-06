@@ -4,7 +4,7 @@ import {useState} from 'react';
 
 import type {Locale, Photo} from '@/content/contracts';
 
-import {MasonryGallery} from './masonry-gallery';
+import {FeaturedGallery} from './featured-gallery';
 import {PhotoViewer} from './photo-viewer';
 import type {PhotoViewerLabels} from './photo-viewer-contract';
 
@@ -28,7 +28,7 @@ export function FeaturedPhotoGallery({
   return (
     <section aria-labelledby="featured-photography-title" className="featured-photography">
       <h2 id="featured-photography-title">{title}</h2>
-      <MasonryGallery locale={locale} onOpen={setActiveId} photos={photos.slice(0, 5)} />
+      <FeaturedGallery locale={locale} onOpen={setActiveId} photos={photos.slice(0, 5)} />
       <PhotoViewer
         activeId={activeId}
         labels={labels}

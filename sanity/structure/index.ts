@@ -17,6 +17,7 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('education').title('教育经历'),
       S.documentTypeListItem('award').title('获奖经历'),
       S.documentTypeListItem('photo').title('摄影作品'),
+      S.documentTypeListItem('photoCollection').title('摄影合集'),
       S.documentTypeListItem('researchProject').title('科研项目'),
       S.divider(),
       S.listItem()

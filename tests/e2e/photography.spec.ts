@@ -1,63 +1,55 @@
 import { expect, test } from '@playwright/test';
 
-import {
-  disableAutomaticPagination,
-  swipeViewerLeft,
-} from './support';
+import { swipeViewerLeft } from './support';
 
-test('scrolling progressively loads another photography page', async ({ page }) => {
+test('numbered pagination navigates between statically exported pages', async ({ page }) => {
   const hydrationErrors: string[] = [];
   page.on('console', (message) => {
     if (message.type() === 'error' && message.text().includes('Hydration failed')) {
       hydrationErrors.push(message.text());
     }
   });
-  await page.goto('/zh/photography?category=landscape');
+
+  await page.goto('/zh/photography/landscape/');
   const cards = page.locator('.photography-card__button');
   await expect(cards).toHaveCount(20);
-  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-  await expect.poll(() => cards.count()).toBeGreaterThan(20);
-  await expect(page).toHaveURL(/category=landscape/);
+
+  // First page: previous is disabled, current pill is marked, next is a link.
+  await expect(page.getByRole('link', { name: /上一页/ })).toHaveCount(0);
+  await expect(page.getByText('第 1 页，共 … 页')).toBeAttached();
+  await expect(page.locator('.photography-feed__page-number[aria-current="page"]')).toHaveText('1');
+  await expect(page.getByRole('link', { name: '2', exact: true })).toBeVisible();
+
+  // Navigate to page two.
+  await page.getByRole('link', { name: /下一页/ }).click();
+  await expect(page).toHaveURL(/\/photography\/landscape\/2/);
+  await expect(cards).toHaveCount(20);
+  await expect(page.locator('.photography-feed__page-number[aria-current="page"]')).toHaveText('2');
+  await expect(page.getByRole('link', { name: /上一页/ })).toBeVisible();
+
   expect(hydrationErrors).toEqual([]);
 });
 
-test('pagination failure retains photos, retry succeeds, and category change cannot mix stale photos', async ({ page }) => {
-  await disableAutomaticPagination(page);
-  await page.goto('/zh/photography?category=landscape');
-  const cards = page.locator('.photography-card__button');
-  await expect(cards).toHaveCount(20);
+test('collections tab lists curated collections and opens their detail pages', async ({ page }) => {
+  await page.goto('/zh/photography/landscape/');
+  const collectionsLink = page.getByRole('link', { name: '合集' });
+  await expect(collectionsLink).toHaveAttribute('href', '/zh/photography/collections/#gallery');
 
-  await page.route('**/api/photos?**', async (route) => {
-    await route.fulfill({
-      status: 500,
-      contentType: 'application/json',
-      body: JSON.stringify({
-        error: { code: 'CONTENT_UNAVAILABLE', message: 'Injected E2E failure' },
-      }),
-    });
-  }, { times: 1 });
-  await page.getByRole('button', { name: '加载更多' }).click();
-  await expect(page.locator('.photography-feed__status[role="alert"]')).toContainText('加载失败');
-  await expect(cards).toHaveCount(20);
+  await collectionsLink.click();
+  await expect(page).toHaveURL(/\/photography\/collections/);
+  const cards = page.locator('.collection-card');
+  await expect(cards).toHaveCount(2);
+  await expect(cards.first()).toContainText('4 张照片');
 
-  await page.getByRole('button', { name: '重试' }).click();
-  await expect(cards).toHaveCount(40);
-
-  await page.route('**/api/photos?category=landscape**', async (route) => {
-    await new Promise((resolve) => setTimeout(resolve, 350));
-    await route.continue();
-  }, { times: 1 });
-  await page.getByRole('button', { name: '加载更多' }).click();
-  await page.getByRole('link', { name: '人像' }).click();
-  await expect(page).toHaveURL(/category=portrait/);
-  await expect(cards).toHaveCount(20);
-  await expect(page.locator('[data-photo-id="fixture-photo-002"]')).toBeVisible();
-  await expect(page.locator('[data-photo-id="fixture-photo-003"]')).toHaveCount(0);
+  await cards.first().locator('.collection-card__link').click();
+  await expect(page).toHaveURL(/\/photography\/collections\/zhejiang-university/);
+  await expect(page.locator('.photography-masonry')).toBeVisible();
+  await expect(page.locator('.photography-card__button')).toHaveCount(4);
+  await expect(page.locator('.photography-filter__link[aria-current="true"]')).toHaveText('合集');
 });
 
-test('viewer zooms, navigates, prefetches near the end, and restores focus', async ({ page }, testInfo) => {
-  await disableAutomaticPagination(page);
-  await page.goto('/zh/photography?category=landscape');
+test('viewer zooms, navigates with keys and touch, and restores focus', async ({ page }, testInfo) => {
+  await page.goto('/zh/photography/landscape/');
   const cards = page.locator('.photography-card__button');
   const first = cards.first();
   await first.click();
@@ -74,6 +66,7 @@ test('viewer zooms, navigates, prefetches near the end, and restores focus', asy
     return activeSlide?.textContent ?? '';
   });
   await expect.poll(activeCaption).toContain('摄影作品 1');
+  await expect(page.locator('.yarl__counter')).toHaveText('1 / 20');
   await page.getByRole('button', { name: '放大' }).click();
   await page.getByRole('button', { name: '缩小' }).click();
   await page.waitForTimeout(250);
@@ -84,14 +77,8 @@ test('viewer zooms, navigates, prefetches near the end, and restores focus', asy
     await page.keyboard.press('ArrowRight');
   }
   await expect.poll(activeCaption).not.toContain('摄影作品 1。');
+  await expect(page.locator('.yarl__counter')).toHaveText('2 / 20');
   await page.keyboard.press('Escape');
   await expect(page.locator('.photo-viewer-lightbox')).toHaveCount(0);
   await expect(first).toBeFocused();
-
-  const nearEnd = cards.nth(18);
-  await nearEnd.click();
-  await expect(page.locator('.photo-viewer-lightbox')).toBeVisible();
-  await expect.poll(() => cards.count()).toBeGreaterThan(20);
-  await page.keyboard.press('Escape');
-  await expect(nearEnd).toBeFocused();
 });

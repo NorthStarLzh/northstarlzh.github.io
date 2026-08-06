@@ -4,6 +4,8 @@ import {
   type EducationEntry,
   type PageResult,
   type Photo,
+  type PhotoCollection,
+  type PhotoCollectionRepository,
   type PhotoPageInput,
   type PhotoRepository,
   type Profile,
@@ -20,14 +22,17 @@ import {
   mapAward,
   mapEducation,
   mapPhoto,
+  mapPhotoCollection,
   mapProfile,
   mapResearchProject,
   mapValidDocuments,
   type ContentLogger,
 } from '../mappers';
 import {
+  ALL_COLLECTIONS_QUERY,
   ALL_RESEARCH_QUERY,
   AWARDS_QUERY,
+  COLLECTION_BY_SLUG_QUERY,
   CONTENT_CACHE_TAGS,
   EDUCATION_QUERY,
   FEATURED_PHOTOS_QUERY,
@@ -51,7 +56,7 @@ import {
 
 export const MAX_PHOTO_PAGE_SIZE = 20;
 
-type ContentModule = 'profile' | 'education' | 'awards' | 'photos' | 'research';
+type ContentModule = 'profile' | 'education' | 'awards' | 'photos' | 'photoCollections' | 'research';
 
 async function fetchContent<T>(
   client: SanityQueryClient,
@@ -315,9 +320,49 @@ export class SanityResearchRepository implements ResearchRepository {
   }
 }
 
+export class SanityPhotoCollectionRepository implements PhotoCollectionRepository {
+  constructor(
+    private readonly client: SanityQueryClient,
+    private readonly logger: ContentLogger = consoleContentLogger,
+  ) {}
+
+  async listCollections(): Promise<PhotoCollection[]> {
+    const raw = await fetchContent<unknown>(
+      this.client,
+      'photoCollections',
+      ALL_COLLECTIONS_QUERY,
+      {},
+      contentFetchOptions(CONTENT_CACHE_TAGS.photoCollections),
+    );
+    return mapMany(raw, mapPhotoCollection, this.logger, 'photoCollections', 'photoCollection');
+  }
+
+  async getCollectionBySlug(slug: string): Promise<PhotoCollection | null> {
+    if (typeof slug !== 'string' || slug.trim().length === 0 || slug.length > 256) {
+      throw new RangeError('Collection slug must be a non-empty string.');
+    }
+    const raw = await fetchContent<unknown>(
+      this.client,
+      'photoCollections',
+      COLLECTION_BY_SLUG_QUERY,
+      {slug: slug.trim()},
+      contentFetchOptions(CONTENT_CACHE_TAGS.photoCollections),
+    );
+    if (raw === null || raw === undefined) return null;
+
+    try {
+      return mapPhotoCollection(raw);
+    } catch (error) {
+      logInvalidDocument(this.logger, 'photoCollections', 'photoCollection', error);
+      return null;
+    }
+  }
+}
+
 export interface SanityRepositories {
   profile: ProfileRepository;
   photos: PhotoRepository;
+  photoCollections: PhotoCollectionRepository;
   research: ResearchRepository;
 }
 
@@ -333,6 +378,7 @@ export function createSanityRepositories(
   return {
     profile: new SanityProfileRepository(resolvedClient, logger),
     photos: new SanityPhotoRepository(resolvedClient, logger),
+    photoCollections: new SanityPhotoCollectionRepository(resolvedClient, logger),
     research: new SanityResearchRepository(resolvedClient, logger),
   };
 }

@@ -66,6 +66,7 @@ describe('cache policy', () => {
       'awards',
       'education',
       'home',
+      'photoCollections',
       'photos',
       'profile',
       'research',

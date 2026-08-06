@@ -2,6 +2,7 @@ import {award} from './award';
 import {education} from './education';
 import {localizedList, localizedLongText, localizedShortText} from './localized';
 import {photo} from './photo';
+import {photoCollection} from './photoCollection';
 import {profile} from './profile';
 import {paperResult, researchImage, researchProject} from './researchProject';
 
@@ -15,6 +16,7 @@ export const schemaTypes = [
   education,
   award,
   photo,
+  photoCollection,
   researchProject,
 ];
 
@@ -26,6 +28,7 @@ export {
   localizedShortText,
   paperResult,
   photo,
+  photoCollection,
   profile,
   researchImage,
   researchProject,

@@ -1,7 +1,6 @@
 {
   "home": {
     "title": "Wind, Flowers, Poetry, Wine & Tea",
-    "preview": "Personal portfolio development preview",
     "featuredPhotography": "Featured photography",
     "profileTitle": "About",
     "photographyEmptyDescription": "Selected photographs will appear here when they are published.",
@@ -22,11 +21,17 @@
     "retry": "Retry",
     "complete": "All photographs loaded",
     "empty": "No photographs yet",
+    "collections": "Collections",
+    "collectionsTitle": "Photo collections",
+    "collectionsIntro": "Curated groups of photographs, each telling a complete story.",
+    "collectionsEmpty": "No photo collections yet",
+    "collectionsPhotoCount": "'{count}' photos",
+    "collectionsError": "Failed to load collections. Please try again",
     "error": "Loading failed. Please try again",
     "pagination": {
       "prev": "Previous page",
       "next": "Next page",
-      "pageInfo": "Page {current} of {total}"
+      "pageInfo": "Page '{current}' of '{total}'"
     }
   },
   "metadata": {

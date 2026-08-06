@@ -10,6 +10,7 @@ import {
 } from '@/content/mappers';
 import {
   MAX_PHOTO_PAGE_SIZE,
+  SanityPhotoCollectionRepository,
   SanityPhotoRepository,
   SanityProfileRepository,
   SanityResearchRepository,
@@ -74,6 +75,19 @@ function rawResearch(id: string, overrides: Record<string, unknown> = {}) {
     noPublishedPapers: false,
     featured: false,
     featuredOrder: undefined,
+    ...overrides,
+  };
+}
+
+function rawPhotoCollection(id: string, overrides: Record<string, unknown> = {}) {
+  return {
+    _id: id,
+    title: bilingual('合集', 'Collection'),
+    description: bilingual('简介', 'Description'),
+    slug: 'zhejiang-university',
+    cover: {...rawImage('cover'), alt: bilingual('封面', 'Cover')},
+    photos: [rawPhoto('photo-1'), rawPhoto('photo-2')],
+    sortOrder: 1,
     ...overrides,
   };
 }
@@ -379,5 +393,64 @@ describe('SanityResearchRepository', () => {
       message: 'The content service is temporarily unavailable.',
       module: 'research',
     } satisfies Partial<ContentServiceError>);
+  });
+});
+
+describe('SanityPhotoCollectionRepository', () => {
+  it('maps collections and their photos with the photoCollections cache tag', async () => {
+    const client = new QueueClient([
+      [
+        rawPhotoCollection('collection-1'),
+        rawPhotoCollection('collection-2', {slug: 'travel', sortOrder: 2}),
+      ],
+    ]);
+    const repository = new SanityPhotoCollectionRepository(client);
+
+    await expect(repository.listCollections()).resolves.toEqual([
+      expect.objectContaining({
+        id: 'collection-1',
+        slug: 'zhejiang-university',
+        cover: expect.objectContaining({id: 'cover'}),
+        photos: expect.arrayContaining([
+          expect.objectContaining({id: 'photo-1'}),
+        ]),
+      }),
+      expect.objectContaining({id: 'collection-2', slug: 'travel'}),
+    ]);
+    expect(client.calls[0].options.next.tags).toEqual(['photoCollections']);
+  });
+
+  it('parameterizes and trims the slug and returns null for missing collections', async () => {
+    const client = new QueueClient([null]);
+    const repository = new SanityPhotoCollectionRepository(client);
+
+    await expect(repository.getCollectionBySlug(' travel ')).resolves.toBeNull();
+    expect(client.calls[0].params).toEqual({slug: 'travel'});
+
+    const untouchedClient = new QueueClient([]);
+    await expect(new SanityPhotoCollectionRepository(untouchedClient).getCollectionBySlug('  '))
+      .rejects.toBeInstanceOf(RangeError);
+    expect(untouchedClient.calls).toHaveLength(0);
+  });
+
+  it('logs and drops collections with no photos while keeping the rest', async () => {
+    const {logger, entries} = collectingLogger();
+    const client = new QueueClient([
+      [
+        rawPhotoCollection('collection-good'),
+        rawPhotoCollection('collection-empty', {photos: []}),
+      ],
+    ]);
+    const repository = new SanityPhotoCollectionRepository(client, logger);
+
+    await expect(repository.listCollections()).resolves.toEqual([
+      expect.objectContaining({id: 'collection-good'}),
+    ]);
+    expect(entries).toHaveLength(1);
+    expect(entries[0]).toMatchObject({
+      module: 'photoCollections',
+      documentType: 'photoCollection',
+      documentId: 'collection-empty',
+    });
   });
 });

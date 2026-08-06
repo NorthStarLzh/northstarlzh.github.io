@@ -1,12 +1,14 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  InMemoryPhotoCollectionRepository,
   InMemoryPhotoRepository,
   InMemoryProfileRepository,
   InMemoryResearchRepository,
 } from '@/content/repositories';
 import {
   awardFixtures,
+  collectionFixtures,
   educationFixtures,
   photoDataset,
   profileFixture,
@@ -123,5 +125,34 @@ describe('InMemoryResearchRepository', () => {
     projects[0].title.zh = 'mutated';
 
     await expect(repository.listAll()).resolves.toEqual(researchProjectFixtures);
+  });
+});
+
+describe('InMemoryPhotoCollectionRepository', () => {
+  it('lists collections in sort order and looks up a collection by slug', async () => {
+    const repository = new InMemoryPhotoCollectionRepository(collectionFixtures);
+
+    const collections = await repository.listCollections();
+    expect(collections.map(({ slug }) => slug)).toEqual([
+      'zhejiang-university',
+      'travel',
+    ]);
+
+    await expect(
+      repository.getCollectionBySlug('travel'),
+    ).resolves.toMatchObject({
+      id: 'collection-travel',
+      photos: expect.any(Array),
+    });
+    await expect(repository.getCollectionBySlug('missing')).resolves.toBeNull();
+  });
+
+  it('returns defensive copies', async () => {
+    const repository = new InMemoryPhotoCollectionRepository(collectionFixtures);
+    const collections = await repository.listCollections();
+    collections[0].title.zh = 'mutated';
+    collections[0].photos[0].image.id = 'mutated';
+
+    await expect(repository.listCollections()).resolves.toEqual(collectionFixtures);
   });
 });

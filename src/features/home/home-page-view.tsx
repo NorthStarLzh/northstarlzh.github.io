@@ -28,7 +28,6 @@ import styles from './home.module.css';
 
 export interface HomePageViewProps {
   content: HomeContent;
-  fallbackDescription?: string;
   fallbackTitle?: string;
   locale: Locale;
 }
@@ -100,7 +99,6 @@ function selectHeroPhoto(
 }
 
 function HeroSection({
-  fallbackDescription,
   fallbackTitle,
   featured,
   hero,
@@ -149,9 +147,6 @@ function HeroSection({
       ) : null}
       <div aria-hidden="true" className={styles.heroShade} />
       <Container className={styles.heroCopy}>
-        <p className={styles.eyebrow}>
-          {fallbackDescription ?? messages.home.preview}
-        </p>
         <h1>{profile?.nickname ?? fallbackTitle ?? messages.home.title}</h1>
         {profile ? (
           <p className={styles.heroPosition}>
@@ -366,7 +361,6 @@ export function HomePageView(props: HomePageViewProps) {
     <div className={styles.page}>
       <Suspense fallback={<HomeSectionSkeleton locale={locale} section="hero" />}>
         <HeroSection
-          fallbackDescription={props.fallbackDescription}
           fallbackTitle={props.fallbackTitle}
           featured={content.photos}
           hero={content.hero}
@@ -399,7 +393,6 @@ export interface StreamingHomePageProps
 }
 
 async function StreamingHero({
-  fallbackDescription,
   fallbackTitle,
   locale,
   requests,
@@ -413,7 +406,6 @@ async function StreamingHero({
     : await requests.photos;
   return (
     <HeroSection
-      fallbackDescription={fallbackDescription}
       fallbackTitle={fallbackTitle}
       featured={featured}
       hero={hero}

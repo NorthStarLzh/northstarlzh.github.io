@@ -65,6 +65,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             labels={{
               landscape: t('categories.landscape'),
               portrait: t('categories.portrait'),
+              collections: t('collections'),
             }}
             locale={locale}
           />

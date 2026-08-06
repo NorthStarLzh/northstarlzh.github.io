@@ -21,6 +21,24 @@ const PHOTO_FIELDS = `
   featuredOrder
 `;
 
+const COLLECTION_COVER_FIELDS = `
+  "id": asset->_id,
+  "width": asset->metadata.dimensions.width,
+  "height": asset->metadata.dimensions.height,
+  "blurDataUrl": asset->metadata.lqip,
+  "alt": ^.coverAlt
+`;
+
+const COLLECTION_FIELDS = `
+  _id,
+  title,
+  description,
+  "slug": slug.current,
+  "cover": cover{${COLLECTION_COVER_FIELDS}},
+  "photos": photos[]->{${PHOTO_FIELDS}},
+  sortOrder
+`;
+
 const RESEARCH_FIELDS = `
   _id,
   title,
@@ -157,5 +175,18 @@ export const ALL_RESEARCH_QUERY = defineQuery(`
 export const RESEARCH_BY_ID_QUERY = defineQuery(`
   *[_type == "researchProject" && _id == $id][0]{
     ${RESEARCH_FIELDS}
+  }
+`);
+
+export const ALL_COLLECTIONS_QUERY = defineQuery(`
+  *[_type == "photoCollection"]
+    | order(coalesce(sortOrder, 2147483647) asc, _createdAt desc, _id asc){
+      ${COLLECTION_FIELDS}
+    }
+`);
+
+export const COLLECTION_BY_SLUG_QUERY = defineQuery(`
+  *[_type == "photoCollection" && slug.current == $slug][0]{
+    ${COLLECTION_FIELDS}
   }
 `);

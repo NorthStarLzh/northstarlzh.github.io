@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 
 import { disableAutomaticPagination, waitForStablePage } from './support';
 
-const corePages = ['/zh', '/zh/photography?category=landscape', '/zh/research', '/zh/resume'] as const;
+const corePages = ['/zh', '/zh/photography/landscape/', '/zh/research', '/zh/resume'] as const;
 
 test('core pages have no serious or critical axe violations', async ({ page }) => {
   await disableAutomaticPagination(page);

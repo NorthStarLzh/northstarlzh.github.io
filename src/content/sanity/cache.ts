@@ -5,6 +5,7 @@ export const CONTENT_CACHE_TAGS = {
   education: 'education',
   awards: 'awards',
   photos: 'photos',
+  photoCollections: 'photoCollections',
   research: 'research',
   resume: 'resume',
   home: 'home',

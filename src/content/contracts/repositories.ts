@@ -3,6 +3,7 @@ import type {
   EducationEntry,
   PageResult,
   Photo,
+  PhotoCollection,
   PhotoPageInput,
   Profile,
   ResearchProject,
@@ -24,4 +25,9 @@ export interface ResearchRepository {
   listFeatured(limit: 3): Promise<ResearchProject[]>;
   listAll(): Promise<ResearchProject[]>;
   getById(id: string): Promise<ResearchProject | null>;
+}
+
+export interface PhotoCollectionRepository {
+  listCollections(): Promise<PhotoCollection[]>;
+  getCollectionBySlug(slug: string): Promise<PhotoCollection | null>;
 }

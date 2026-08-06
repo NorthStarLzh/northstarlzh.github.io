@@ -47,12 +47,12 @@ test('theme follows the system, cycles manually, and persists after refresh', as
 
 test('locale switch preserves page, portrait category, hash, and localized content', async ({ page }) => {
   await disableAutomaticPagination(page);
-  await page.goto('/zh/photography?category=portrait#gallery');
+  await page.goto('/zh/photography/portrait/#gallery');
   await expect(page.getByRole('link', { name: '人像' })).toHaveAttribute('aria-current', 'true');
   await openResponsiveControls(page, 'zh');
   await page.getByRole('button', { name: /切换到英文/ }).click();
 
-  await expect(page).toHaveURL(/\/en\/photography\?category=portrait#gallery$/);
+  await expect(page).toHaveURL(/\/en\/photography\/portrait\/?#gallery/);
   await expect(page.getByRole('heading', { level: 1, name: 'Between light and shadow' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Portrait' })).toHaveAttribute('aria-current', 'true');
   await expect(page.locator('.photography-card__button').first()).toHaveAccessibleName(/Automated test image/);

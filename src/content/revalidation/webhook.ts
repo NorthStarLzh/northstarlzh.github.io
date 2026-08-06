@@ -38,6 +38,7 @@ const DOCUMENT_TAGS = {
   education: [CONTENT_CACHE_TAGS.education, CONTENT_CACHE_TAGS.resume],
   award: [CONTENT_CACHE_TAGS.awards, CONTENT_CACHE_TAGS.resume],
   photo: [CONTENT_CACHE_TAGS.photos, CONTENT_CACHE_TAGS.home],
+  photoCollection: [CONTENT_CACHE_TAGS.photoCollections],
   researchProject: [CONTENT_CACHE_TAGS.research, CONTENT_CACHE_TAGS.home],
 } as const;
 

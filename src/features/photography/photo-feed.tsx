@@ -43,6 +43,28 @@ function formatPageInfo(
     .replace('{total}', hasMore ? '…' : String(current));
 }
 
+interface PageNumber {
+  current: boolean;
+  href: string | null;
+  num: number;
+}
+
+function buildPageNumbers(
+  currentPage: number,
+  prevPageUrl: string | null,
+  nextPageUrl: string | null,
+): PageNumber[] {
+  const numbers: PageNumber[] = [];
+  if (prevPageUrl) {
+    numbers.push({num: currentPage - 1, href: prevPageUrl, current: false});
+  }
+  numbers.push({num: currentPage, href: null, current: true});
+  if (nextPageUrl) {
+    numbers.push({num: currentPage + 1, href: nextPageUrl, current: false});
+  }
+  return numbers;
+}
+
 function PhotoFeedController({
   currentPage,
   hasMore,
@@ -91,7 +113,37 @@ function PhotoFeedController({
           </span>
         )}
 
-        <span className="photography-feed__page-info">
+        <div
+          aria-label={formatPageInfo(labels.pageInfo, currentPage, hasMore)}
+          className="photography-feed__page-numbers"
+          role="group"
+        >
+          {buildPageNumbers(currentPage, prevPageUrl, nextPageUrl).map(
+            ({num, href, current}) =>
+              current ? (
+                <span
+                  aria-current="page"
+                  className="photography-feed__page-number photography-feed__page-number--current"
+                  key={num}
+                >
+                  {num}
+                </span>
+              ) : (
+                <a
+                  className="photography-feed__page-number"
+                  href={href ?? undefined}
+                  key={num}
+                >
+                  {num}
+                </a>
+              ),
+          )}
+        </div>
+
+        <span
+          aria-live="polite"
+          className="photography-feed__page-info"
+        >
           {formatPageInfo(labels.pageInfo, currentPage, hasMore)}
         </span>
 

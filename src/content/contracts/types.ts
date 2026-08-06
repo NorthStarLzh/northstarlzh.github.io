@@ -62,6 +62,17 @@ export interface Photo {
   featuredOrder?: number;
 }
 
+export interface PhotoCollection {
+  id: string;
+  title: LocalizedText;
+  description: LocalizedText;
+  slug: string;
+  /** Optional curated cover; falls back to the first photo in components. */
+  cover?: ImageAsset;
+  photos: Photo[];
+  sortOrder?: number;
+}
+
 export interface PaperResult {
   id: string;
   title: LocalizedText;

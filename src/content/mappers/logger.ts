@@ -2,7 +2,7 @@ import {InvalidContentError} from './errors';
 
 export interface InvalidDocumentLog {
   event: 'content.invalid_document';
-  module: 'profile' | 'education' | 'awards' | 'photos' | 'research';
+  module: 'profile' | 'education' | 'awards' | 'photos' | 'photoCollections' | 'research';
   documentType: string;
   documentId: string;
   errorCategory: 'validation';
