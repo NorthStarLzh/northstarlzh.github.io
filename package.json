@@ -14,10 +14,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
     "test:e2e": "PLAYWRIGHT_BROWSERS_PATH=.playwright-browsers playwright test",
-    "test:e2e:preview": "PLAYWRIGHT_BROWSERS_PATH=.playwright-browsers playwright test --config=playwright.preview.config.ts",
     "test:e2e:update": "PLAYWRIGHT_BROWSERS_PATH=.playwright-browsers playwright test --update-snapshots",
-    "test:watch": "vitest",
-    "preview:check": "node scripts/check-preview-env.mjs"
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.23",
