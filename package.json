@@ -9,6 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "build:pages": "node scripts/build-github-pages.mjs",
+    "photos:import": "node scripts/import-photos.mjs",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",

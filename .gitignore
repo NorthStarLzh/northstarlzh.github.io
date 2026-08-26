@@ -19,3 +19,6 @@
 .DS_Store
 *.tsbuildinfo
 npm-debug.log*
+
+# source photo originals (imported into Sanity via npm run photos:import)
+/照片展示
