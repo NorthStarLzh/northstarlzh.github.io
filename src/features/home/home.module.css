@@ -9,7 +9,7 @@
   min-height: min(52rem, calc(100svh - 4.5rem));
   align-items: end;
   overflow: hidden;
-  background: var(--color-surface);
+  background: var(--color-bg);
 }
 
 .hero[data-image-source='solid'] {
@@ -37,10 +37,13 @@
 
 .heroShade {
   z-index: -1;
+  /* 顶部保持透明让照片完整露出；到底边时铺满 100% 页面底色，
+     使渐变块的边界与首图边界完全重合，不再露出深色照片残留。 */
   background: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--color-bg) 5%, transparent) 0%,
-    color-mix(in srgb, var(--color-bg) 90%, transparent) 100%
+    transparent 0%,
+    color-mix(in srgb, var(--color-bg) 55%, transparent) 62%,
+    var(--color-bg) 100%
   );
 }
 
