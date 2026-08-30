@@ -3,18 +3,29 @@
     "title": "Wind, Flowers, Poetry, Wine & Tea",
     "featuredPhotography": "Featured photography",
     "profileTitle": "About",
+    "viewAllPhotography": "View all photography",
     "photographyEmptyDescription": "Selected photographs will appear here when they are published.",
     "photographyErrorTitle": "Photography is unavailable",
-    "photographyErrorDescription": "The content service is temporarily unavailable. Please try again later."
+    "photographyErrorDescription": "The content service is temporarily unavailable. Please try again later.",
+    "eyebrow": {
+      "photography": "Photography"
+    }
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "About me",
+    "description": "Profile, research interests, and education background.",
+    "errorTitle": "About is unavailable",
+    "errorDescription": "The content service is temporarily unavailable. Please try again later."
   },
   "photography": {
-    "eyebrow": "Photography",
-    "title": "Between light and shadow",
+    "eyebrow": "Photography exhibition",
+    "title": "Making memories traceable",
     "intro": "Explore landscape and portrait photographs in their original proportions.",
     "categoryLabel": "Photography categories",
     "categories": {
-      "landscape": "Landscape",
-      "portrait": "Portrait"
+      "landscape": "Landscape photography",
+      "portrait": "Portrait photography"
     },
     "loadMore": "Load more",
     "loading": "Loading photographs…",
@@ -46,6 +57,7 @@
     "menuTitle": "Site navigation",
     "menuDescription": "Visit every page and change the language or theme.",
     "home": "Home",
+    "about": "About",
     "photography": "Photography",
     "research": "Research",
     "resume": "Résumé",
@@ -80,8 +92,15 @@
     "viewerUnavailable": "The photo viewer is temporarily unavailable"
   },
   "download": {
-    "resume": "Download PDF résumé",
-    "unavailable": "The résumé is not available for download"
+    "resume": "Download",
+    "unavailable": "The résumé is not available for download",
+    "portfolioTitle": "Portfolio",
+    "resumeTitle": "Résumé",
+    "portfolio": "Download",
+    "portfolioAria": "Download portfolio",
+    "resumeAria": "Download résumé",
+    "portfolioPreview": "Portfolio PDF preview",
+    "resumePreview": "Résumé PDF preview"
   },
   "dialogs": {
     "close": "Close dialog",
@@ -98,6 +117,7 @@
   },
   "research": {
     "title": "Research",
+    "eyebrow": "Research",
     "description": "Explore project contexts, research processes, and paper results.",
     "featuredTitle": "Featured research",
     "featuredDescription": "A selection of recent research and practice.",
@@ -111,6 +131,7 @@
   },
   "resume": {
     "title": "Résumé",
+    "eyebrow": "Résumé",
     "description": "Profile, education, and awards.",
     "summaryTitle": "Résumé summary",
     "educationTitle": "Education",
@@ -121,10 +142,17 @@
   "contact": {
     "title": "Contact",
     "description": "You are welcome to get in touch by email.",
-    "emailLabel": "Email"
+    "emailLabel": "Email",
+    "errorTitle": "Contact is unavailable",
+    "errorDescription": "The content service is temporarily unavailable. Please try again later."
+  },
+  "footer": {
+    "tagline": "A personal site for photography and research.",
+    "navLabel": "Footer navigation",
+    "rights": "All rights reserved."
   },
   "theme": {
-    "label": "Theme",
+    "label": "Theme: ",
     "loading": "Theme is loading",
     "ariaLabel": "Current theme: {current}; switch to {target}",
     "title": "Theme: {current}",

@@ -1,0 +1,48 @@
+.page {
+  position: relative;
+  isolation: isolate;
+}
+
+/* 与首页相同的封面照片作为整页背景，降低透明度弱化为底纹。 */
+.background {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+}
+
+/* 深色模式：照片全屏满铺并轻度模糊变淡（与浅色底纹观感一致），
+   最左侧保留黑色渐变矩形围住导航栏。 */
+[data-theme='dark'] .photo {
+  opacity: 0.35;
+  filter: blur(3px);
+}
+
+/* 浅色模式：左侧贴合侧边栏底色、向右渐隐，模糊掉图片与导航栏的界限。 */
+.fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--color-bg) 0%,
+    color-mix(in srgb, var(--color-bg) 85%, transparent) 10%,
+    color-mix(in srgb, var(--color-bg) 60%, transparent) 28%,
+    color-mix(in srgb, var(--color-bg) 30%, transparent) 46%,
+    transparent 60%
+  );
+}
+
+[data-theme='dark'] .fade {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg) 0%,
+    var(--color-bg) 16%,
+    color-mix(in srgb, var(--color-bg) 70%, transparent) 19%,
+    transparent 24%
+  );
+}

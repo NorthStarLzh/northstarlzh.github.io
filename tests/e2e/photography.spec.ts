@@ -33,7 +33,7 @@ test('numbered pagination navigates between statically exported pages', async ({
 test('collections tab lists curated collections and opens their detail pages', async ({ page }) => {
   await page.goto('/zh/photography/landscape/');
   const collectionsLink = page.getByRole('link', { name: '合集' });
-  await expect(collectionsLink).toHaveAttribute('href', '/zh/photography/collections/#gallery');
+  await expect(collectionsLink).toHaveAttribute('href', '/zh/photography/collections/');
 
   await collectionsLink.click();
   await expect(page).toHaveURL(/\/photography\/collections/);

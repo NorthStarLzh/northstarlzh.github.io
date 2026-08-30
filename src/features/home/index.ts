@@ -15,3 +15,5 @@ export {
   buildHomeHeroSources,
   toSrcSet,
 } from './home-image-sources';
+export { HeroPhoto } from './hero-photo';
+export type { HeroPhotoProps } from './hero-photo';

@@ -122,7 +122,7 @@ describe('ResumeDownload', () => {
       </NextIntlClientProvider>,
     );
 
-    const link = screen.getByRole('link', { name: '下载 PDF 简历' });
+    const link = screen.getByRole('link', { name: '点击下载' });
     expect(link).toHaveAttribute('download', RESUME_DOWNLOAD_FILENAME);
     expect(link).toHaveAttribute(
       'href',
@@ -162,7 +162,7 @@ describe('ResumeSummary', () => {
     expect(screen.getByText('仅用于自动化测试的简介。')).toBeInTheDocument();
     expect(screen.getByText('示例大学')).toBeInTheDocument();
     expect(screen.getByText('测试奖项一')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: '下载 PDF 简历' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: '点击下载' })).toBeInTheDocument();
     expect(container.querySelector('[data-resume-variant="summary"]')).toBeInTheDocument();
     expect(container.querySelectorAll('[data-density="compact"]')).toHaveLength(3);
   });

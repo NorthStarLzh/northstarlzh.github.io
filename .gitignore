@@ -22,3 +22,7 @@ npm-debug.log*
 
 # source photo originals (imported into Sanity via npm run photos:import)
 /照片展示
+
+# local design references and source documents (published copies live in /public)
+/参考图
+/个人简历

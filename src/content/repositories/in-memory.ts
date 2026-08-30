@@ -1,6 +1,7 @@
 import type {
   AwardEntry,
   EducationEntry,
+  HeroPhoto,
   PageResult,
   Photo,
   PhotoCollection,
@@ -98,22 +99,32 @@ export class InMemoryProfileRepository implements ProfileRepository {
 export class InMemoryPhotoRepository implements PhotoRepository {
   private readonly photos: Photo[];
   private readonly heroPhotoId: string;
+  private readonly heroPhotoDarkId: string;
 
-  constructor(photos: Photo[], heroPhotoId = photos[0]?.id ?? '') {
+  constructor(
+    photos: Photo[],
+    heroPhotoId = photos[0]?.id ?? '',
+    heroPhotoDarkId = '',
+  ) {
     this.photos = clone(photos);
     this.heroPhotoId = heroPhotoId;
+    this.heroPhotoDarkId = heroPhotoDarkId;
   }
 
-  async getHeroPhoto(): Promise<Photo> {
+  async getHeroPhoto(): Promise<HeroPhoto> {
     const hero = this.photos.find(({ id }) => id === this.heroPhotoId);
     if (!hero) {
       throw new Error(`Hero photo "${this.heroPhotoId}" was not found.`);
     }
 
-    return clone(hero);
+    const dark = this.heroPhotoDarkId
+      ? this.photos.find(({ id }) => id === this.heroPhotoDarkId)
+      : undefined;
+
+    return {light: clone(hero), dark: dark ? clone(dark) : null};
   }
 
-  async listFeatured(limit: 5): Promise<Photo[]> {
+  async listFeatured(limit: number): Promise<Photo[]> {
     return clone(this.photos)
       .filter(({ featured }) => featured)
       .sort(byFeaturedOrder)

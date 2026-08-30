@@ -22,6 +22,13 @@ export const profile = defineType({
     }),
     defineField({name: 'email', title: '邮箱', type: 'string', initialValue: 'Northstar_lzh@zju.edu.cn', validation: (Rule) => Rule.required().custom(validateEmail)}),
     defineField({name: 'heroPhoto', title: '首页主图', type: 'reference', to: [{type: 'photo'}], validation: (Rule) => Rule.required()}),
+    defineField({
+      name: 'heroPhotoDark',
+      title: '首页深色主图',
+      type: 'reference',
+      to: [{type: 'photo'}],
+      description: '可选；深色主题下的首页主图，未设置时回退到浅色主图。',
+    }),
     defineField({name: 'resume', title: '简历 PDF', type: 'file', options: {accept: 'application/pdf'}, validation: (Rule) => Rule.custom(validatePdfAsset)}),
   ],
   preview: {select: {title: 'nickname', media: 'avatar'}},

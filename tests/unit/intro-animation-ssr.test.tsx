@@ -27,7 +27,9 @@ describe('home page SSR without JavaScript', () => {
     // The development-preview eyebrow was removed from the hero in Task 1;
     // its translation key is no longer requested, so the sentinel must be absent.
     expect(html).not.toContain('服务端首页正文');
-    expect(html).toContain('id="contact"');
+    // The hero is the only home section now; the contact section moved to /contact.
+    expect(html).toContain('data-testid="home-hero"');
+    expect(html).not.toContain('id="contact"');
     expect(html).not.toContain('data-testid="intro-animation"');
     expect(getTranslations).toHaveBeenCalledTimes(1);
     expect(setRequestLocale).toHaveBeenCalledWith('zh');

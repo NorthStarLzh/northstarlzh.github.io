@@ -9,17 +9,23 @@ import {PhotoViewer} from './photo-viewer';
 import type {PhotoViewerLabels} from './photo-viewer-contract';
 
 export interface FeaturedPhotoGalleryProps {
-  photos: Photo[];
-  locale: Locale;
+  eyebrow?: string;
   labels: PhotoViewerLabels;
+  locale: Locale;
+  photos: Photo[];
   title: string;
+  viewAllHref?: string;
+  viewAllLabel?: string;
 }
 
 export function FeaturedPhotoGallery({
-  photos,
-  locale,
+  eyebrow,
   labels,
+  locale,
+  photos,
   title,
+  viewAllHref,
+  viewAllLabel,
 }: FeaturedPhotoGalleryProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
 
@@ -27,7 +33,18 @@ export function FeaturedPhotoGallery({
 
   return (
     <section aria-labelledby="featured-photography-title" className="featured-photography">
-      <h2 id="featured-photography-title">{title}</h2>
+      <div className="eds-section-head eds-section-head--split">
+        <div>
+          {eyebrow ? <p className="eds-eyebrow">{eyebrow}</p> : null}
+          <h2 className="eds-section-title" id="featured-photography-title">{title}</h2>
+        </div>
+        {viewAllHref && viewAllLabel ? (
+          <a className="featured-photography__view-all" href={viewAllHref}>
+            {viewAllLabel}
+            <span aria-hidden="true">→</span>
+          </a>
+        ) : null}
+      </div>
       <FeaturedGallery locale={locale} onOpen={setActiveId} photos={photos.slice(0, 5)} />
       <PhotoViewer
         activeId={activeId}

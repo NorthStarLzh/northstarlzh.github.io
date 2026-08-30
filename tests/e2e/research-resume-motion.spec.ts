@@ -37,17 +37,24 @@ test('research dialogs cover one to three images, long scrolling, Escape, and fo
   }
 });
 
-test('resume downloads the local PDF fixture and home exposes only the mail link', async ({ page }) => {
+test('resume page serves the portfolio and résumé PDF downloads', async ({ page }) => {
   await page.goto('/zh/resume');
-  const link = page.getByRole('link', { name: '下载 PDF 简历' });
-  await expect(link).toHaveAttribute('download', 'wind-flower-poetry-wine-tea-resume.pdf');
+
+  const portfolio = page.getByRole('link', { name: '下载个人作品集' });
+  await expect(portfolio).toHaveAttribute('download', 'wind-flower-poetry-wine-tea-portfolio.pdf');
+  await expect(portfolio).toHaveAttribute('href', '/portfolio.pdf');
+
+  const resume = page.getByRole('link', { name: '下载个人简历' });
+  await expect(resume).toHaveAttribute('download', 'wind-flower-poetry-wine-tea-resume.pdf');
+  await expect(resume).toHaveAttribute('href', '/resume.pdf');
+
   const downloadPromise = page.waitForEvent('download');
-  await link.click();
+  await resume.click();
   const download = await downloadPromise;
   expect(download.suggestedFilename()).toBe('wind-flower-poetry-wine-tea-resume.pdf');
 
-  await page.goto('/zh#contact');
-  const contact = page.getByTestId('home-contact');
+  await page.goto('/zh/contact');
+  const contact = page.getByTestId('contact-section');
   await expect(contact.locator('a')).toHaveCount(1);
   await expect(contact.locator('a')).toHaveAttribute('href', 'mailto:portfolio-owner@example.com');
   await expect(contact.locator('form')).toHaveCount(0);
@@ -76,7 +83,7 @@ test('reduced motion uses a fade-only intro and disables scroll reveal movement'
   await expect(page.locator('[data-intro-motion="full"]')).toHaveCount(0);
   await expect(page.getByTestId('intro-animation')).toHaveCount(0, { timeout: 1_100 });
 
-  const reveal = page.getByTestId('home-profile');
-  await expect(reveal).toHaveCSS('animation-name', 'none');
-  await expect(reveal).toHaveCSS('transform', 'none');
+  const heroCopy = page.getByTestId('home-hero-copy');
+  await expect(heroCopy).toHaveCSS('animation-name', 'none');
+  await expect(heroCopy).toHaveCSS('transform', 'none');
 });

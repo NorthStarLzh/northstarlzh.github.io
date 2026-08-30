@@ -62,6 +62,12 @@ export interface Photo {
   featuredOrder?: number;
 }
 
+export interface HeroPhoto {
+  light: Photo;
+  /** Dark-theme hero photo; null when unset (callers fall back to `light`). */
+  dark: Photo | null;
+}
+
 export interface PhotoCollection {
   id: string;
   title: LocalizedText;

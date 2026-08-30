@@ -23,11 +23,11 @@ describe('CategoryFilter', () => {
     );
 
     const landscapeLink = screen.getByRole('link', {name: '风光'});
-    expect(landscapeLink).toHaveAttribute('href', '/zh/photography/landscape/#gallery');
+    expect(landscapeLink).toHaveAttribute('href', '/zh/photography/landscape/');
     expect(landscapeLink).toHaveAttribute('aria-current', 'true');
 
     const portraitLink = screen.getByRole('link', {name: '人像'});
-    expect(portraitLink).toHaveAttribute('href', '/zh/photography/portrait/#gallery');
+    expect(portraitLink).toHaveAttribute('href', '/zh/photography/portrait/');
     expect(portraitLink).not.toHaveAttribute('aria-current');
   });
 
@@ -44,7 +44,7 @@ describe('CategoryFilter', () => {
     expect(screen.getByRole('link', {name: 'Portrait'})).toHaveAttribute('aria-current', 'true');
     expect(screen.getByRole('link', {name: 'Portrait'})).toHaveAttribute(
       'href',
-      '/en/photography/portrait/#gallery',
+      '/en/photography/portrait/',
     );
   });
 
@@ -58,7 +58,7 @@ describe('CategoryFilter', () => {
     );
 
     const collectionsLink = screen.getByRole('link', {name: '合集'});
-    expect(collectionsLink).toHaveAttribute('href', '/zh/photography/collections/#gallery');
+    expect(collectionsLink).toHaveAttribute('href', '/zh/photography/collections/');
     expect(collectionsLink).not.toHaveAttribute('aria-current');
 
     unmount();

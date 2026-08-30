@@ -30,8 +30,8 @@ describe('résumé and contact responsive stories', () => {
             locale="zh"
           />
           <ContactSection
-            email="Northstar_lzh@zju.edu.cn"
             locale="zh"
+            profile={{...profileFixture, email: 'Northstar_lzh@zju.edu.cn'}}
           />
         </div>,
       );

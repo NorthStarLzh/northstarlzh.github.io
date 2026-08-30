@@ -19,7 +19,7 @@
  */
 import {createReadStream, readFileSync, readdirSync} from 'node:fs';
 import {createClient} from '@sanity/client';
-import {basename, join, resolve} from 'node:path';
+import {join, resolve} from 'node:path';
 
 const API_VERSION = '2026-07-27';
 const DEFAULT_FOLDER = '照片展示';

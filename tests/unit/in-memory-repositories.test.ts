@@ -47,10 +47,45 @@ describe('InMemoryPhotoRepository', () => {
   it('returns the configured hero and five ordered featured photos', async () => {
     const repository = new InMemoryPhotoRepository(photoDataset, profileFixture.heroPhotoId);
 
-    await expect(repository.getHeroPhoto()).resolves.toMatchObject({ id: 'photo-001' });
+    await expect(repository.getHeroPhoto()).resolves.toMatchObject({
+      light: { id: 'photo-001' },
+      dark: null,
+    });
     const featured = await repository.listFeatured(5);
     expect(featured).toHaveLength(5);
     expect(featured.every((photo, index) => photo.featuredOrder === index + 1)).toBe(true);
+  });
+
+  it('returns a cloned dark hero when a dark cover id is configured', async () => {
+    const repository = new InMemoryPhotoRepository(
+      photoDataset,
+      profileFixture.heroPhotoId,
+      'photo-002',
+    );
+
+    await expect(repository.getHeroPhoto()).resolves.toMatchObject({
+      light: { id: 'photo-001' },
+      dark: { id: 'photo-002' },
+    });
+
+    const hero = await repository.getHeroPhoto();
+    hero.dark!.image.alt.zh = 'mutated';
+    await expect(repository.getHeroPhoto()).resolves.toMatchObject({
+      dark: { image: { alt: { zh: photoDataset[1].image.alt.zh } } },
+    });
+  });
+
+  it('falls back to a null dark hero when the dark cover id is missing', async () => {
+    const repository = new InMemoryPhotoRepository(
+      photoDataset,
+      profileFixture.heroPhotoId,
+      'photo-missing',
+    );
+
+    await expect(repository.getHeroPhoto()).resolves.toMatchObject({
+      light: { id: 'photo-001' },
+      dark: null,
+    });
   });
 
   it('paginates one category with an opaque test cursor and stable completion', async () => {

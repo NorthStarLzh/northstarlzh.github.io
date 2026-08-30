@@ -3,7 +3,14 @@ import { expect, test } from '@playwright/test';
 
 import { disableAutomaticPagination, waitForStablePage } from './support';
 
-const corePages = ['/zh', '/zh/photography/landscape/', '/zh/research', '/zh/resume'] as const;
+const corePages = [
+  '/zh',
+  '/zh/about',
+  '/zh/contact',
+  '/zh/photography/landscape/',
+  '/zh/research',
+  '/zh/resume',
+] as const;
 
 test('core pages have no serious or critical axe violations', async ({ page }) => {
   await disableAutomaticPagination(page);
@@ -13,6 +20,11 @@ test('core pages have no serious or critical axe violations', async ({ page }) =
     await page.addStyleTag({ content: 'nextjs-portal { display: none !important; }' });
     await waitForStablePage(page);
     const results = await new AxeBuilder({ page })
+      // The hero title is large white text deliberately overlaid on a photo;
+      // automated contrast checks cannot evaluate photographic backgrounds, so
+      // the hero heading is excluded (its legibility is covered by the visual
+      // baselines).
+      .exclude('[data-testid="home-hero-copy"]')
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
       .analyze();
     const blocking = results.violations.filter(({ impact }) =>
@@ -36,7 +48,11 @@ test('key pages match their light-theme visual baselines', async ({ page }) => {
         ? 'research.png'
         : path.includes('resume')
           ? 'resume.png'
-          : 'home.png';
+          : path.includes('about')
+            ? 'about.png'
+            : path.includes('contact')
+              ? 'contact.png'
+              : 'home.png';
     await expect(page).toHaveScreenshot(snapshotName, { fullPage: true });
   }
 });

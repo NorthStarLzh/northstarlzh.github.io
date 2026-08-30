@@ -23,9 +23,10 @@ export function FeaturedResearchSection({
     <Section aria-labelledby="featured-research-title">
       <Container>
         <Stack gap="lg">
-          <div>
-            <h2 id="featured-research-title">{t('featuredTitle')}</h2>
-            <p>{t('featuredDescription')}</p>
+          <div className="eds-section-head">
+            <p className="eds-eyebrow">{t('eyebrow')}</p>
+            <h2 className="eds-section-title" id="featured-research-title">{t('featuredTitle')}</h2>
+            <p className="eds-section-description">{t('featuredDescription')}</p>
           </div>
           <ResearchPanel
             locale={locale}

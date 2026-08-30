@@ -9,6 +9,7 @@ import {
   ContactSection,
   createMailtoHref,
 } from '@/features/contact';
+import { profileFixture } from '@fixtures/domain';
 
 afterEach(cleanup);
 
@@ -32,7 +33,10 @@ describe('ContactSection', () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch');
     const cookiesBefore = document.cookie;
     const { container } = render(
-      <ContactSection email={PUBLIC_EMAIL} locale="zh" />,
+      <ContactSection
+        locale="zh"
+        profile={{...profileFixture, email: PUBLIC_EMAIL}}
+      />,
     );
 
     expect(container.querySelector('#contact')).toBeInTheDocument();

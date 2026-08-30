@@ -1,6 +1,11 @@
+import { createElement } from 'react';
+
 import { Container, Section, Stack } from '@/components/layout';
-import type { Locale } from '@/content/contracts';
+import { AppImage } from '@/components/ui';
+import type { Locale, Profile } from '@/content/contracts';
 import { isValidEmail } from '@/content/contracts';
+import { buildHomeAvatarSources, toSrcSet } from '@/features/home';
+import { localize } from '@/i18n/localize';
 import { messagesByLocale } from '@/i18n/messages';
 
 import styles from './contact.module.css';
@@ -18,27 +23,73 @@ export function createMailtoHref(email: string): string {
 }
 
 export interface ContactSectionProps {
-  email: string;
+  headingLevel?: 'h1' | 'h2' | 'h3';
   locale: Locale;
+  profile: Profile;
 }
 
-export function ContactSection({ email, locale }: ContactSectionProps) {
-  const normalizedEmail = email.trim();
+export function ContactSection({
+  headingLevel = 'h2',
+  locale,
+  profile,
+}: ContactSectionProps) {
+  const email = profile.email.trim();
   const messages = messagesByLocale[locale].contact;
   const labelSeparator = locale === 'zh' ? '：' : ': ';
+  const avatar = buildHomeAvatarSources(profile.avatar);
+  const avatarAlt = localize(profile.avatar.alt, locale, {
+    path: 'profile.avatar.alt',
+  });
+  const role = localize(profile.role, locale, { path: 'profile.role' });
 
   return (
-    <Section className={styles.contact} id="contact">
+    <Section
+      className={styles.contact}
+      data-testid="contact-section"
+      id="contact"
+    >
       <Container size="narrow">
         <Stack className={styles.content} gap="md">
-          <h2 className={styles.title}>{messages.title}</h2>
+          {createElement(
+            headingLevel,
+            { className: styles.title, 'data-heading-level': headingLevel },
+            messages.title,
+          )}
           <p className={styles.description}>{messages.description}</p>
+
+          <div className={styles.identity}>
+            <div className={styles.avatarFrame}>
+              <picture>
+                <source
+                  sizes="(min-width: 48rem) 8rem, 6.5rem"
+                  srcSet={toSrcSet(avatar)}
+                />
+                <AppImage
+                  alt={avatarAlt}
+                  className={styles.avatar}
+                  height={profile.avatar.height}
+                  loading="eager"
+                  sizes="(min-width: 48rem) 8rem, 6.5rem"
+                  src={avatar.src}
+                  unoptimized
+                  width={profile.avatar.width}
+                />
+              </picture>
+            </div>
+            <p className={styles.nickname}>{profile.nickname}</p>
+            <p className={styles.meta}>
+              {profile.institution}
+              <span aria-hidden="true"> · </span>
+              {role}
+            </p>
+          </div>
+
           <a
-            aria-label={`${messages.emailLabel}${labelSeparator}${normalizedEmail}`}
+            aria-label={`${messages.emailLabel}${labelSeparator}${email}`}
             className={styles.email}
-            href={createMailtoHref(normalizedEmail)}
+            href={createMailtoHref(email)}
           >
-            {normalizedEmail}
+            {email}
           </a>
         </Stack>
       </Container>

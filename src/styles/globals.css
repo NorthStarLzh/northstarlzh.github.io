@@ -43,25 +43,26 @@
 :root {
   color-scheme: light;
 
-  --color-bg: #f4f5f7;
-  --ds-color-surface: #fbfbfc;
+  --color-bg: #ffffff;
+  --ds-color-surface: rgb(0 0 0 / 4%);
   --color-surface: var(--ds-color-surface);
-  --color-surface-raised: #ffffff;
-  --color-text: #1a1d22;
-  --color-text-muted: #5f6673;
-  --ds-color-border: #d6dae1;
+  --color-surface-raised: rgb(0 0 0 / 6%);
+  --color-text: #000000;
+  --color-text-muted: rgb(0 0 0 / 60%);
+  --color-text-tertiary: rgb(0 0 0 / 45%);
+  --ds-color-border: rgb(0 0 0 / 12%);
   --color-border: var(--ds-color-border);
-  --ds-color-accent: #2a5d8f;
+  --ds-color-accent: #000000;
   --color-accent: var(--ds-color-accent);
-  --ds-color-accent-soft: #4a7fb5;
+  --ds-color-accent-soft: #000000;
   --color-accent-soft: var(--ds-color-accent-soft);
-  --color-accent-hover: #224c78;
+  --color-accent-hover: #000000;
   --ds-color-accent-contrast: #ffffff;
   --color-accent-contrast: var(--ds-color-accent-contrast);
-  --color-danger: #a03b3b;
-  --ds-color-overlay: rgb(9 13 18 / 76%);
+  --color-danger: #000000;
+  --ds-color-overlay: rgb(0 0 0 / 55%);
   --color-overlay: var(--ds-color-overlay);
-  --color-focus: #1a6fc4;
+  --color-focus: #000000;
 
   --space-2xs: 0.25rem;
   --space-xs: 0.5rem;
@@ -72,31 +73,32 @@
   --space-2xl: 3rem;
   --space-section: clamp(4rem, 9vw, 8rem);
 
-  --ds-radius-sm: 0.375rem;
+  --ds-radius-sm: 0.5rem;
   --radius-sm: var(--ds-radius-sm);
-  --ds-radius-md: 0.75rem;
+  --ds-radius-md: 0.875rem;
   --radius-md: var(--ds-radius-md);
-  --ds-radius-lg: 1.25rem;
+  --ds-radius-lg: 1.5rem;
   --radius-lg: var(--ds-radius-lg);
   --ds-radius-pill: 999px;
   --radius-pill: var(--ds-radius-pill);
 
-  --ds-shadow-subtle: 0 1px 2px rgb(10 18 30 / 8%);
+  --ds-shadow-subtle: 0 1px 3px rgb(0 0 0 / 14%);
   --shadow-subtle: var(--ds-shadow-subtle);
-  --ds-shadow-elevated: 0 12px 36px rgb(10 18 30 / 14%);
+  --ds-shadow-elevated: 0 8px 24px rgb(0 0 0 / 16%);
   --shadow-elevated: var(--ds-shadow-elevated);
-  --ds-shadow-dialog: 0 28px 80px rgb(0 0 0 / 30%);
+  --ds-shadow-dialog: 0 28px 80px rgb(0 0 0 / 38%);
   --shadow-dialog: var(--ds-shadow-dialog);
 
-  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', sans-serif;
-  --font-size-caption: 0.75rem;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    system-ui, sans-serif;
+  --font-size-caption: 0.8125rem;
   --font-size-body: 1rem;
-  --font-size-lead: clamp(1.125rem, 1.5vw, 1.375rem);
-  --font-size-h3: clamp(1.375rem, 2vw, 1.75rem);
-  --font-size-h2: clamp(1.75rem, 3vw, 2.75rem);
-  --font-size-h1: clamp(2.5rem, 6vw, 5.5rem);
-  --font-size-display: clamp(3.25rem, 10vw, 9rem);
+  --font-size-lead: clamp(1.0625rem, 1.4vw, 1.25rem);
+  --font-size-h3: clamp(1.25rem, 1.8vw, 1.5rem);
+  --font-size-h2: clamp(1.875rem, 3vw, 3rem);
+  --font-size-h1: clamp(2.5rem, 5vw, 4.5rem);
+  --font-size-display: clamp(3rem, 8vw, 6.5rem);
 
   --duration-instant: 0ms;
   --duration-fast: 120ms;
@@ -117,22 +119,23 @@
 
 [data-theme='dark'] {
   color-scheme: dark;
-  --color-bg: #0f1216;
-  --ds-color-surface: #161a20;
-  --color-surface-raised: #1c222b;
-  --color-text: #eef1f5;
-  --color-text-muted: #aab3c0;
-  --ds-color-border: #333d4a;
-  --ds-color-accent: #8eb8e8;
-  --ds-color-accent-soft: #a9cdf0;
-  --color-accent-hover: #a6c9f2;
-  --ds-color-accent-contrast: #0c1622;
-  --color-danger: #ef9a91;
-  --ds-color-overlay: rgb(2 4 6 / 82%);
-  --color-focus: #6fb2f2;
-  --ds-shadow-subtle: 0 1px 2px rgb(0 0 0 / 30%);
-  --ds-shadow-elevated: 0 12px 36px rgb(0 0 0 / 40%);
-  --ds-shadow-dialog: 0 28px 80px rgb(0 0 0 / 60%);
+  --color-bg: #000000;
+  --ds-color-surface: rgb(255 255 255 / 6%);
+  --color-surface-raised: rgb(255 255 255 / 10%);
+  --color-text: #ffffff;
+  --color-text-muted: rgb(255 255 255 / 60%);
+  --color-text-tertiary: rgb(255 255 255 / 45%);
+  --ds-color-border: rgb(255 255 255 / 18%);
+  --ds-color-accent: #ffffff;
+  --ds-color-accent-soft: #ffffff;
+  --color-accent-hover: #ffffff;
+  --ds-color-accent-contrast: #000000;
+  --color-danger: #ffffff;
+  --ds-color-overlay: rgb(0 0 0 / 72%);
+  --color-focus: #ffffff;
+  --ds-shadow-subtle: 0 1px 3px rgb(0 0 0 / 45%);
+  --ds-shadow-elevated: 0 8px 24px rgb(0 0 0 / 55%);
+  --ds-shadow-dialog: 0 28px 80px rgb(0 0 0 / 72%);
 }
 
 *,
@@ -223,6 +226,43 @@ a:hover {
     gap: var(--cluster-gap, var(--space-md));
   }
 
+  /* Editorial section headers (Apple-style): small eyebrow label + big title. */
+  .eds-eyebrow {
+    margin: 0;
+    color: var(--color-accent);
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .eds-section-title {
+    margin: 0;
+    font-size: var(--font-size-h2);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .eds-section-head {
+    display: grid;
+    max-width: var(--content-narrow);
+    gap: var(--space-sm);
+    margin-block-end: var(--space-xl);
+  }
+
+  .eds-section-head--split {
+    max-width: none;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+
+  .eds-section-description {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lead);
+  }
+
   .ds-button {
     display: inline-flex;
     min-height: 2.75rem;
@@ -252,12 +292,12 @@ a:hover {
   }
 
   .ds-button--primary {
-    background: var(--color-accent-soft);
+    background: var(--color-accent);
     color: var(--color-accent-contrast);
   }
 
   .ds-button--primary:hover:not(:disabled, [aria-disabled='true']) {
-    background: color-mix(in srgb, var(--color-accent-soft) 86%, black);
+    background: var(--color-accent-hover);
     color: var(--color-accent-contrast);
   }
 
@@ -368,33 +408,31 @@ a:hover {
     text-transform: uppercase;
   }
 
+  /* 参考设计：分类与分页均为纯文字链接，当前项加粗高亮（与侧边栏一致）。 */
   .photography-filter {
     display: flex;
-    gap: var(--space-xs);
+    flex-wrap: wrap;
+    gap: var(--space-lg);
   }
 
   .photography-filter__link {
     display: inline-flex;
-    min-height: 2.75rem;
-    padding-inline: var(--space-lg);
+    min-height: 2rem;
     align-items: center;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-pill);
     color: var(--color-text-muted);
-    font-weight: 650;
+    font-size: 1rem;
+    font-weight: 500;
     text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+
+  .photography-filter__link:hover {
+    color: var(--color-text);
   }
 
   .photography-filter__link[aria-current] {
-    border-color: var(--color-accent-soft);
-    background: var(--color-accent-soft);
-    color: var(--color-accent-contrast);
-  }
-
-  .photography-filter__link:active {
-    border-color: var(--color-accent-soft);
-    background: var(--color-accent-soft);
-    color: var(--color-accent-contrast);
+    color: var(--color-text);
+    font-weight: 700;
   }
 
   .photography-card {
@@ -440,7 +478,7 @@ a:hover {
     display: flex;
     margin: var(--space-2xl) 0 0;
     flex-wrap: wrap;
-    gap: var(--space-md);
+    gap: var(--space-lg);
     justify-content: center;
     align-items: center;
   }
@@ -448,53 +486,41 @@ a:hover {
   .photography-feed__page-link,
   .photography-feed__page-number {
     display: inline-flex;
-    min-width: 2.75rem;
-    height: 2.75rem;
-    padding-inline: var(--space-sm);
-    justify-content: center;
+    min-height: 2rem;
     align-items: center;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-pill);
-    background: var(--color-surface);
-    color: var(--color-text);
-    font-weight: 650;
+    justify-content: center;
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    font-weight: 500;
     font-variant-numeric: tabular-nums;
     text-decoration: none;
-    transition:
-      border-color var(--duration-fast) var(--ease-standard),
-      background var(--duration-fast) var(--ease-standard),
-      color var(--duration-fast) var(--ease-standard);
+    transition: color var(--duration-fast) var(--ease-standard);
   }
 
   .photography-feed__page-link:hover,
   .photography-feed__page-number:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
+    color: var(--color-text);
   }
 
   .photography-feed__page-link--disabled {
     cursor: default;
-    border-color: transparent;
-    background: var(--color-surface);
-    color: var(--color-text-muted);
+    color: var(--color-text-tertiary);
   }
 
   .photography-feed__page-link--disabled:hover {
-    border-color: transparent;
-    color: var(--color-text-muted);
+    color: var(--color-text-tertiary);
   }
 
   .photography-feed__page-numbers {
     display: flex;
-    gap: var(--space-2xs);
+    gap: var(--space-md);
     align-items: center;
   }
 
   .photography-feed__page-number--current,
   .photography-feed__page-number--current:hover {
-    border-color: var(--color-accent);
-    background: var(--color-accent);
-    color: var(--color-accent-contrast);
+    color: var(--color-text);
+    font-weight: 700;
   }
 
   /* Screen-reader-only helper for the live "Page N of M" announcement. */
@@ -510,9 +536,23 @@ a:hover {
     border: 0;
   }
 
-  .featured-photography > h2 {
-    margin: 0 0 var(--space-xl);
-    font-size: var(--font-size-h2);
+  .featured-photography__view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    color: var(--color-accent);
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .featured-photography__view-all:hover {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
   }
 
   .featured-gallery {
@@ -927,6 +967,11 @@ a:hover {
     top: 0;
     border-bottom: 1px solid var(--color-border);
     background: var(--color-bg);
+    transition: box-shadow var(--duration-normal) var(--ease-standard);
+  }
+
+  .app-shell__header--scrolled {
+    box-shadow: var(--shadow-subtle);
   }
 
   .app-shell__header-content {
@@ -944,11 +989,61 @@ a:hover {
     text-decoration: none;
   }
 
-  .app-shell__desktop-navigation {
+  .app-shell__shell {
+    min-height: 100vh;
+  }
+
+  .app-shell__sidebar {
     display: none;
+  }
+
+  .app-shell__content {
+    position: relative;
     min-width: 0;
+  }
+
+  /* Top-right language/theme controls (reference design floats them over the
+     hero media on desktop). Hidden below the desktop breakpoint where the
+     header and the mobile menu take over. */
+  .app-shell__content-controls {
+    position: absolute;
+    z-index: var(--layer-sticky-nav);
+    top: 1.25rem;
+    right: clamp(var(--space-md), 3vw, var(--space-xl));
+    display: none;
     align-items: center;
-    gap: var(--space-lg);
+    gap: var(--space-md);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-caption);
+  }
+
+  .app-shell__content-controls .ds-button {
+    min-height: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .app-shell__content-controls .ds-button:hover:not(:disabled, [aria-disabled='true']) {
+    color: var(--color-text);
+    transform: none;
+  }
+
+  /* On the home page the controls sit over the full-bleed hero photo. */
+  .app-shell__content-controls--over-media {
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgb(0 0 0 / 40%);
+  }
+
+  .app-shell__content-controls--over-media .ds-button:hover:not(:disabled, [aria-disabled='true']) {
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
   }
 
   .app-shell__navigation-list {
@@ -962,13 +1057,17 @@ a:hover {
 
   .app-shell__navigation-link {
     display: inline-flex;
-    min-height: 2.75rem;
+    min-height: 2.5rem;
     padding-inline: var(--space-md);
     align-items: center;
     border-radius: var(--radius-pill);
     color: var(--color-text-muted);
-    font-weight: 650;
+    font-size: 0.875rem;
+    font-weight: 500;
     text-decoration: none;
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard);
   }
 
   .app-shell__navigation-link:hover {
@@ -980,12 +1079,6 @@ a:hover {
     background: var(--color-surface);
     box-shadow: inset 0 -3px 0 var(--color-accent);
     color: var(--color-text);
-  }
-
-  .app-shell__controls {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2xs);
   }
 
   .app-shell__mobile-navigation {
@@ -1017,11 +1110,178 @@ a:hover {
     width: 100%;
     justify-content: flex-start;
   }
+
+  /* Apple-style footer: muted gray band with a hairline top border. */
+  .app-footer {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-caption);
+  }
+
+  .app-footer__content {
+    padding-block: var(--space-xl) var(--space-lg);
+  }
+
+  .app-footer__top {
+    display: grid;
+    gap: var(--space-xl);
+    padding-block-end: var(--space-xl);
+  }
+
+  .app-footer__identity {
+    display: grid;
+    gap: var(--space-xs);
+  }
+
+  .app-footer__brand {
+    margin: 0;
+    color: var(--color-text);
+    font-size: var(--font-size-lead);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .app-footer__tagline {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .app-footer__links {
+    display: grid;
+    align-content: start;
+    gap: var(--space-md);
+  }
+
+  .app-footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-lg);
+  }
+
+  .app-footer__link {
+    color: var(--color-text-muted);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .app-footer__link:hover {
+    color: var(--color-text);
+    text-decoration: underline;
+  }
+
+  .app-footer__email {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    overflow-wrap: anywhere;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .app-footer__email:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .app-footer__legal {
+    margin: 0;
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-caption);
+  }
+
+  @media (min-width: 48rem) {
+    .app-footer__top {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+    }
+
+    .app-footer__links {
+      justify-items: end;
+      text-align: end;
+    }
+  }
 }
 
 @media (min-width: 75rem) {
-  .app-shell__desktop-navigation {
+  .app-shell__shell {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .app-shell__sidebar {
+    position: sticky;
+    z-index: var(--layer-sticky-nav);
+    top: 0;
     display: flex;
+    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
+    flex-direction: column;
+    gap: var(--space-2xl);
+    padding: var(--space-2xl) var(--space-lg);
+    overflow-y: auto;
+    background: var(--color-bg);
+  }
+
+  /* Reference design: brand and nav items are centred in the rail, with an
+     airy gap between the brand and the menu (the mockup starts the menu about
+     a third of the way down). */
+  .app-shell__sidebar .app-shell__brand {
+    align-self: center;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .app-shell__sidebar-nav {
+    flex: 1;
+  }
+
+  .app-shell__sidebar .app-shell__navigation-list {
+    align-items: center;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: clamp(3rem, 14vh, 7rem);
+  }
+
+  .app-shell__sidebar .app-shell__navigation-link {
+    width: 100%;
+    min-height: 2rem;
+    justify-content: center;
+    padding-inline: 0;
+    border-radius: 0;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+
+  .app-shell__sidebar .app-shell__navigation-link:hover {
+    background: transparent;
+    color: var(--color-text);
+  }
+
+  /* The reference marks the current page with bold full-contrast text only —
+     no underline, background block, or side indicator; inactive items stay
+     muted gray (about 50-60% opacity in the mockup). */
+  .app-shell__sidebar .app-shell__navigation-link[aria-current] {
+    background: transparent;
+    box-shadow: none;
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .app-shell__content-controls {
+    display: flex;
+  }
+
+  .app-shell__header {
+    display: none;
   }
 
   .app-shell__mobile-navigation {

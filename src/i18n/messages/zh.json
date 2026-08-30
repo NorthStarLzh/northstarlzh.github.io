@@ -3,18 +3,29 @@
     "title": "风花诗酒茶",
     "featuredPhotography": "精选摄影",
     "profileTitle": "个人介绍",
+    "viewAllPhotography": "查看全部摄影",
     "photographyEmptyDescription": "精选摄影作品发布后将在这里展示。",
     "photographyErrorTitle": "精选摄影暂不可用",
-    "photographyErrorDescription": "内容服务暂时不可用，请稍后再试。"
+    "photographyErrorDescription": "内容服务暂时不可用，请稍后再试。",
+    "eyebrow": {
+      "photography": "摄影"
+    }
+  },
+  "about": {
+    "eyebrow": "关于",
+    "title": "关于我",
+    "description": "个人简介、研究兴趣与教育背景。",
+    "errorTitle": "个人介绍暂不可用",
+    "errorDescription": "内容服务暂时不可用，请稍后再试。"
   },
   "photography": {
-    "eyebrow": "摄影作品",
-    "title": "光影之间",
+    "eyebrow": "摄影作品展",
+    "title": "让回忆有迹可循",
     "intro": "按原始比例浏览风光与人像摄影作品。",
     "categoryLabel": "摄影作品分类",
     "categories": {
-      "landscape": "风光",
-      "portrait": "人像"
+      "landscape": "风光摄影",
+      "portrait": "人像摄影"
     },
     "loadMore": "加载更多",
     "loading": "正在加载摄影作品…",
@@ -46,6 +57,7 @@
     "menuTitle": "网站导航",
     "menuDescription": "访问全部页面并切换语言或主题。",
     "home": "首页",
+    "about": "关于我",
     "photography": "摄影作品",
     "research": "科研成果",
     "resume": "个人简历",
@@ -80,8 +92,15 @@
     "viewerUnavailable": "大图查看器暂不可用"
   },
   "download": {
-    "resume": "下载 PDF 简历",
-    "unavailable": "简历暂不可下载"
+    "resume": "点击下载",
+    "unavailable": "简历暂不可下载",
+    "portfolioTitle": "个人作品集",
+    "resumeTitle": "个人简历",
+    "portfolio": "点击下载",
+    "portfolioAria": "下载个人作品集",
+    "resumeAria": "下载个人简历",
+    "portfolioPreview": "个人作品集 PDF 预览",
+    "resumePreview": "个人简历 PDF 预览"
   },
   "dialogs": {
     "close": "关闭弹窗",
@@ -98,6 +117,7 @@
   },
   "research": {
     "title": "科研成果",
+    "eyebrow": "研究",
     "description": "探索项目背景、研究过程与论文成果。",
     "featuredTitle": "精选科研项目",
     "featuredDescription": "近期具有代表性的研究与实践。",
@@ -111,6 +131,7 @@
   },
   "resume": {
     "title": "个人简历",
+    "eyebrow": "履历",
     "description": "个人简介、教育经历与获奖经历。",
     "summaryTitle": "简历摘要",
     "educationTitle": "教育经历",
@@ -121,10 +142,17 @@
   "contact": {
     "title": "联系方式",
     "description": "欢迎通过电子邮件联系。",
-    "emailLabel": "电子邮箱"
+    "emailLabel": "电子邮箱",
+    "errorTitle": "联系方式暂不可用",
+    "errorDescription": "内容服务暂时不可用，请稍后再试。"
+  },
+  "footer": {
+    "tagline": "摄影与科研的个人网站。",
+    "navLabel": "页脚导航",
+    "rights": "保留所有权利。"
   },
   "theme": {
-    "label": "主题",
+    "label": "主题：",
     "loading": "主题正在加载",
     "ariaLabel": "当前主题: {current}; 切换到 {target}",
     "title": "主题: {current}",

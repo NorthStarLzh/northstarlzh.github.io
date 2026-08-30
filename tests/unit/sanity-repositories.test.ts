@@ -205,11 +205,31 @@ describe('SanityProfileRepository', () => {
 
 describe('SanityPhotoRepository', () => {
   it('returns a valid configured hero without querying the fallback', async () => {
-    const client = new QueueClient([rawPhoto('hero')]);
+    const client = new QueueClient([rawPhoto('hero'), null]);
     await expect(new SanityPhotoRepository(client).getHeroPhoto())
-      .resolves.toMatchObject({id: 'hero'});
-    expect(client.calls).toHaveLength(1);
+      .resolves.toMatchObject({light: {id: 'hero'}, dark: null});
+    expect(client.calls).toHaveLength(2);
     expect(client.calls[0].options.next.tags).toEqual(['photos', 'home']);
+    expect(client.calls[1].options.next.tags).toEqual(['photos', 'home']);
+  });
+
+  it('returns a configured dark hero when the dark cover is set', async () => {
+    const client = new QueueClient([rawPhoto('hero'), rawPhoto('dark-hero')]);
+    await expect(new SanityPhotoRepository(client).getHeroPhoto())
+      .resolves.toMatchObject({light: {id: 'hero'}, dark: {id: 'dark-hero'}});
+    expect(client.calls).toHaveLength(2);
+  });
+
+  it('falls back to a null dark hero when the dark cover is invalid', async () => {
+    const client = new QueueClient([
+      rawPhoto('hero'),
+      rawPhoto('broken-dark', {shotAt: 'invalid'}),
+    ]);
+    const {logger, entries} = collectingLogger();
+
+    await expect(new SanityPhotoRepository(client, logger).getHeroPhoto())
+      .resolves.toMatchObject({light: {id: 'hero'}, dark: null});
+    expect(entries.map(({documentId}) => documentId)).toEqual(['broken-dark']);
   });
 
   it('uses the first valid featured photo when the configured hero is missing or invalid', async () => {
@@ -219,12 +239,13 @@ describe('SanityPhotoRepository', () => {
         rawPhoto('broken-featured', {featured: true, featuredOrder: 0, categories: ['unknown']}),
         rawPhoto('featured-fallback', {featured: true, featuredOrder: 1}),
       ],
+      null,
     ]);
     const {logger, entries} = collectingLogger();
 
     await expect(new SanityPhotoRepository(client, logger).getHeroPhoto())
-      .resolves.toMatchObject({id: 'featured-fallback'});
-    expect(client.calls).toHaveLength(2);
+      .resolves.toMatchObject({light: {id: 'featured-fallback'}, dark: null});
+    expect(client.calls).toHaveLength(3);
     expect(client.calls[1].params).toEqual({limit: 5});
     expect(entries.map(({documentId}) => documentId)).toEqual([
       'broken-hero',

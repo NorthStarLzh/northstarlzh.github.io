@@ -36,13 +36,16 @@ export function ResumeModule({
         <Stack gap={compact ? 'xl' : '2xl'}>
           <header className={styles.moduleHeader}>
             {compact ? (
-              <h2 className={styles.moduleTitle}>{messages.resume.summaryTitle}</h2>
+              <>
+                <p className="eds-eyebrow">{messages.resume.eyebrow}</p>
+                <h2 className="eds-section-title">{messages.resume.summaryTitle}</h2>
+              </>
             ) : (
-              <h1 className={styles.moduleTitle}>{messages.resume.title}</h1>
+              <>
+                <h1 className={styles.moduleTitle}>{messages.resume.title}</h1>
+                <p className={styles.moduleDescription}>{messages.resume.description}</p>
+              </>
             )}
-            {!compact ? (
-              <p className={styles.moduleDescription}>{messages.resume.description}</p>
-            ) : null}
           </header>
 
           <ProfileSummary

@@ -74,13 +74,13 @@ describe('AppShell navigation', () => {
     renderShell();
 
     const navigation = screen.getByRole('navigation', { name: '主导航' });
-    expect(within(navigation).getAllByRole('link')).toHaveLength(5);
+    expect(within(navigation).getAllByRole('link')).toHaveLength(6);
     expect(
       within(navigation).getByRole('link', { name: '科研成果' }),
     ).toHaveAttribute('aria-current', 'page');
     expect(within(navigation).getByRole('link', { name: '联系方式' })).toHaveAttribute(
       'href',
-      '/zh#contact',
+      '/zh/contact',
     );
     expect(screen.getByRole('button', { name: /当前语言/ })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /当前主题/ })).toBeInTheDocument();
@@ -91,16 +91,16 @@ describe('AppShell navigation', () => {
     );
   });
 
-  it('marks the contact location instead of home when its hash is active', async () => {
-    navigationMock.pathname = '/zh';
-    window.history.replaceState({}, '', '/zh#contact');
+  it('marks contact current and home inactive on the contact page', async () => {
+    navigationMock.pathname = '/zh/contact';
+    window.history.replaceState({}, '', '/zh/contact');
     renderShell();
 
     const navigation = screen.getByRole('navigation', { name: '主导航' });
     await waitFor(() =>
       expect(
         within(navigation).getByRole('link', { name: '联系方式' }),
-      ).toHaveAttribute('aria-current', 'location'),
+      ).toHaveAttribute('aria-current', 'page'),
     );
     expect(within(navigation).getByRole('link', { name: '首页' })).not.toHaveAttribute(
       'aria-current',
@@ -134,10 +134,10 @@ describe('AppShell navigation', () => {
     const navigation = within(dialog).getByRole('navigation', {
       name: '移动端主导航',
     });
-    expect(within(navigation).getAllByRole('link')).toHaveLength(5);
+    expect(within(navigation).getAllByRole('link')).toHaveLength(6);
     expect(within(navigation).getByRole('link', { name: '联系方式' })).toHaveAttribute(
       'href',
-      '/zh#contact',
+      '/zh/contact',
     );
     expect(within(dialog).getByRole('button', { name: /当前语言/ })).toBeEnabled();
     expect(within(dialog).getByRole('button', { name: /当前主题/ })).toBeEnabled();

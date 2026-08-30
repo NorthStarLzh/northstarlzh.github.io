@@ -2,6 +2,7 @@ import {
   PHOTO_CATEGORIES,
   type AwardEntry,
   type EducationEntry,
+  type HeroPhoto,
   type PageResult,
   type Photo,
   type PhotoCollection,
@@ -37,6 +38,7 @@ import {
   EDUCATION_QUERY,
   FEATURED_PHOTOS_QUERY,
   FEATURED_RESEARCH_QUERY,
+  HERO_PHOTO_DARK_QUERY,
   HERO_PHOTO_QUERY,
   MAX_FEATURED_ORDER,
   PROFILE_QUERY,
@@ -151,7 +153,7 @@ export class SanityPhotoRepository implements PhotoRepository {
     private readonly logger: ContentLogger = consoleContentLogger,
   ) {}
 
-  async getHeroPhoto(): Promise<Photo> {
+  async getHeroPhoto(): Promise<HeroPhoto> {
     const options = contentFetchOptions(
       CONTENT_CACHE_TAGS.photos,
       CONTENT_CACHE_TAGS.home,
@@ -166,7 +168,7 @@ export class SanityPhotoRepository implements PhotoRepository {
 
     if (raw !== null && raw !== undefined) {
       try {
-        return mapPhoto(raw);
+        return {light: mapPhoto(raw), dark: await this.fetchDarkHeroPhoto(options)};
       } catch (error) {
         logInvalidDocument(this.logger, 'photos', 'photo', error);
       }
@@ -190,13 +192,31 @@ export class SanityPhotoRepository implements PhotoRepository {
     if (!fallback) {
       throw new HeroPhotoUnavailableError();
     }
-    return fallback;
+    return {light: fallback, dark: await this.fetchDarkHeroPhoto(options)};
   }
 
-  async listFeatured(limit: 5): Promise<Photo[]> {
-    if (limit !== 5) {
-      throw new RangeError('Featured photo limit must be exactly 5.');
+  private async fetchDarkHeroPhoto(options: SanityFetchOptions): Promise<Photo | null> {
+    const raw = await fetchContent<unknown>(
+      this.client,
+      'photos',
+      HERO_PHOTO_DARK_QUERY,
+      {},
+      options,
+    );
+
+    if (raw === null || raw === undefined) {
+      return null;
     }
+
+    try {
+      return mapPhoto(raw);
+    } catch (error) {
+      logInvalidDocument(this.logger, 'photos', 'photo', error);
+      return null;
+    }
+  }
+
+  async listFeatured(limit: number): Promise<Photo[]> {
     const raw = await fetchContent<unknown>(
       this.client,
       'photos',

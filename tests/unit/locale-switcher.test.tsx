@@ -65,12 +65,12 @@ describe('LocaleSwitcher', () => {
     );
   });
 
-  it('keeps the contact anchor when switching from English', async () => {
-    window.history.replaceState({}, '', '/en#contact');
+  it('keeps the contact page when switching from English', async () => {
+    window.history.replaceState({}, '', '/en/contact');
     renderSwitcher('en');
 
     await userEvent.click(screen.getByRole('button'));
 
-    expect(routerReplace).toHaveBeenCalledWith('/zh#contact');
+    expect(routerReplace).toHaveBeenCalledWith('/zh/contact');
   });
 });

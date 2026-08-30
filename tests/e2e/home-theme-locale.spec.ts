@@ -5,7 +5,7 @@ import {
   openResponsiveControls,
 } from './support';
 
-test('Chinese home completes its intro and exposes featured content and email', async ({ page }) => {
+test('Chinese home completes its intro and exposes the hero cover', async ({ page }) => {
   const startedAt = Date.now();
   await page.goto('/zh', { waitUntil: 'domcontentloaded' });
 
@@ -14,11 +14,11 @@ test('Chinese home completes its intro and exposes featured content and email', 
   await intro.waitFor({ state: 'detached', timeout: 1_100 });
   expect(Date.now() - startedAt).toBeLessThan(4_000);
 
+  const hero = page.getByTestId('home-hero');
+  await expect(hero).toBeVisible();
+  await expect(hero).toHaveAttribute('data-image-source', 'hero');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('自动化测试');
-  await expect(page.getByTestId('home-featured-photos').locator('.photography-card')).toHaveCount(5);
-  await expect(page.getByTestId('home-featured-research').locator('.research-card')).toHaveCount(3);
-  const email = page.getByRole('link', { name: /portfolio-owner@example\.com/ });
-  await expect(email).toHaveAttribute('href', 'mailto:portfolio-owner@example.com');
+  await expect(page.getByTestId('home-hero-copy')).toContainText('自动化测试');
 });
 
 test('theme follows the system, cycles manually, and persists after refresh', async ({ page }) => {
@@ -53,14 +53,16 @@ test('locale switch preserves page, portrait category, hash, and localized conte
   await page.getByRole('button', { name: /切换到英文/ }).click();
 
   await expect(page).toHaveURL(/\/en\/photography\/portrait\/?#gallery/);
-  await expect(page.getByRole('heading', { level: 1, name: 'Between light and shadow' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 1, name: 'Making memories traceable' }),
+  ).toBeVisible();
   await expect(page.getByRole('link', { name: 'Portrait' })).toHaveAttribute('aria-current', 'true');
   await expect(page.locator('.photography-card__button').first()).toHaveAccessibleName(/Automated test image/);
 
   await openResponsiveControls(page, 'en');
   await page.getByRole('link', { name: 'Contact' }).click();
-  await expect(page).toHaveURL(/\/en#contact$/);
+  await expect(page).toHaveURL(/\/en\/contact\/?$/);
   await expect(
-    page.getByTestId('home-profile').getByText(/This content is used only for local automated testing/),
+    page.getByTestId('contact-section').getByRole('link', { name: /portfolio-owner@example\.com/ }),
   ).toBeVisible();
 });

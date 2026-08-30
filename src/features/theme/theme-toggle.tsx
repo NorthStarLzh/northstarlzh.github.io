@@ -21,9 +21,11 @@ function ThemeGlyph({ mode }: { mode: ThemeMode }) {
 
 export interface ThemeToggleProps {
   className?: string;
+  /** Renders as plain text without the mode glyph (used in the top-right bar). */
+  plain?: boolean;
 }
 
-export function ThemeToggle({ className }: ThemeToggleProps) {
+export function ThemeToggle({ className, plain = false }: ThemeToggleProps) {
   const hydrated = useSyncExternalStore(
     subscribeToHydration,
     getClientSnapshot,
@@ -42,7 +44,8 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
         size="sm"
         variant="ghost"
       >
-        ◐ {t('label')}
+        {plain ? null : <>◐ </>}
+        {t('label')}
       </Button>
     );
   }
@@ -73,7 +76,13 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       })}
       variant="ghost"
     >
-      <ThemeGlyph mode={currentMode} /> {t('label')}: {currentModeLabel}
+      {plain ? null : (
+        <>
+          <ThemeGlyph mode={currentMode} />{' '}
+        </>
+      )}
+      {t('label')}
+      {currentModeLabel}
     </Button>
   );
 }

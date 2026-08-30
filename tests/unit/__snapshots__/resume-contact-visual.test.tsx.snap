@@ -202,7 +202,7 @@ exports[`résumé and contact responsive stories > keeps the complete content at
             href="https://cdn.sanity.io/files/test-project/test-dataset/fixture-resume.pdf?dl=wind-flower-poetry-wine-tea-resume.pdf"
           >
             <span>
-              下载 PDF 简历
+              点击下载
             </span>
           </a>
         </div>
@@ -211,6 +211,7 @@ exports[`résumé and contact responsive stories > keeps the complete content at
   </section>
   <section
     class="ds-section _contact_bd68ac"
+    data-testid="contact-section"
     id="contact"
     style="--section-space: var(--space-section);"
   >
@@ -224,6 +225,7 @@ exports[`résumé and contact responsive stories > keeps the complete content at
       >
         <h2
           class="_title_bd68ac"
+          data-heading-level="h2"
         >
           联系方式
         </h2>
@@ -232,6 +234,47 @@ exports[`résumé and contact responsive stories > keeps the complete content at
         >
           欢迎通过电子邮件联系。
         </p>
+        <div
+          class="_identity_bd68ac"
+        >
+          <div
+            class="_avatarFrame_bd68ac"
+          >
+            <picture>
+              <source
+                sizes="(min-width: 48rem) 8rem, 6.5rem"
+                srcset="/content-image-placeholder.svg?fit=max&w=160 160w, /content-image-placeholder.svg?fit=max&w=320 320w, /content-image-placeholder.svg?fit=max&w=640 640w"
+              />
+              <img
+                alt="测试图片 fixture-avatar"
+                class="ds-app-image _avatar_bd68ac"
+                data-nimg="1"
+                decoding="async"
+                height="800"
+                loading="eager"
+                src="/content-image-placeholder.svg?fit=max&w=640"
+                style="color: transparent;"
+                width="800"
+              />
+            </picture>
+          </div>
+          <p
+            class="_nickname_bd68ac"
+          >
+            测试作品集
+          </p>
+          <p
+            class="_meta_bd68ac"
+          >
+            Fixture University
+            <span
+              aria-hidden="true"
+            >
+               · 
+            </span>
+            测试摄影师
+          </p>
+        </div>
         <a
           aria-label="电子邮箱：Northstar_lzh@zju.edu.cn"
           class="_email_bd68ac"
@@ -447,7 +490,7 @@ exports[`résumé and contact responsive stories > keeps the complete content at
             href="https://cdn.sanity.io/files/test-project/test-dataset/fixture-resume.pdf?dl=wind-flower-poetry-wine-tea-resume.pdf"
           >
             <span>
-              下载 PDF 简历
+              点击下载
             </span>
           </a>
         </div>
@@ -456,6 +499,7 @@ exports[`résumé and contact responsive stories > keeps the complete content at
   </section>
   <section
     class="ds-section _contact_bd68ac"
+    data-testid="contact-section"
     id="contact"
     style="--section-space: var(--space-section);"
   >
@@ -469,6 +513,7 @@ exports[`résumé and contact responsive stories > keeps the complete content at
       >
         <h2
           class="_title_bd68ac"
+          data-heading-level="h2"
         >
           联系方式
         </h2>
@@ -477,6 +522,47 @@ exports[`résumé and contact responsive stories > keeps the complete content at
         >
           欢迎通过电子邮件联系。
         </p>
+        <div
+          class="_identity_bd68ac"
+        >
+          <div
+            class="_avatarFrame_bd68ac"
+          >
+            <picture>
+              <source
+                sizes="(min-width: 48rem) 8rem, 6.5rem"
+                srcset="/content-image-placeholder.svg?fit=max&w=160 160w, /content-image-placeholder.svg?fit=max&w=320 320w, /content-image-placeholder.svg?fit=max&w=640 640w"
+              />
+              <img
+                alt="测试图片 fixture-avatar"
+                class="ds-app-image _avatar_bd68ac"
+                data-nimg="1"
+                decoding="async"
+                height="800"
+                loading="eager"
+                src="/content-image-placeholder.svg?fit=max&w=640"
+                style="color: transparent;"
+                width="800"
+              />
+            </picture>
+          </div>
+          <p
+            class="_nickname_bd68ac"
+          >
+            测试作品集
+          </p>
+          <p
+            class="_meta_bd68ac"
+          >
+            Fixture University
+            <span
+              aria-hidden="true"
+            >
+               · 
+            </span>
+            测试摄影师
+          </p>
+        </div>
         <a
           aria-label="电子邮箱：Northstar_lzh@zju.edu.cn"
           class="_email_bd68ac"
@@ -692,7 +778,7 @@ exports[`résumé and contact responsive stories > keeps the complete content at
             href="https://cdn.sanity.io/files/test-project/test-dataset/fixture-resume.pdf?dl=wind-flower-poetry-wine-tea-resume.pdf"
           >
             <span>
-              下载 PDF 简历
+              点击下载
             </span>
           </a>
         </div>
@@ -701,6 +787,7 @@ exports[`résumé and contact responsive stories > keeps the complete content at
   </section>
   <section
     class="ds-section _contact_bd68ac"
+    data-testid="contact-section"
     id="contact"
     style="--section-space: var(--space-section);"
   >
@@ -714,6 +801,7 @@ exports[`résumé and contact responsive stories > keeps the complete content at
       >
         <h2
           class="_title_bd68ac"
+          data-heading-level="h2"
         >
           联系方式
         </h2>
@@ -722,6 +810,47 @@ exports[`résumé and contact responsive stories > keeps the complete content at
         >
           欢迎通过电子邮件联系。
         </p>
+        <div
+          class="_identity_bd68ac"
+        >
+          <div
+            class="_avatarFrame_bd68ac"
+          >
+            <picture>
+              <source
+                sizes="(min-width: 48rem) 8rem, 6.5rem"
+                srcset="/content-image-placeholder.svg?fit=max&w=160 160w, /content-image-placeholder.svg?fit=max&w=320 320w, /content-image-placeholder.svg?fit=max&w=640 640w"
+              />
+              <img
+                alt="测试图片 fixture-avatar"
+                class="ds-app-image _avatar_bd68ac"
+                data-nimg="1"
+                decoding="async"
+                height="800"
+                loading="eager"
+                src="/content-image-placeholder.svg?fit=max&w=640"
+                style="color: transparent;"
+                width="800"
+              />
+            </picture>
+          </div>
+          <p
+            class="_nickname_bd68ac"
+          >
+            测试作品集
+          </p>
+          <p
+            class="_meta_bd68ac"
+          >
+            Fixture University
+            <span
+              aria-hidden="true"
+            >
+               · 
+            </span>
+            测试摄影师
+          </p>
+        </div>
         <a
           aria-label="电子邮箱：Northstar_lzh@zju.edu.cn"
           class="_email_bd68ac"

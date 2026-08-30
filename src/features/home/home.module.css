@@ -6,7 +6,7 @@
   position: relative;
   isolation: isolate;
   display: grid;
-  min-height: min(52rem, calc(100svh - 4.5rem));
+  min-height: calc(100svh - 4.5rem);
   align-items: end;
   overflow: hidden;
   background: var(--color-bg);
@@ -37,74 +37,52 @@
 
 .heroShade {
   z-index: -1;
-  /* 顶部保持透明让照片完整露出；到底边时铺满 100% 页面底色，
-     使渐变块的边界与首图边界完全重合，不再露出深色照片残留。 */
+  /* 左侧贴合侧边栏底色、向右渐隐：消除图片与导航栏之间的硬边界。 */
   background: linear-gradient(
-    180deg,
-    transparent 0%,
-    color-mix(in srgb, var(--color-bg) 55%, transparent) 62%,
-    var(--color-bg) 100%
+    90deg,
+    var(--color-bg) 0%,
+    color-mix(in srgb, var(--color-bg) 45%, transparent) 38%,
+    transparent 68%
+  );
+}
+
+[data-theme='dark'] .heroShade {
+  /* 深色模式同样从左往右渐隐，让深色封面与黑色侧边栏融为一体。 */
+  background: linear-gradient(
+    90deg,
+    var(--color-bg) 0%,
+    color-mix(in srgb, var(--color-bg) 40%, transparent) 36%,
+    transparent 66%
   );
 }
 
 .heroCopy {
   display: grid;
+  justify-items: end;
   padding-block: clamp(4rem, 14vw, 9rem);
   gap: var(--space-md);
-}
-
-.heroCopy h1,
-.heroPosition,
-.sectionTitle {
-  margin: 0;
+  animation: hero-rise 800ms var(--ease-standard) both;
+  animation-delay: 320ms;
 }
 
 .heroCopy h1 {
   max-width: 12ch;
+  margin: 0;
+  color: #ffffff;
   font-size: var(--font-size-display);
   line-height: 0.92;
   letter-spacing: -0.045em;
+  text-align: right;
+  /* 白色大字压在照片上，加一层柔和投影保证可读性。 */
+  text-shadow:
+    0 1px 2px rgb(0 0 0 / 30%),
+    0 4px 18px rgb(0 0 0 / 28%);
 }
 
-.heroPosition {
-  max-width: 45rem;
-  font-size: var(--font-size-lead);
-  font-weight: 620;
-}
-
-.sectionTitle {
-  font-size: var(--font-size-h2);
-  line-height: 1.1;
-}
-
-.featuredPhotos {
-  padding-block: var(--space-section);
-}
-
-.featuredPhotos > :global(.featured-photography) {
-  width: 100%;
-  max-width: var(--content-wide);
-  margin-inline: auto;
-  padding-inline: clamp(var(--space-md), 4vw, var(--space-xl));
-}
-
-.reveal {
-  opacity: 1;
-  transform: none;
-}
-
-@supports (animation-timeline: view()) {
-  .reveal {
-    animation: home-reveal linear both;
-    animation-range: entry 0% entry 35%;
-    animation-timeline: view();
-  }
-}
-
-@keyframes home-reveal {
+@keyframes hero-rise {
   from {
-    opacity: 0.2;
-    transform: translateY(1.5rem);
+    opacity: 0;
+    transform: translateY(1rem);
   }
 
   to {
@@ -115,7 +93,7 @@
 
 @media (min-width: 48rem) {
   .hero {
-    min-height: min(56rem, calc(100svh - 4.5rem));
+    min-height: calc(100svh - 4.5rem);
   }
 
   .heroCopy {
@@ -124,20 +102,13 @@
 }
 
 @media (min-width: 75rem) {
-  .heroCopy {
-    grid-template-columns: minmax(0, 2fr) minmax(18rem, 1fr);
-    align-items: end;
-  }
-
-  .heroPosition {
-    justify-self: end;
+  .hero {
+    min-height: 100svh;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .heroCopy {
     animation: none;
-    opacity: 1;
-    transform: none;
   }
 }

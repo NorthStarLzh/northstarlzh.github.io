@@ -9,6 +9,7 @@ import {
   EDUCATION_QUERY,
   FEATURED_PHOTOS_QUERY,
   FEATURED_RESEARCH_QUERY,
+  HERO_PHOTO_DARK_QUERY,
   HERO_PHOTO_QUERY,
   PHOTO_PAGE_QUERY,
   PROFILE_QUERY,
@@ -90,19 +91,25 @@ describe('GROQ query contracts', () => {
       EDUCATION_QUERY,
       AWARDS_QUERY,
       HERO_PHOTO_QUERY,
+      HERO_PHOTO_DARK_QUERY,
       FEATURED_PHOTOS_QUERY,
       PHOTO_PAGE_QUERY,
       FEATURED_RESEARCH_QUERY,
       ALL_RESEARCH_QUERY,
       RESEARCH_BY_ID_QUERY,
     ];
-    expect(queries).toHaveLength(9);
+    expect(queries).toHaveLength(10);
     for (const query of queries) {
       expect(() => parse(query)).not.toThrow();
       expect(query).toContain('*[');
       expect(query).not.toMatch(/\b(create|delete|mutate|patch)\b/i);
       expect(query).not.toContain('drafts.');
     }
+  });
+
+  it('reads the configured and dark hero photo references', () => {
+    expect(HERO_PHOTO_QUERY).toContain('.heroPhoto->');
+    expect(HERO_PHOTO_DARK_QUERY).toContain('.heroPhotoDark->');
   });
 
   it('limits home selections and applies stable tie breakers', () => {

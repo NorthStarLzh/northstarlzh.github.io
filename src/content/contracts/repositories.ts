@@ -1,6 +1,7 @@
 import type {
   AwardEntry,
   EducationEntry,
+  HeroPhoto,
   PageResult,
   Photo,
   PhotoCollection,
@@ -16,8 +17,8 @@ export interface ProfileRepository {
 }
 
 export interface PhotoRepository {
-  getHeroPhoto(): Promise<Photo>;
-  listFeatured(limit: 5): Promise<Photo[]>;
+  getHeroPhoto(): Promise<HeroPhoto>;
+  listFeatured(limit: number): Promise<Photo[]>;
   listPage(input: PhotoPageInput): Promise<PageResult<Photo>>;
 }
 

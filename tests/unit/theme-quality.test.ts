@@ -23,29 +23,52 @@ function cssBlock(selector: string): string {
   return match[1];
 }
 
-function token(block: string, name: string): string {
-  const match = block.match(new RegExp(`${name}:\\s*(#[0-9a-fA-F]{6})`));
-  if (!match) throw new Error(`Missing hex color token: ${name}`);
-  return match[1];
-}
+type Rgba = { r: number; g: number; b: number; a: number };
 
-function relativeLuminance(hex: string): number {
-  const channels = hex
-    .slice(1)
-    .match(/.{2}/g)!
-    .map((value) => Number.parseInt(value, 16) / 255)
-    .map((value) =>
-      value <= 0.04045
-        ? value / 12.92
-        : ((value + 0.055) / 1.055) ** 2.4,
+function parseColor(value: string): Rgba {
+  const trimmed = value.trim();
+  const hex = trimmed.match(/^#([0-9a-fA-F]{6})$/);
+  if (hex) {
+    const channels = hex[1].match(/.{2}/g)!.map((part) =>
+      Number.parseInt(part, 16),
     );
+    return { r: channels[0], g: channels[1], b: channels[2], a: 1 };
+  }
 
-  return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+  const rgb = trimmed.match(
+    /^rgb\(\s*(\d{1,3})\s+(\d{1,3})\s+(\d{1,3})\s*\/\s*([\d.]+)%\s*\)$/,
+  );
+  if (!rgb) throw new Error(`Unsupported color token: ${value}`);
+  return { r: +rgb[1], g: +rgb[2], b: +rgb[3], a: +rgb[4] / 100 };
 }
 
-function contrastRatio(first: string, second: string): number {
-  const firstLuminance = relativeLuminance(first);
-  const secondLuminance = relativeLuminance(second);
+function composite(foreground: Rgba, background: Rgba): Rgba {
+  const alpha = foreground.a;
+  return {
+    r: Math.round(foreground.r * alpha + background.r * (1 - alpha)),
+    g: Math.round(foreground.g * alpha + background.g * (1 - alpha)),
+    b: Math.round(foreground.b * alpha + background.b * (1 - alpha)),
+    a: 1,
+  };
+}
+
+function token(block: string, name: string): string {
+  const match = block.match(new RegExp(`${name}:\\s*([^;]+)`));
+  if (!match) throw new Error(`Missing color token: ${name}`);
+  return match[1].trim();
+}
+
+function luminance(color: Rgba): number {
+  const [r, g, b] = [color.r, color.g, color.b].map((channel) => {
+    const s = channel / 255;
+    return s <= 0.04045 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+  });
+  return r * 0.2126 + g * 0.7152 + b * 0.0722;
+}
+
+function contrastRatio(first: Rgba, second: Rgba): number {
+  const firstLuminance = luminance(first);
+  const secondLuminance = luminance(second);
   const lighter = Math.max(firstLuminance, secondLuminance);
   const darker = Math.min(firstLuminance, secondLuminance);
 
@@ -58,23 +81,27 @@ describe('theme visual quality', () => {
     ["[data-theme='dark']", 'dark'],
   ])('%s base page colors meet WCAG AA contrast', (selector) => {
     const block = cssBlock(selector);
-    const background = token(block, '--color-bg');
+    const background = parseColor(token(block, '--color-bg'));
 
     for (const foregroundToken of [
       '--color-text',
       '--color-text-muted',
       '--ds-color-accent',
     ]) {
+      const effective = composite(
+        parseColor(token(block, foregroundToken)),
+        background,
+      );
       expect(
-        contrastRatio(token(block, foregroundToken), background),
-        `${foregroundToken} on ${background}`,
+        contrastRatio(effective, background),
+        `${foregroundToken} meets AA on the page background`,
       ).toBeGreaterThanOrEqual(4.5);
     }
 
     expect(
       contrastRatio(
-        token(block, '--ds-color-accent-contrast'),
-        token(block, '--ds-color-accent'),
+        parseColor(token(block, '--ds-color-accent-contrast')),
+        parseColor(token(block, '--ds-color-accent')),
       ),
       'accent text on accent surface',
     ).toBeGreaterThanOrEqual(4.5);

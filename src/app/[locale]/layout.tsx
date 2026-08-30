@@ -8,7 +8,7 @@ import {
 import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 
-import { AppShell, createNavigation } from '@/features/app-shell';
+import { AppFooter, AppShell, createNavigation } from '@/features/app-shell';
 import { ThemeProvider } from '@/features/theme';
 import { isSupportedLocale, routing } from '@/i18n/routing';
 
@@ -56,6 +56,7 @@ export default async function LocaleLayout({
         <AppShell locale={locale} navigation={navigation}>
           {children}
         </AppShell>
+        <AppFooter locale={locale} navigation={navigation} />
       </ThemeProvider>
     </NextIntlClientProvider>
   );

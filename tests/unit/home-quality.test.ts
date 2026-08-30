@@ -6,16 +6,16 @@ import { describe, expect, it } from 'vitest';
 const projectRoot = process.cwd();
 
 describe('home responsive motion', () => {
-  it('uses light scroll reveal transforms and removes displacement for reduced motion', () => {
+  it('animates the hero copy on load and disables it for reduced motion', () => {
     const styles = readFileSync(
       resolve(projectRoot, 'src/features/home/home.module.css'),
       'utf8',
     );
 
-    expect(styles).toMatch(/@keyframes\s+home-reveal/u);
-    expect(styles).toMatch(/animation-timeline:\s*view\(\)/u);
+    expect(styles).toMatch(/@keyframes\s+hero-rise/u);
+    expect(styles).toMatch(/animation:\s*hero-rise/u);
     expect(styles).toMatch(
-      /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.reveal[\s\S]*?transform:\s*none/u,
+      /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.heroCopy[\s\S]*?animation:\s*none/u,
     );
   });
 

@@ -6,13 +6,7 @@ import { cleanup, render, screen, within } from '@testing-library/react';
 import { NextIntlClientProvider } from 'next-intl';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import type {
-  AwardEntry,
-  EducationEntry,
-  Photo,
-  Profile,
-  ResearchProject,
-} from '@/content/contracts';
+import type { HeroPhoto, Photo, Profile } from '@/content/contracts';
 import {
   HomePageView,
   loadHomeContent,
@@ -20,15 +14,12 @@ import {
   type HomeRepositories,
 } from '@/features/home';
 import { messagesByLocale } from '@/i18n/messages';
-import {
-  awardFixtures,
-  educationFixtures,
-  photoDataset,
-  profileFixture,
-  researchProjectFixtures,
-} from '@fixtures/domain';
+import { photoDataset, profileFixture } from '@fixtures/domain';
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  document.documentElement.removeAttribute('data-theme');
+});
 
 function deferred<T>() {
   let resolve!: (value: T) => void;
@@ -49,11 +40,8 @@ const unavailable = { status: 'error' as const };
 function completeContent(overrides: Partial<HomeContent> = {}): HomeContent {
   return {
     profile: ready(profileFixture),
-    hero: ready(photoDataset[0]),
+    hero: ready({ light: photoDataset[0], dark: null }),
     photos: ready(photoDataset.slice(0, 5)),
-    projects: ready(researchProjectFixtures),
-    education: ready(educationFixtures),
-    awards: ready(awardFixtures),
     ...overrides,
   };
 }
@@ -67,13 +55,10 @@ function renderHome(content: HomeContent, locale: 'zh' | 'en' = 'zh') {
 }
 
 describe('home repository composition', () => {
-  it('starts all six reads together and calls every repository operation once', async () => {
+  it('starts all three reads together and calls every repository operation once', async () => {
     const profile = deferred<Profile>();
-    const hero = deferred<Photo>();
+    const hero = deferred<HeroPhoto>();
     const photos = deferred<Photo[]>();
-    const projects = deferred<ResearchProject[]>();
-    const education = deferred<EducationEntry[]>();
-    const awards = deferred<AwardEntry[]>();
     const started: string[] = [];
     const repositories: HomeRepositories = {
       profile: {
@@ -81,14 +66,8 @@ describe('home repository composition', () => {
           started.push('profile');
           return profile.promise;
         }),
-        listEducation: vi.fn(() => {
-          started.push('education');
-          return education.promise;
-        }),
-        listAwards: vi.fn(() => {
-          started.push('awards');
-          return awards.promise;
-        }),
+        listEducation: vi.fn(),
+        listAwards: vi.fn(),
       },
       photos: {
         getHeroPhoto: vi.fn(() => {
@@ -101,53 +80,28 @@ describe('home repository composition', () => {
         }),
         listPage: vi.fn(),
       },
-      research: {
-        listFeatured: vi.fn(() => {
-          started.push('projects');
-          return projects.promise;
-        }),
-        listAll: vi.fn(),
-        getById: vi.fn(),
-      },
     };
 
     const loading = loadHomeContent(repositories);
 
-    expect(started).toEqual([
-      'profile',
-      'hero',
-      'photos',
-      'projects',
-      'education',
-      'awards',
-    ]);
+    expect(started).toEqual(['profile', 'hero', 'photos']);
     for (const repositoryCall of [
       repositories.profile.getProfile,
       repositories.photos.getHeroPhoto,
       repositories.photos.listFeatured,
-      repositories.research.listFeatured,
-      repositories.profile.listEducation,
-      repositories.profile.listAwards,
     ]) {
       expect(repositoryCall).toHaveBeenCalledTimes(1);
     }
-    expect(repositories.photos.listFeatured).toHaveBeenCalledWith(5);
-    expect(repositories.research.listFeatured).toHaveBeenCalledWith(3);
+    expect(repositories.photos.listFeatured).toHaveBeenCalledWith(1);
 
     profile.resolve(profileFixture);
-    hero.resolve(photoDataset[0]);
-    photos.resolve(photoDataset.slice(0, 5));
-    projects.resolve(researchProjectFixtures);
-    education.resolve(educationFixtures);
-    awards.resolve(awardFixtures);
+    hero.resolve({ light: photoDataset[0], dark: null });
+    photos.resolve(photoDataset.slice(0, 1));
 
     await expect(loading).resolves.toMatchObject({
       profile: { status: 'ready' },
       hero: { status: 'ready' },
       photos: { status: 'ready' },
-      projects: { status: 'ready' },
-      education: { status: 'ready' },
-      awards: { status: 'ready' },
     });
   });
 
@@ -155,18 +109,14 @@ describe('home repository composition', () => {
     const repositories: HomeRepositories = {
       profile: {
         getProfile: async () => profileFixture,
-        listEducation: async () => educationFixtures,
-        listAwards: async () => awardFixtures,
+        listEducation: vi.fn(),
+        listAwards: vi.fn(),
       },
       photos: {
-        getHeroPhoto: async () => photoDataset[0],
-        listFeatured: async () => photoDataset.slice(0, 5),
+        getHeroPhoto: async () =>
+          Promise.reject(new Error('private dataset detail')),
+        listFeatured: async () => photoDataset.slice(0, 1),
         listPage: vi.fn(),
-      },
-      research: {
-        listFeatured: async () => Promise.reject(new Error('private dataset detail')),
-        listAll: vi.fn(),
-        getById: vi.fn(),
       },
     };
 
@@ -175,17 +125,18 @@ describe('home repository composition', () => {
 
     expect(screen.getByRole('heading', { level: 1, name: profileFixture.nickname }))
       .toBeInTheDocument();
-    expect(screen.getAllByRole('button', { name: /Fixture image image-photo/ }))
-      .toHaveLength(5);
-    expect(screen.getByRole('heading', { name: 'Résumé summary' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /portfolio-owner@example.com/ }))
-      .toHaveAttribute('href', 'mailto:portfolio-owner@example.com');
-    expect(screen.getByRole('alert')).toHaveTextContent('Research is unavailable');
+    expect(screen.getByTestId('home-hero')).toHaveAttribute(
+      'data-image-source',
+      'featured',
+    );
+    expect(within(screen.getByTestId('home-hero')).getByRole('img', {
+      name: /Fixture image image-photo/,
+    })).toBeInTheDocument();
     expect(screen.queryByText('private dataset detail')).not.toBeInTheDocument();
   });
 });
 
-describe('home sections', () => {
+describe('home hero', () => {
   it('uses the first featured photo when the configured hero is unavailable', () => {
     renderHome(completeContent({ hero: unavailable }));
 
@@ -208,31 +159,48 @@ describe('home sections', () => {
     expect(screen.getByTestId('home-hero').querySelector('img')).toBeNull();
   });
 
-  it.each([
-    ['zh', '精选摄影', '精选科研项目'],
-    ['en', 'Featured photography', 'Featured research'],
-  ] as const)('renders localized %s content with 5 photos and 3 research cards', (
-    locale,
-    photographyTitle,
-    researchTitle,
-  ) => {
+  it('renders the dark hero image when the dark cover is set and dark theme is active', () => {
+    document.documentElement.setAttribute('data-theme', 'dark');
     renderHome(completeContent({
-      photos: ready([...photoDataset.slice(0, 7)]),
-      projects: ready(researchProjectFixtures),
-    }), locale);
+      hero: ready({ light: photoDataset[0], dark: photoDataset[1] }),
+    }));
 
-    expect(screen.getByRole('heading', { name: photographyTitle })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: researchTitle })).toBeInTheDocument();
-    expect(screen.getAllByRole('button', {
-      name: locale === 'zh' ? /测试图片 image-photo/ : /Fixture image image-photo/,
-    })).toHaveLength(5);
-    expect(screen.getAllByRole('button', {
-      name: locale === 'zh' ? /测试项目/ : /Fixture project/,
-    })).toHaveLength(3);
+    const heroImage = within(screen.getByTestId('home-hero')).getByRole('img', {
+      name: /测试图片 image-photo-002/,
+    });
+    expect(heroImage).toHaveAttribute(
+      'src',
+      '/content-image-placeholder.svg?fit=max&w=1360',
+    );
+  });
+
+  it('falls back to the light hero image in dark theme when no dark cover is set', () => {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    renderHome(completeContent({
+      hero: ready({ light: photoDataset[0], dark: null }),
+    }));
+
+    const heroImage = within(screen.getByTestId('home-hero')).getByRole('img', {
+      name: /测试图片 image-photo-001/,
+    });
+    expect(heroImage).toHaveAttribute(
+      'src',
+      '/content-image-placeholder.svg?fit=max&w=1200',
+    );
+  });
+
+  it('renders the localized nickname as the page heading', () => {
+    renderHome(completeContent(), 'en');
+
+    expect(screen.getByRole('heading', { level: 1, name: profileFixture.nickname }))
+      .toBeInTheDocument();
+    expect(screen.getByTestId('home-hero-copy')).toHaveTextContent(
+      profileFixture.nickname,
+    );
   });
 
   it.each(['mobile', 'tablet', 'desktop'] as const)(
-    'keeps every required section at the %s viewport seam',
+    'keeps the hero at the %s viewport seam',
     (viewport) => {
       const { container } = render(
         <NextIntlClientProvider locale="zh" messages={messagesByLocale.zh}>
@@ -247,16 +215,13 @@ describe('home sections', () => {
         viewport,
       );
       expect(screen.getByTestId('home-hero')).toBeInTheDocument();
-      expect(screen.getByTestId('home-profile')).toBeInTheDocument();
-      expect(screen.getByTestId('home-featured-photos')).toBeInTheDocument();
-      expect(screen.getByTestId('home-featured-research')).toBeInTheDocument();
-      expect(screen.getByTestId('home-resume')).toBeInTheDocument();
-      expect(document.querySelector('#contact')).toBeInTheDocument();
+      expect(screen.getByTestId('home-hero-copy')).toBeInTheDocument();
+      expect(container.querySelectorAll('section')).toHaveLength(1);
     },
   );
 
   it.each(['light', 'dark'] as const)(
-    'keeps the complete home composition in the %s theme',
+    'keeps the hero composition in the %s theme',
     (theme) => {
       const { container } = render(
         <NextIntlClientProvider locale="en" messages={messagesByLocale.en}>
@@ -269,12 +234,7 @@ describe('home sections', () => {
       expect(container.firstElementChild).toHaveAttribute('data-theme', theme);
       expect(screen.getByRole('heading', { level: 1, name: profileFixture.nickname }))
         .toBeInTheDocument();
-      expect(screen.getByRole('heading', { name: 'Featured photography' }))
-        .toBeInTheDocument();
-      expect(screen.getByRole('heading', { name: 'Featured research' }))
-        .toBeInTheDocument();
-      expect(screen.getByRole('heading', { name: 'Résumé summary' }))
-        .toBeInTheDocument();
+      expect(screen.getByTestId('home-hero-copy')).toBeInTheDocument();
     },
   );
 });

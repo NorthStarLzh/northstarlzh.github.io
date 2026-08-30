@@ -1,18 +1,14 @@
 import type {
-  AwardEntry,
-  EducationEntry,
+  HeroPhoto,
   Photo,
   PhotoRepository,
   Profile,
   ProfileRepository,
-  ResearchProject,
-  ResearchRepository,
 } from '@/content/contracts';
 
 export interface HomeRepositories {
   profile: ProfileRepository;
   photos: PhotoRepository;
-  research: ResearchRepository;
 }
 
 export type HomeContentResult<T> =
@@ -21,11 +17,8 @@ export type HomeContentResult<T> =
 
 export interface HomeContent {
   profile: HomeContentResult<Profile>;
-  hero: HomeContentResult<Photo>;
+  hero: HomeContentResult<HeroPhoto>;
   photos: HomeContentResult<Photo[]>;
-  projects: HomeContentResult<ResearchProject[]>;
-  education: HomeContentResult<EducationEntry[]>;
-  awards: HomeContentResult<AwardEntry[]>;
 }
 
 export type HomeContentRequests = {
@@ -48,16 +41,13 @@ export async function loadHomeContent(
 ): Promise<HomeContent> {
   const requests = startHomeContentRequests(repositories);
 
-  const [profile, hero, photos, projects, education, awards] = await Promise.all([
+  const [profile, hero, photos] = await Promise.all([
     requests.profile,
     requests.hero,
     requests.photos,
-    requests.projects,
-    requests.education,
-    requests.awards,
   ]);
 
-  return { profile, hero, photos, projects, education, awards };
+  return { profile, hero, photos };
 }
 
 export function startHomeContentRequests(
@@ -66,9 +56,6 @@ export function startHomeContentRequests(
   return {
     profile: settle(() => repositories.profile.getProfile()),
     hero: settle(() => repositories.photos.getHeroPhoto()),
-    photos: settle(() => repositories.photos.listFeatured(5)),
-    projects: settle(() => repositories.research.listFeatured(3)),
-    education: settle(() => repositories.profile.listEducation()),
-    awards: settle(() => repositories.profile.listAwards()),
+    photos: settle(() => repositories.photos.listFeatured(1)),
   };
 }

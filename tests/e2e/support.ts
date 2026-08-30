@@ -30,6 +30,15 @@ export async function waitForStablePage(page: Page) {
   });
   await page.evaluate(async () => {
     await document.fonts.ready;
+    // Native lazy-loading keeps below-fold images incomplete indefinitely, which
+    // would stall this wait and leave blank tiles in full-page screenshots.
+    // Promote any unfinished image to eager so the baseline captures every tile.
+    for (const image of Array.from(document.images)) {
+      if (!image.complete) {
+        image.loading = 'eager';
+        image.src = image.src;
+      }
+    }
     await Promise.all(
       Array.from(document.images, (image) => {
         if (image.complete) return Promise.resolve();

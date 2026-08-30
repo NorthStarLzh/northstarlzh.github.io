@@ -21,12 +21,12 @@ export function CategoryFilter({
   labels,
   locale,
 }: CategoryFilterProps) {
-  const collectionsHref = `${buildPhotographyCollectionsUrl(locale)}#gallery`;
+  const collectionsHref = buildPhotographyCollectionsUrl(locale);
 
   return (
     <nav aria-label={ariaLabel} className="photography-filter">
       {PHOTO_CATEGORIES.map((category) => {
-        const href = `${buildPhotographyCategoryIndexUrl(locale, category)}#gallery`;
+        const href = buildPhotographyCategoryIndexUrl(locale, category);
         return (
           <a
             aria-current={activeCategory === category ? 'true' : undefined}

@@ -22,9 +22,6 @@ function unavailableHomeContent(): HomeContent {
     profile: unavailable,
     hero: unavailable,
     photos: unavailable,
-    projects: unavailable,
-    education: unavailable,
-    awards: unavailable,
   };
 }
 

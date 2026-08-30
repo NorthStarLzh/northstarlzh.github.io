@@ -10,12 +10,11 @@ exports[`application shell visual stories > matches the desktop navigation viewp
   >
     跳到主要内容
   </a>
-  <header
-    class="app-shell__header"
+  <div
+    class="app-shell__shell"
   >
-    <div
-      class="ds-container app-shell__header-content"
-      style="--container-max: var(--content-wide);"
+    <aside
+      class="app-shell__sidebar"
     >
       <a
         class="app-shell__brand"
@@ -23,117 +22,138 @@ exports[`application shell visual stories > matches the desktop navigation viewp
       >
         风花诗酒茶
       </a>
-      <div
-        class="app-shell__desktop-navigation"
+      <nav
+        aria-label="主导航"
+        class="app-shell__sidebar-nav"
       >
-        <nav
-          aria-label="主导航"
+        <ul
+          class="app-shell__navigation-list"
         >
-          <ul
-            class="app-shell__navigation-list"
-          >
-            <li>
-              <a
-                class="app-shell__navigation-link"
-                href="/zh"
-              >
-                首页
-              </a>
-            </li>
-            <li>
-              <a
-                aria-current="page"
-                class="app-shell__navigation-link"
-                href="/zh/photography"
-              >
-                摄影作品
-              </a>
-            </li>
-            <li>
-              <a
-                class="app-shell__navigation-link"
-                href="/zh/research"
-              >
-                科研成果
-              </a>
-            </li>
-            <li>
-              <a
-                class="app-shell__navigation-link"
-                href="/zh/resume"
-              >
-                个人简历
-              </a>
-            </li>
-            <li>
-              <a
-                class="app-shell__navigation-link"
-                href="/zh#contact"
-              >
-                联系方式
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <div
-          class="app-shell__controls"
-        >
-          <button
-            aria-label="当前语言：中文；切换到英文"
-            class="ds-button ds-button--ghost ds-button--sm"
-            type="button"
-          >
-            <span>
-              切换到英文
-            </span>
-          </button>
-          <button
-            aria-label="当前主题: 跟随系统 (当前为浅色); 切换到 浅色"
-            class="ds-button ds-button--ghost ds-button--sm"
-            data-hydrated="true"
-            data-resolved-theme="light"
-            data-theme-mode="system"
-            title="主题: 跟随系统 (当前为浅色)"
-            type="button"
-          >
-            <span>
-              ◐
-               
-              主题
-              : 
-              跟随系统
-            </span>
-          </button>
-        </div>
-      </div>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh"
+            >
+              首页
+            </a>
+          </li>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh/about"
+            >
+              关于我
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="app-shell__navigation-link"
+              href="/zh/photography"
+            >
+              摄影作品
+            </a>
+          </li>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh/research"
+            >
+              科研成果
+            </a>
+          </li>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh/resume"
+            >
+              个人简历
+            </a>
+          </li>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh/contact"
+            >
+              联系方式
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <div
+      class="app-shell__content"
+    >
       <div
-        class="app-shell__mobile-navigation"
+        class="app-shell__content-controls"
       >
         <button
-          aria-expanded="false"
-          aria-haspopup="dialog"
-          aria-label="打开菜单"
-          class="ds-button ds-button--ghost ds-button--sm ds-icon-button"
-          data-state="closed"
+          aria-label="当前语言：中文；切换到英文"
+          class="ds-button ds-button--ghost ds-button--sm"
           type="button"
         >
-          <span
-            aria-hidden="true"
-          >
-            ☰
+          <span>
+            切换到英文
+          </span>
+        </button>
+        <button
+          aria-label="当前主题: 跟随系统 (当前为浅色); 切换到 浅色"
+          class="ds-button ds-button--ghost ds-button--sm"
+          data-hydrated="true"
+          data-resolved-theme="light"
+          data-theme-mode="system"
+          title="主题: 跟随系统 (当前为浅色)"
+          type="button"
+        >
+          <span>
+            主题：
+            跟随系统
           </span>
         </button>
       </div>
+      <header
+        class="app-shell__header"
+      >
+        <div
+          class="ds-container app-shell__header-content"
+          style="--container-max: var(--content-wide);"
+        >
+          <a
+            class="app-shell__brand"
+            href="/zh"
+          >
+            风花诗酒茶
+          </a>
+          <div
+            class="app-shell__mobile-navigation"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              aria-label="打开菜单"
+              class="ds-button ds-button--ghost ds-button--sm ds-icon-button"
+              data-state="closed"
+              type="button"
+            >
+              <span
+                aria-hidden="true"
+              >
+                ☰
+              </span>
+            </button>
+          </div>
+        </div>
+      </header>
+      <main
+        id="main-content"
+        tabindex="-1"
+      >
+        <h1>
+          摄影作品
+        </h1>
+      </main>
     </div>
-  </header>
-  <main
-    id="main-content"
-    tabindex="-1"
-  >
-    <h1>
-      摄影作品
-    </h1>
-  </main>
+  </div>
 </div>
 `;
 
@@ -147,12 +167,11 @@ exports[`application shell visual stories > matches the mobile navigation viewpo
   >
     跳到主要内容
   </a>
-  <header
-    class="app-shell__header"
+  <div
+    class="app-shell__shell"
   >
-    <div
-      class="ds-container app-shell__header-content"
-      style="--container-max: var(--content-wide);"
+    <aside
+      class="app-shell__sidebar"
     >
       <a
         class="app-shell__brand"
@@ -160,117 +179,138 @@ exports[`application shell visual stories > matches the mobile navigation viewpo
       >
         风花诗酒茶
       </a>
-      <div
-        class="app-shell__desktop-navigation"
+      <nav
+        aria-label="主导航"
+        class="app-shell__sidebar-nav"
       >
-        <nav
-          aria-label="主导航"
+        <ul
+          class="app-shell__navigation-list"
         >
-          <ul
-            class="app-shell__navigation-list"
-          >
-            <li>
-              <a
-                class="app-shell__navigation-link"
-                href="/zh"
-              >
-                首页
-              </a>
-            </li>
-            <li>
-              <a
-                aria-current="page"
-                class="app-shell__navigation-link"
-                href="/zh/photography"
-              >
-                摄影作品
-              </a>
-            </li>
-            <li>
-              <a
-                class="app-shell__navigation-link"
-                href="/zh/research"
-              >
-                科研成果
-              </a>
-            </li>
-            <li>
-              <a
-                class="app-shell__navigation-link"
-                href="/zh/resume"
-              >
-                个人简历
-              </a>
-            </li>
-            <li>
-              <a
-                class="app-shell__navigation-link"
-                href="/zh#contact"
-              >
-                联系方式
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <div
-          class="app-shell__controls"
-        >
-          <button
-            aria-label="当前语言：中文；切换到英文"
-            class="ds-button ds-button--ghost ds-button--sm"
-            type="button"
-          >
-            <span>
-              切换到英文
-            </span>
-          </button>
-          <button
-            aria-label="当前主题: 跟随系统 (当前为浅色); 切换到 浅色"
-            class="ds-button ds-button--ghost ds-button--sm"
-            data-hydrated="true"
-            data-resolved-theme="light"
-            data-theme-mode="system"
-            title="主题: 跟随系统 (当前为浅色)"
-            type="button"
-          >
-            <span>
-              ◐
-               
-              主题
-              : 
-              跟随系统
-            </span>
-          </button>
-        </div>
-      </div>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh"
+            >
+              首页
+            </a>
+          </li>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh/about"
+            >
+              关于我
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="app-shell__navigation-link"
+              href="/zh/photography"
+            >
+              摄影作品
+            </a>
+          </li>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh/research"
+            >
+              科研成果
+            </a>
+          </li>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh/resume"
+            >
+              个人简历
+            </a>
+          </li>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh/contact"
+            >
+              联系方式
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <div
+      class="app-shell__content"
+    >
       <div
-        class="app-shell__mobile-navigation"
+        class="app-shell__content-controls"
       >
         <button
-          aria-expanded="false"
-          aria-haspopup="dialog"
-          aria-label="打开菜单"
-          class="ds-button ds-button--ghost ds-button--sm ds-icon-button"
-          data-state="closed"
+          aria-label="当前语言：中文；切换到英文"
+          class="ds-button ds-button--ghost ds-button--sm"
           type="button"
         >
-          <span
-            aria-hidden="true"
-          >
-            ☰
+          <span>
+            切换到英文
+          </span>
+        </button>
+        <button
+          aria-label="当前主题: 跟随系统 (当前为浅色); 切换到 浅色"
+          class="ds-button ds-button--ghost ds-button--sm"
+          data-hydrated="true"
+          data-resolved-theme="light"
+          data-theme-mode="system"
+          title="主题: 跟随系统 (当前为浅色)"
+          type="button"
+        >
+          <span>
+            主题：
+            跟随系统
           </span>
         </button>
       </div>
+      <header
+        class="app-shell__header"
+      >
+        <div
+          class="ds-container app-shell__header-content"
+          style="--container-max: var(--content-wide);"
+        >
+          <a
+            class="app-shell__brand"
+            href="/zh"
+          >
+            风花诗酒茶
+          </a>
+          <div
+            class="app-shell__mobile-navigation"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              aria-label="打开菜单"
+              class="ds-button ds-button--ghost ds-button--sm ds-icon-button"
+              data-state="closed"
+              type="button"
+            >
+              <span
+                aria-hidden="true"
+              >
+                ☰
+              </span>
+            </button>
+          </div>
+        </div>
+      </header>
+      <main
+        id="main-content"
+        tabindex="-1"
+      >
+        <h1>
+          摄影作品
+        </h1>
+      </main>
     </div>
-  </header>
-  <main
-    id="main-content"
-    tabindex="-1"
-  >
-    <h1>
-      摄影作品
-    </h1>
-  </main>
+  </div>
 </div>
 `;
 
@@ -284,12 +324,11 @@ exports[`application shell visual stories > matches the tablet navigation viewpo
   >
     跳到主要内容
   </a>
-  <header
-    class="app-shell__header"
+  <div
+    class="app-shell__shell"
   >
-    <div
-      class="ds-container app-shell__header-content"
-      style="--container-max: var(--content-wide);"
+    <aside
+      class="app-shell__sidebar"
     >
       <a
         class="app-shell__brand"
@@ -297,116 +336,137 @@ exports[`application shell visual stories > matches the tablet navigation viewpo
       >
         风花诗酒茶
       </a>
-      <div
-        class="app-shell__desktop-navigation"
+      <nav
+        aria-label="主导航"
+        class="app-shell__sidebar-nav"
       >
-        <nav
-          aria-label="主导航"
+        <ul
+          class="app-shell__navigation-list"
         >
-          <ul
-            class="app-shell__navigation-list"
-          >
-            <li>
-              <a
-                class="app-shell__navigation-link"
-                href="/zh"
-              >
-                首页
-              </a>
-            </li>
-            <li>
-              <a
-                aria-current="page"
-                class="app-shell__navigation-link"
-                href="/zh/photography"
-              >
-                摄影作品
-              </a>
-            </li>
-            <li>
-              <a
-                class="app-shell__navigation-link"
-                href="/zh/research"
-              >
-                科研成果
-              </a>
-            </li>
-            <li>
-              <a
-                class="app-shell__navigation-link"
-                href="/zh/resume"
-              >
-                个人简历
-              </a>
-            </li>
-            <li>
-              <a
-                class="app-shell__navigation-link"
-                href="/zh#contact"
-              >
-                联系方式
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <div
-          class="app-shell__controls"
-        >
-          <button
-            aria-label="当前语言：中文；切换到英文"
-            class="ds-button ds-button--ghost ds-button--sm"
-            type="button"
-          >
-            <span>
-              切换到英文
-            </span>
-          </button>
-          <button
-            aria-label="当前主题: 跟随系统 (当前为浅色); 切换到 浅色"
-            class="ds-button ds-button--ghost ds-button--sm"
-            data-hydrated="true"
-            data-resolved-theme="light"
-            data-theme-mode="system"
-            title="主题: 跟随系统 (当前为浅色)"
-            type="button"
-          >
-            <span>
-              ◐
-               
-              主题
-              : 
-              跟随系统
-            </span>
-          </button>
-        </div>
-      </div>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh"
+            >
+              首页
+            </a>
+          </li>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh/about"
+            >
+              关于我
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="app-shell__navigation-link"
+              href="/zh/photography"
+            >
+              摄影作品
+            </a>
+          </li>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh/research"
+            >
+              科研成果
+            </a>
+          </li>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh/resume"
+            >
+              个人简历
+            </a>
+          </li>
+          <li>
+            <a
+              class="app-shell__navigation-link"
+              href="/zh/contact"
+            >
+              联系方式
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <div
+      class="app-shell__content"
+    >
       <div
-        class="app-shell__mobile-navigation"
+        class="app-shell__content-controls"
       >
         <button
-          aria-expanded="false"
-          aria-haspopup="dialog"
-          aria-label="打开菜单"
-          class="ds-button ds-button--ghost ds-button--sm ds-icon-button"
-          data-state="closed"
+          aria-label="当前语言：中文；切换到英文"
+          class="ds-button ds-button--ghost ds-button--sm"
           type="button"
         >
-          <span
-            aria-hidden="true"
-          >
-            ☰
+          <span>
+            切换到英文
+          </span>
+        </button>
+        <button
+          aria-label="当前主题: 跟随系统 (当前为浅色); 切换到 浅色"
+          class="ds-button ds-button--ghost ds-button--sm"
+          data-hydrated="true"
+          data-resolved-theme="light"
+          data-theme-mode="system"
+          title="主题: 跟随系统 (当前为浅色)"
+          type="button"
+        >
+          <span>
+            主题：
+            跟随系统
           </span>
         </button>
       </div>
+      <header
+        class="app-shell__header"
+      >
+        <div
+          class="ds-container app-shell__header-content"
+          style="--container-max: var(--content-wide);"
+        >
+          <a
+            class="app-shell__brand"
+            href="/zh"
+          >
+            风花诗酒茶
+          </a>
+          <div
+            class="app-shell__mobile-navigation"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              aria-label="打开菜单"
+              class="ds-button ds-button--ghost ds-button--sm ds-icon-button"
+              data-state="closed"
+              type="button"
+            >
+              <span
+                aria-hidden="true"
+              >
+                ☰
+              </span>
+            </button>
+          </div>
+        </div>
+      </header>
+      <main
+        id="main-content"
+        tabindex="-1"
+      >
+        <h1>
+          摄影作品
+        </h1>
+      </main>
     </div>
-  </header>
-  <main
-    id="main-content"
-    tabindex="-1"
-  >
-    <h1>
-      摄影作品
-    </h1>
-  </main>
+  </div>
 </div>
 `;

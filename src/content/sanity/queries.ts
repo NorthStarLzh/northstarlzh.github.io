@@ -98,6 +98,12 @@ export const HERO_PHOTO_QUERY = defineQuery(`
   }
 `);
 
+export const HERO_PHOTO_DARK_QUERY = defineQuery(`
+  *[_type == "profile" && _id == "profile"][0].heroPhotoDark->{
+    ${PHOTO_FIELDS}
+  }
+`);
+
 export const FEATURED_PHOTOS_QUERY = defineQuery(`
   *[_type == "photo" && featured == true]
     | order(featuredOrder asc, shotAt desc, _id asc)[0...5]{
