@@ -120,6 +120,22 @@
   }
 }
 
+@media (max-width: 47.999rem) {
+  .heroCopy h1 {
+    max-width: 100%;
+    font-size: clamp(1.5rem, 7vw, 2.25rem);
+    letter-spacing: -0.07em;
+    white-space: nowrap;
+  }
+
+  .heroCopy p {
+    max-width: 100%;
+    font-size: clamp(0.7rem, 2.95vw, 1.25rem);
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .heroCopy {
     animation: none;

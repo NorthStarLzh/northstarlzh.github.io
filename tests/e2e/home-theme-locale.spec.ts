@@ -19,6 +19,20 @@ test('Chinese home completes its intro and exposes the hero cover', async ({ pag
   await expect(hero).toHaveAttribute('data-image-source', 'hero');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('自动化测试');
   await expect(page.getByTestId('home-hero-copy')).toContainText('自动化测试');
+
+  const title = page.getByTestId('home-hero-copy').getByRole('heading');
+  await expect.poll(() => title.evaluate((element) => {
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    return element.scrollWidth <= element.clientWidth && range.getClientRects().length === 1;
+  })).toBe(true);
+
+  const identity = page.getByTestId('home-hero-copy').locator('p');
+  await expect.poll(() => identity.evaluate((element) => {
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    return element.scrollWidth <= element.clientWidth && range.getClientRects().length === 1;
+  })).toBe(true);
 });
 
 test('theme follows the system, cycles manually, and persists after refresh', async ({ page }) => {
