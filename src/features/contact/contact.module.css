@@ -4,13 +4,36 @@
 }
 
 .content {
-  align-items: center;
-  text-align: center;
+  display: grid;
+  gap: var(--space-2xl);
 }
 
+.intro {
+  max-width: 42rem;
+}
+
+.eyebrow,
 .title,
-.description {
+.description,
+.nickname,
+.meta,
+.emailAction,
+.emailAddress,
+.guideHeader h2,
+.guideHeader p,
+.guideItem h3,
+.guideItem p,
+.guideNote {
   margin: 0;
+}
+
+.eyebrow {
+  margin-bottom: var(--space-sm);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-caption);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .title {
@@ -21,51 +44,41 @@
 }
 
 .title[data-heading-level='h1'] {
-  font-size: var(--font-size-h1);
-  line-height: 1.05;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.12;
 }
 
 .description {
+  margin-top: var(--space-md);
   color: var(--color-text-muted);
   font-size: var(--font-size-lead);
 }
 
-.email {
-  display: inline-flex;
-  min-height: 3.5rem;
-  max-width: 100%;
-  align-items: center;
-  overflow-wrap: anywhere;
-  color: var(--color-accent);
-  font-size: clamp(1.375rem, 3.5vw, 2.5rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  text-decoration: none;
-}
-
-.email:hover {
-  color: var(--color-accent-hover);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.18em;
-}
-
-/* 身份信息：头像 + 姓名 + 身份。 */
-.identity {
+.primary {
   display: grid;
-  justify-items: center;
-  gap: var(--space-sm);
-  margin-block: var(--space-md);
+  gap: var(--space-lg);
+  align-items: stretch;
+}
+
+.identity {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  min-width: 0;
+  padding: var(--space-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
 }
 
 .avatarFrame {
-  width: 7.5rem;
+  width: 4rem;
+  flex: 0 0 auto;
   aspect-ratio: 1;
   overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: 50%;
-  background: var(--color-surface);
+  background: var(--color-surface-raised);
   box-shadow: var(--shadow-subtle);
 }
 
@@ -75,19 +88,145 @@
   object-fit: cover;
 }
 
-.nickname,
-.meta {
-  margin: 0;
-}
-
 .nickname {
-  font-size: var(--font-size-h2);
+  font-size: var(--font-size-body);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.25;
 }
 
 .meta {
+  margin-top: var(--space-2xs);
   color: var(--color-text-muted);
+  font-size: var(--font-size-caption);
   font-weight: 650;
+}
+
+.metaSeparator {
+  margin-inline: var(--space-2xs);
+}
+
+.email {
+  display: grid;
+  gap: var(--space-xs);
+  align-content: center;
+  min-height: 9.5rem;
+  padding: var(--space-lg) var(--space-md);
+  border-radius: var(--radius-lg);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  text-decoration: none;
+  transition: transform var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.email:hover {
+  color: var(--color-accent-contrast);
+  text-decoration: none;
+  transform: translateY(-0.125rem);
+  box-shadow: var(--shadow-elevated);
+}
+
+.emailAction {
+  font-size: var(--font-size-caption);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.emailAddress {
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-caption);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.guide {
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.guideHeader {
+  max-width: 35rem;
+}
+
+.guideHeader h2 {
+  font-size: var(--font-size-h3);
+  line-height: 1.2;
+}
+
+.guideHeader p,
+.guideItem p,
+.guideNote {
+  color: var(--color-text-muted);
+}
+
+.guideHeader p {
+  margin-top: var(--space-xs);
+}
+
+.guideList {
+  display: grid;
+  gap: 1px;
+  margin: var(--space-lg) 0 0;
+  padding: 1px;
+  list-style: none;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-border);
+}
+
+.guideItem {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  gap: var(--space-sm);
+  min-height: 8.25rem;
+  padding: var(--space-lg);
+  background: var(--color-bg);
+}
+
+.guideNumber {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-caption);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.guideItem h3 {
+  font-size: var(--font-size-body);
+  line-height: 1.35;
+}
+
+.guideItem p {
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-caption);
+}
+
+.guideNote {
+  margin-top: var(--space-md);
+  font-size: var(--font-size-caption);
+}
+
+@media (min-width: 48rem) {
+  .primary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .guideList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .guideItem {
+    min-height: 9.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .email {
+    transition: none;
+  }
+
+  .email:hover {
+    transform: none;
+  }
 }

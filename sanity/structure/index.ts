@@ -16,14 +16,23 @@ export const structure: StructureResolver = (S) =>
       S.divider(),
       S.documentTypeListItem('education').title('教育经历'),
       S.documentTypeListItem('award').title('获奖经历'),
-      S.documentTypeListItem('photo').title('摄影作品'),
-      S.documentTypeListItem('photoCollection').title('摄影合集'),
-      S.documentTypeListItem('researchProject').title('科研项目'),
-      S.divider(),
       S.listItem()
-        .id('batch-photo-upload')
-        .title('批量上传摄影图')
-        .child(S.component(BatchUploadPane).id('batch-photo-upload-pane')),
+        .id('photography-management')
+        .title('摄影管理')
+        .child(
+          S.list()
+            .id('photography-management-list')
+            .title('摄影管理')
+            .items([
+              S.listItem()
+                .id('batch-photo-upload')
+                .title('上传摄影作品')
+                .child(S.component(BatchUploadPane).id('batch-photo-upload-pane')),
+              S.documentTypeListItem('photo').title('全部摄影作品'),
+              S.documentTypeListItem('photoCollection').title('摄影合集'),
+            ]),
+        ),
+      S.documentTypeListItem('researchProject').title('科研项目'),
     ]);
 
 export function filterSingletonTemplates<Template extends {schemaType: string}>(

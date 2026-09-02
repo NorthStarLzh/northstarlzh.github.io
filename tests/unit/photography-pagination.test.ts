@@ -4,7 +4,7 @@ import {InMemoryPhotoRepository} from '@/content/repositories';
 import {createPhoto} from '@fixtures/domain';
 
 describe('photography list ordering and cursor pagination', () => {
-  it('orders featured first by featured order, then other work by month and stable id', async () => {
+  it('keeps the legacy featured/date ordering for unnumbered work', async () => {
     const repository = new InMemoryPhotoRepository([
       createPhoto('same-b', ['landscape'], {shotAt: '2025-04'}),
       createPhoto('featured-two', ['landscape'], {
@@ -29,6 +29,22 @@ describe('photography list ordering and cursor pagination', () => {
       'same-a',
       'same-b',
     ]);
+  });
+
+  it('puts numbered work first and uses a stable shuffle for equal numbers', async () => {
+    const repository = new InMemoryPhotoRepository([
+      createPhoto('legacy', ['landscape'], {shotAt: '2026-12'}),
+      createPhoto('same-a', ['landscape'], {displayOrder: 2}),
+      createPhoto('same-b', ['landscape'], {displayOrder: 2}),
+      createPhoto('first', ['landscape'], {displayOrder: 1}),
+    ]);
+
+    const firstPage = await repository.listPage({category: 'landscape', limit: 20});
+    const secondRead = await repository.listPage({category: 'landscape', limit: 20});
+
+    expect(firstPage.items.map(({id}) => id)).toEqual(secondRead.items.map(({id}) => id));
+    expect(firstPage.items.map(({displayOrder}) => displayOrder)).toEqual([1, 2, 2, undefined]);
+    expect(firstPage.items.slice(1, 3).map(({id}) => id).sort()).toEqual(['same-a', 'same-b']);
   });
 
   it('rejects a malformed or out-of-range cursor instead of returning a shifted page', async () => {

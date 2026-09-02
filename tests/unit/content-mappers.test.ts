@@ -31,6 +31,7 @@ function rawPhoto(overrides: Record<string, unknown> = {}) {
     description: bilingual('照片介绍', 'Photo description'),
     featured: true,
     featuredOrder: 1,
+    displayOrder: 10,
     ...overrides,
   };
 }
@@ -133,6 +134,7 @@ describe('photo mapper', () => {
         alt: bilingual('替代文本', 'Alternative text'),
       },
       categories: ['landscape'],
+      displayOrder: 10,
       shotAt: '2026-07',
       city: bilingual('杭州', 'Hangzhou'),
       description: bilingual('照片介绍', 'Photo description'),
@@ -144,6 +146,8 @@ describe('photo mapper', () => {
   it.each([
     {categories: ['unknown']},
     {categories: ['landscape', 'landscape']},
+    {displayOrder: -1},
+    {displayOrder: 1.5},
     {shotAt: '2026-13'},
     {image: {...rawImage(), width: 0}},
   ])('rejects malformed photo data %#', (overrides) => {

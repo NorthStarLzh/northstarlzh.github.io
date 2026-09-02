@@ -37,8 +37,18 @@ test('research dialogs cover one to three images, long scrolling, Escape, and fo
   }
 });
 
-test('resume page serves the portfolio and résumé PDF downloads', async ({ page }) => {
+test('resume page serves static previews and PDF downloads', async ({ page }) => {
   await page.goto('/zh/resume');
+
+  await expect(page.locator('iframe, embed, object')).toHaveCount(0);
+  await expect(page.getByRole('img', {name: '个人作品集封面预览'})).toHaveAttribute(
+    'src',
+    '/portfolio-preview.webp',
+  );
+  await expect(page.getByRole('img', {name: '个人简历首页预览'})).toHaveAttribute(
+    'src',
+    '/resume-preview.webp',
+  );
 
   const portfolio = page.getByRole('link', { name: '下载个人作品集' });
   await expect(portfolio).toHaveAttribute('download', 'wind-flower-poetry-wine-tea-portfolio.pdf');
@@ -52,7 +62,9 @@ test('resume page serves the portfolio and résumé PDF downloads', async ({ pag
   await resume.click();
   const download = await downloadPromise;
   expect(download.suggestedFilename()).toBe('wind-flower-poetry-wine-tea-resume.pdf');
+});
 
+test('contact page exposes one email link and no form', async ({ page }) => {
   await page.goto('/zh/contact');
   const contact = page.getByTestId('contact-section');
   await expect(contact.locator('a')).toHaveCount(1);

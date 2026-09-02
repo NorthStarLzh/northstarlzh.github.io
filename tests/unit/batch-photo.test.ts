@@ -2,10 +2,12 @@ import {describe, expect, it} from 'vitest';
 
 import {
   buildBatchPhotoDocument,
+  buildPhotoImageValue,
   computeNextFeaturedOrder,
   hasReachedFeaturedLimit,
   isSupportedImageFile,
   MAX_FEATURED_PHOTOS,
+  sanitizeDisplayOrder,
   sanitizeShotAt,
 } from '../../sanity/components/batch-photo';
 
@@ -23,14 +25,16 @@ describe('buildBatchPhotoDocument', () => {
     });
   });
 
-  it('applies optional category, shotAt, and city defaults', () => {
+  it('applies optional categories, display order, shotAt, and city defaults', () => {
     const document = buildBatchPhotoDocument('image-abc', {
-      category: 'landscape',
+      categories: ['landscape', 'portrait', 'landscape'],
+      displayOrder: ' 10 ',
       shotAt: validShotAt,
       city: '杭州',
     });
     expect(document).toMatchObject({
-      categories: ['landscape'],
+      categories: ['landscape', 'portrait'],
+      displayOrder: 10,
       shotAt: validShotAt,
       city: {_type: 'localizedShortText', zh: '杭州', en: '杭州'},
     });
@@ -38,13 +42,43 @@ describe('buildBatchPhotoDocument', () => {
 
   it('omits blank or malformed optional defaults', () => {
     const document = buildBatchPhotoDocument('image-abc', {
-      category: undefined,
+      categories: undefined,
+      displayOrder: '-1',
       shotAt: 'not-a-date',
       city: '   ',
     });
     expect(document).not.toHaveProperty('categories');
+    expect(document).not.toHaveProperty('displayOrder');
     expect(document).not.toHaveProperty('shotAt');
     expect(document).not.toHaveProperty('city');
+  });
+});
+
+describe('buildPhotoImageValue', () => {
+  it('resets image framing when a new asset replaces an existing photo', () => {
+    expect(buildPhotoImageValue(' image-replacement ')).toEqual({
+      _type: 'image',
+      asset: {_type: 'reference', _ref: 'image-replacement'},
+      hotspot: {_type: 'sanity.imageHotspot', x: 0.5, y: 0.5, width: 1, height: 1},
+    });
+  });
+
+  it('refuses an empty asset reference', () => {
+    expect(() => buildPhotoImageValue('   ')).toThrow('Photo image asset reference is required.');
+  });
+});
+
+describe('sanitizeDisplayOrder', () => {
+  it('accepts safe non-negative integers from Studio input', () => {
+    expect(sanitizeDisplayOrder(0)).toBe(0);
+    expect(sanitizeDisplayOrder(' 42 ')).toBe(42);
+  });
+
+  it('rejects blank, fractional, negative, and unsafe values', () => {
+    expect(sanitizeDisplayOrder('')).toBeUndefined();
+    expect(sanitizeDisplayOrder('1.5')).toBeUndefined();
+    expect(sanitizeDisplayOrder('-1')).toBeUndefined();
+    expect(sanitizeDisplayOrder(Number.MAX_SAFE_INTEGER + 1)).toBeUndefined();
   });
 });
 

@@ -220,68 +220,194 @@ exports[`résumé and contact responsive stories > keeps the complete content at
       style="--container-max: var(--content-narrow);"
     >
       <div
-        class="ds-stack _content_bd68ac"
-        style="--stack-gap: var(--space-md);"
+        class="_content_bd68ac"
       >
-        <h2
-          class="_title_bd68ac"
-          data-heading-level="h2"
+        <header
+          class="_intro_bd68ac"
         >
-          联系方式
-        </h2>
-        <p
-          class="_description_bd68ac"
-        >
-          欢迎通过电子邮件联系。
-        </p>
+          <p
+            class="_eyebrow_bd68ac"
+          >
+            取得联系
+          </p>
+          <h2
+            class="_title_bd68ac"
+            data-heading-level="h2"
+          >
+            从一个清晰的想法开始
+          </h2>
+          <p
+            class="_description_bd68ac"
+          >
+            无论是想交流影像、研究，还是有一个仍在构思中的合作方向，都欢迎写信。
+          </p>
+        </header>
         <div
-          class="_identity_bd68ac"
+          class="_primary_bd68ac"
         >
           <div
-            class="_avatarFrame_bd68ac"
+            class="_identity_bd68ac"
           >
-            <picture>
-              <source
-                sizes="(min-width: 48rem) 8rem, 6.5rem"
-                srcset="/content-image-placeholder.svg?fit=max&w=160 160w, /content-image-placeholder.svg?fit=max&w=320 320w, /content-image-placeholder.svg?fit=max&w=640 640w"
-              />
-              <img
-                alt="测试图片 fixture-avatar"
-                class="ds-app-image _avatar_bd68ac"
-                data-nimg="1"
-                decoding="async"
-                height="800"
-                loading="eager"
-                src="/content-image-placeholder.svg?fit=max&w=640"
-                style="color: transparent;"
-                width="800"
-              />
-            </picture>
-          </div>
-          <p
-            class="_nickname_bd68ac"
-          >
-            测试作品集
-          </p>
-          <p
-            class="_meta_bd68ac"
-          >
-            Fixture University
-            <span
-              aria-hidden="true"
+            <div
+              class="_avatarFrame_bd68ac"
             >
-               · 
+              <picture>
+                <source
+                  sizes="4rem"
+                  srcset="/content-image-placeholder.svg?fit=max&w=160 160w, /content-image-placeholder.svg?fit=max&w=320 320w, /content-image-placeholder.svg?fit=max&w=640 640w"
+                />
+                <img
+                  alt="测试图片 fixture-avatar"
+                  class="ds-app-image _avatar_bd68ac"
+                  data-nimg="1"
+                  decoding="async"
+                  height="800"
+                  loading="eager"
+                  src="/content-image-placeholder.svg?fit=max&w=640"
+                  style="color: transparent;"
+                  width="800"
+                />
+              </picture>
+            </div>
+            <div>
+              <p
+                class="_nickname_bd68ac"
+              >
+                测试作品集
+              </p>
+              <p
+                class="_meta_bd68ac"
+              >
+                <span>
+                  Fixture University
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="_metaSeparator_bd68ac"
+                >
+                  ·
+                </span>
+                <span>
+                  测试摄影师
+                </span>
+              </p>
+            </div>
+          </div>
+          <a
+            aria-label="电子邮箱：Northstar_lzh@zju.edu.cn"
+            class="_email_bd68ac"
+            href="mailto:Northstar_lzh@zju.edu.cn"
+          >
+            <span
+              class="_emailAction_bd68ac"
+            >
+              写一封邮件
             </span>
-            测试摄影师
-          </p>
+            <span
+              class="_emailAddress_bd68ac"
+            >
+              Northstar_lzh@zju.edu.cn
+            </span>
+          </a>
         </div>
-        <a
-          aria-label="电子邮箱：Northstar_lzh@zju.edu.cn"
-          class="_email_bd68ac"
-          href="mailto:Northstar_lzh@zju.edu.cn"
+        <section
+          aria-labelledby="contact-guide-title"
+          class="_guide_bd68ac"
         >
-          Northstar_lzh@zju.edu.cn
-        </a>
+          <div
+            class="_guideHeader_bd68ac"
+          >
+            <h2
+              id="contact-guide-title"
+            >
+              不知道从哪里写起？
+            </h2>
+            <p>
+              下面四点任选几项即可，我能更快理解你的想法。
+            </p>
+          </div>
+          <ol
+            class="_guideList_bd68ac"
+          >
+            <li
+              class="_guideItem_bd68ac"
+            >
+              <span
+                aria-hidden="true"
+                class="_guideNumber_bd68ac"
+              >
+                01
+              </span>
+              <div>
+                <h3>
+                  你想聊什么？
+                </h3>
+                <p>
+                  一句话说明是影像、研究、项目，还是其他想法。
+                </p>
+              </div>
+            </li>
+            <li
+              class="_guideItem_bd68ac"
+            >
+              <span
+                aria-hidden="true"
+                class="_guideNumber_bd68ac"
+              >
+                02
+              </span>
+              <div>
+                <h3>
+                  你是谁？
+                </h3>
+                <p>
+                  留下你的称呼，以及个人、团队或机构背景。
+                </p>
+              </div>
+            </li>
+            <li
+              class="_guideItem_bd68ac"
+            >
+              <span
+                aria-hidden="true"
+                class="_guideNumber_bd68ac"
+              >
+                03
+              </span>
+              <div>
+                <h3>
+                  你期待什么？
+                </h3>
+                <p>
+                  交流、合作、委托，或只是一个简单的提问。
+                </p>
+              </div>
+            </li>
+            <li
+              class="_guideItem_bd68ac"
+            >
+              <span
+                aria-hidden="true"
+                class="_guideNumber_bd68ac"
+              >
+                04
+              </span>
+              <div>
+                <h3>
+                  有哪些关键信息？
+                </h3>
+                <p>
+                  可附上时间、地点、参考链接或相关材料。
+                </p>
+              </div>
+            </li>
+          </ol>
+          <p
+            class="_guideNote_bd68ac"
+          >
+            不需要准备完整提案；一个清楚的开场也足够。
+          </p>
+        </section>
       </div>
     </div>
   </section>
@@ -508,68 +634,194 @@ exports[`résumé and contact responsive stories > keeps the complete content at
       style="--container-max: var(--content-narrow);"
     >
       <div
-        class="ds-stack _content_bd68ac"
-        style="--stack-gap: var(--space-md);"
+        class="_content_bd68ac"
       >
-        <h2
-          class="_title_bd68ac"
-          data-heading-level="h2"
+        <header
+          class="_intro_bd68ac"
         >
-          联系方式
-        </h2>
-        <p
-          class="_description_bd68ac"
-        >
-          欢迎通过电子邮件联系。
-        </p>
+          <p
+            class="_eyebrow_bd68ac"
+          >
+            取得联系
+          </p>
+          <h2
+            class="_title_bd68ac"
+            data-heading-level="h2"
+          >
+            从一个清晰的想法开始
+          </h2>
+          <p
+            class="_description_bd68ac"
+          >
+            无论是想交流影像、研究，还是有一个仍在构思中的合作方向，都欢迎写信。
+          </p>
+        </header>
         <div
-          class="_identity_bd68ac"
+          class="_primary_bd68ac"
         >
           <div
-            class="_avatarFrame_bd68ac"
+            class="_identity_bd68ac"
           >
-            <picture>
-              <source
-                sizes="(min-width: 48rem) 8rem, 6.5rem"
-                srcset="/content-image-placeholder.svg?fit=max&w=160 160w, /content-image-placeholder.svg?fit=max&w=320 320w, /content-image-placeholder.svg?fit=max&w=640 640w"
-              />
-              <img
-                alt="测试图片 fixture-avatar"
-                class="ds-app-image _avatar_bd68ac"
-                data-nimg="1"
-                decoding="async"
-                height="800"
-                loading="eager"
-                src="/content-image-placeholder.svg?fit=max&w=640"
-                style="color: transparent;"
-                width="800"
-              />
-            </picture>
-          </div>
-          <p
-            class="_nickname_bd68ac"
-          >
-            测试作品集
-          </p>
-          <p
-            class="_meta_bd68ac"
-          >
-            Fixture University
-            <span
-              aria-hidden="true"
+            <div
+              class="_avatarFrame_bd68ac"
             >
-               · 
+              <picture>
+                <source
+                  sizes="4rem"
+                  srcset="/content-image-placeholder.svg?fit=max&w=160 160w, /content-image-placeholder.svg?fit=max&w=320 320w, /content-image-placeholder.svg?fit=max&w=640 640w"
+                />
+                <img
+                  alt="测试图片 fixture-avatar"
+                  class="ds-app-image _avatar_bd68ac"
+                  data-nimg="1"
+                  decoding="async"
+                  height="800"
+                  loading="eager"
+                  src="/content-image-placeholder.svg?fit=max&w=640"
+                  style="color: transparent;"
+                  width="800"
+                />
+              </picture>
+            </div>
+            <div>
+              <p
+                class="_nickname_bd68ac"
+              >
+                测试作品集
+              </p>
+              <p
+                class="_meta_bd68ac"
+              >
+                <span>
+                  Fixture University
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="_metaSeparator_bd68ac"
+                >
+                  ·
+                </span>
+                <span>
+                  测试摄影师
+                </span>
+              </p>
+            </div>
+          </div>
+          <a
+            aria-label="电子邮箱：Northstar_lzh@zju.edu.cn"
+            class="_email_bd68ac"
+            href="mailto:Northstar_lzh@zju.edu.cn"
+          >
+            <span
+              class="_emailAction_bd68ac"
+            >
+              写一封邮件
             </span>
-            测试摄影师
-          </p>
+            <span
+              class="_emailAddress_bd68ac"
+            >
+              Northstar_lzh@zju.edu.cn
+            </span>
+          </a>
         </div>
-        <a
-          aria-label="电子邮箱：Northstar_lzh@zju.edu.cn"
-          class="_email_bd68ac"
-          href="mailto:Northstar_lzh@zju.edu.cn"
+        <section
+          aria-labelledby="contact-guide-title"
+          class="_guide_bd68ac"
         >
-          Northstar_lzh@zju.edu.cn
-        </a>
+          <div
+            class="_guideHeader_bd68ac"
+          >
+            <h2
+              id="contact-guide-title"
+            >
+              不知道从哪里写起？
+            </h2>
+            <p>
+              下面四点任选几项即可，我能更快理解你的想法。
+            </p>
+          </div>
+          <ol
+            class="_guideList_bd68ac"
+          >
+            <li
+              class="_guideItem_bd68ac"
+            >
+              <span
+                aria-hidden="true"
+                class="_guideNumber_bd68ac"
+              >
+                01
+              </span>
+              <div>
+                <h3>
+                  你想聊什么？
+                </h3>
+                <p>
+                  一句话说明是影像、研究、项目，还是其他想法。
+                </p>
+              </div>
+            </li>
+            <li
+              class="_guideItem_bd68ac"
+            >
+              <span
+                aria-hidden="true"
+                class="_guideNumber_bd68ac"
+              >
+                02
+              </span>
+              <div>
+                <h3>
+                  你是谁？
+                </h3>
+                <p>
+                  留下你的称呼，以及个人、团队或机构背景。
+                </p>
+              </div>
+            </li>
+            <li
+              class="_guideItem_bd68ac"
+            >
+              <span
+                aria-hidden="true"
+                class="_guideNumber_bd68ac"
+              >
+                03
+              </span>
+              <div>
+                <h3>
+                  你期待什么？
+                </h3>
+                <p>
+                  交流、合作、委托，或只是一个简单的提问。
+                </p>
+              </div>
+            </li>
+            <li
+              class="_guideItem_bd68ac"
+            >
+              <span
+                aria-hidden="true"
+                class="_guideNumber_bd68ac"
+              >
+                04
+              </span>
+              <div>
+                <h3>
+                  有哪些关键信息？
+                </h3>
+                <p>
+                  可附上时间、地点、参考链接或相关材料。
+                </p>
+              </div>
+            </li>
+          </ol>
+          <p
+            class="_guideNote_bd68ac"
+          >
+            不需要准备完整提案；一个清楚的开场也足够。
+          </p>
+        </section>
       </div>
     </div>
   </section>
@@ -796,68 +1048,194 @@ exports[`résumé and contact responsive stories > keeps the complete content at
       style="--container-max: var(--content-narrow);"
     >
       <div
-        class="ds-stack _content_bd68ac"
-        style="--stack-gap: var(--space-md);"
+        class="_content_bd68ac"
       >
-        <h2
-          class="_title_bd68ac"
-          data-heading-level="h2"
+        <header
+          class="_intro_bd68ac"
         >
-          联系方式
-        </h2>
-        <p
-          class="_description_bd68ac"
-        >
-          欢迎通过电子邮件联系。
-        </p>
+          <p
+            class="_eyebrow_bd68ac"
+          >
+            取得联系
+          </p>
+          <h2
+            class="_title_bd68ac"
+            data-heading-level="h2"
+          >
+            从一个清晰的想法开始
+          </h2>
+          <p
+            class="_description_bd68ac"
+          >
+            无论是想交流影像、研究，还是有一个仍在构思中的合作方向，都欢迎写信。
+          </p>
+        </header>
         <div
-          class="_identity_bd68ac"
+          class="_primary_bd68ac"
         >
           <div
-            class="_avatarFrame_bd68ac"
+            class="_identity_bd68ac"
           >
-            <picture>
-              <source
-                sizes="(min-width: 48rem) 8rem, 6.5rem"
-                srcset="/content-image-placeholder.svg?fit=max&w=160 160w, /content-image-placeholder.svg?fit=max&w=320 320w, /content-image-placeholder.svg?fit=max&w=640 640w"
-              />
-              <img
-                alt="测试图片 fixture-avatar"
-                class="ds-app-image _avatar_bd68ac"
-                data-nimg="1"
-                decoding="async"
-                height="800"
-                loading="eager"
-                src="/content-image-placeholder.svg?fit=max&w=640"
-                style="color: transparent;"
-                width="800"
-              />
-            </picture>
-          </div>
-          <p
-            class="_nickname_bd68ac"
-          >
-            测试作品集
-          </p>
-          <p
-            class="_meta_bd68ac"
-          >
-            Fixture University
-            <span
-              aria-hidden="true"
+            <div
+              class="_avatarFrame_bd68ac"
             >
-               · 
+              <picture>
+                <source
+                  sizes="4rem"
+                  srcset="/content-image-placeholder.svg?fit=max&w=160 160w, /content-image-placeholder.svg?fit=max&w=320 320w, /content-image-placeholder.svg?fit=max&w=640 640w"
+                />
+                <img
+                  alt="测试图片 fixture-avatar"
+                  class="ds-app-image _avatar_bd68ac"
+                  data-nimg="1"
+                  decoding="async"
+                  height="800"
+                  loading="eager"
+                  src="/content-image-placeholder.svg?fit=max&w=640"
+                  style="color: transparent;"
+                  width="800"
+                />
+              </picture>
+            </div>
+            <div>
+              <p
+                class="_nickname_bd68ac"
+              >
+                测试作品集
+              </p>
+              <p
+                class="_meta_bd68ac"
+              >
+                <span>
+                  Fixture University
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="_metaSeparator_bd68ac"
+                >
+                  ·
+                </span>
+                <span>
+                  测试摄影师
+                </span>
+              </p>
+            </div>
+          </div>
+          <a
+            aria-label="电子邮箱：Northstar_lzh@zju.edu.cn"
+            class="_email_bd68ac"
+            href="mailto:Northstar_lzh@zju.edu.cn"
+          >
+            <span
+              class="_emailAction_bd68ac"
+            >
+              写一封邮件
             </span>
-            测试摄影师
-          </p>
+            <span
+              class="_emailAddress_bd68ac"
+            >
+              Northstar_lzh@zju.edu.cn
+            </span>
+          </a>
         </div>
-        <a
-          aria-label="电子邮箱：Northstar_lzh@zju.edu.cn"
-          class="_email_bd68ac"
-          href="mailto:Northstar_lzh@zju.edu.cn"
+        <section
+          aria-labelledby="contact-guide-title"
+          class="_guide_bd68ac"
         >
-          Northstar_lzh@zju.edu.cn
-        </a>
+          <div
+            class="_guideHeader_bd68ac"
+          >
+            <h2
+              id="contact-guide-title"
+            >
+              不知道从哪里写起？
+            </h2>
+            <p>
+              下面四点任选几项即可，我能更快理解你的想法。
+            </p>
+          </div>
+          <ol
+            class="_guideList_bd68ac"
+          >
+            <li
+              class="_guideItem_bd68ac"
+            >
+              <span
+                aria-hidden="true"
+                class="_guideNumber_bd68ac"
+              >
+                01
+              </span>
+              <div>
+                <h3>
+                  你想聊什么？
+                </h3>
+                <p>
+                  一句话说明是影像、研究、项目，还是其他想法。
+                </p>
+              </div>
+            </li>
+            <li
+              class="_guideItem_bd68ac"
+            >
+              <span
+                aria-hidden="true"
+                class="_guideNumber_bd68ac"
+              >
+                02
+              </span>
+              <div>
+                <h3>
+                  你是谁？
+                </h3>
+                <p>
+                  留下你的称呼，以及个人、团队或机构背景。
+                </p>
+              </div>
+            </li>
+            <li
+              class="_guideItem_bd68ac"
+            >
+              <span
+                aria-hidden="true"
+                class="_guideNumber_bd68ac"
+              >
+                03
+              </span>
+              <div>
+                <h3>
+                  你期待什么？
+                </h3>
+                <p>
+                  交流、合作、委托，或只是一个简单的提问。
+                </p>
+              </div>
+            </li>
+            <li
+              class="_guideItem_bd68ac"
+            >
+              <span
+                aria-hidden="true"
+                class="_guideNumber_bd68ac"
+              >
+                04
+              </span>
+              <div>
+                <h3>
+                  有哪些关键信息？
+                </h3>
+                <p>
+                  可附上时间、地点、参考链接或相关材料。
+                </p>
+              </div>
+            </li>
+          </ol>
+          <p
+            class="_guideNote_bd68ac"
+          >
+            不需要准备完整提案；一个清楚的开场也足够。
+          </p>
+        </section>
       </div>
     </div>
   </section>

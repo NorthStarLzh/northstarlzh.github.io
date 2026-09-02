@@ -15,7 +15,7 @@ describe('localized résumé page', () => {
     ['zh', '个人简历', '个人作品集', '个人简历'],
     ['en', 'Résumé', 'Portfolio', 'Résumé'],
   ] as const)(
-    'server-renders the two download cards in %s',
+    'server-renders two static preview cards in %s',
     async (locale, pageTitle, portfolioTitle, resumeTitle) => {
       const page = await renderResumePage(locale);
       const html = renderToStaticMarkup(page);
@@ -27,10 +27,12 @@ describe('localized résumé page', () => {
       expect(html).toContain('href="/resume.pdf"');
       expect(html).toContain(`download="${PORTFOLIO_DOWNLOAD_FILENAME}"`);
       expect(html).toContain(`download="${RESUME_DOWNLOAD_FILENAME}"`);
-      expect(html).toContain('src="/portfolio.pdf"');
-      expect(html).toContain('src="/resume.pdf"');
-      expect(html).toContain('iframe');
-      expect(html).toContain('title=');
+      expect(html).toContain('src="/portfolio-preview.webp"');
+      expect(html).toContain('src="/resume-preview.webp"');
+      expect(html).toContain('alt=');
+      expect(html).not.toContain('<iframe');
+      expect(html).not.toContain('<embed');
+      expect(html).not.toContain('<object');
     },
   );
 

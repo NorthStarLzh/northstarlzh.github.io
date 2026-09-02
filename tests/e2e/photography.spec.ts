@@ -12,6 +12,7 @@ test('numbered pagination navigates between statically exported pages', async ({
 
   await page.goto('/zh/photography/landscape/');
   const cards = page.locator('.photography-card__button');
+  await expect(page.locator('.photography-overview')).toBeVisible();
   await expect(cards).toHaveCount(20);
 
   // First page: previous is disabled, current pill is marked, next is a link.
@@ -43,7 +44,7 @@ test('collections tab lists curated collections and opens their detail pages', a
 
   await cards.first().locator('.collection-card__link').click();
   await expect(page).toHaveURL(/\/photography\/collections\/zhejiang-university/);
-  await expect(page.locator('.photography-masonry')).toBeVisible();
+  await expect(page.locator('.photography-justified')).toBeVisible();
   await expect(page.locator('.photography-card__button')).toHaveCount(4);
   await expect(page.locator('.photography-filter__link[aria-current="true"]')).toHaveText('合集');
 });

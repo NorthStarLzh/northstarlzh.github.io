@@ -52,6 +52,8 @@ export interface Photo {
   id: string;
   image: ImageAsset;
   categories: PhotoCategory[];
+  /** Optional category-page ordering number; lower numbers render first. */
+  displayOrder?: number;
   /** Optional shooting date (YYYY-MM). */
   shotAt?: string;
   /** Optional shooting city. */

@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 
 import type { Locale, PageResult, Photo, PhotoCategory } from '@/content/contracts';
 
-import { MasonryGallery } from './masonry-gallery';
+import {PhotoOverviewGrid} from './photo-overview-grid';
 import { PhotoViewer } from './photo-viewer';
 import type { PhotoViewerLabels } from './photo-viewer-contract';
 
@@ -91,7 +91,7 @@ function PhotoFeedController({
   return (
     <div className="photography-feed">
       {items.length > 0 ? (
-        <MasonryGallery locale={locale} onOpen={openPhoto} photos={items} />
+        <PhotoOverviewGrid locale={locale} onOpen={openPhoto} photos={items} />
       ) : (
         <p className="photography-feed__status">{labels.empty}</p>
       )}

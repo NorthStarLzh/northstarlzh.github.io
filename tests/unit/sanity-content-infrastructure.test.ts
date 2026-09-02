@@ -16,7 +16,6 @@ import {
   RESEARCH_BY_ID_QUERY,
   SanityConfigurationError,
   contentFetchOptions,
-  createPhotoPageQuery,
   createSanityReadClient,
   decodePhotoCursor,
   encodePhotoCursor,
@@ -122,12 +121,10 @@ describe('GROQ query contracts', () => {
     expect(AWARDS_QUERY).toContain('order(order asc, _id asc)');
   });
 
-  it('parameterizes category, cursor, limit and document id values', () => {
+  it('parameterizes category and document id values', () => {
     expect(PHOTO_PAGE_QUERY).toContain('$category in categories');
-    expect(createPhotoPageQuery(2)).toContain('[0...2]');
-    expect(createPhotoPageQuery(21)).toContain('[0...21]');
-    expect(() => createPhotoPageQuery(22)).toThrow(RangeError);
-    expect(PHOTO_PAGE_QUERY).toContain('$cursorId');
+    expect(PHOTO_PAGE_QUERY).toContain('coalesce(displayOrder, 2147483647) asc');
+    expect(PHOTO_PAGE_QUERY).toContain('displayOrder');
     expect(RESEARCH_BY_ID_QUERY).toContain('_id == $id');
   });
 
@@ -140,34 +137,22 @@ describe('GROQ query contracts', () => {
 });
 
 describe('opaque photo cursor', () => {
-  it('round-trips the complete stable sort boundary', () => {
-    const cursor = encodePhotoCursor('landscape', {
-      _id: 'photo-10',
-      featured: true,
-      featuredOrder: 2,
-      shotAt: '2026-06',
-    });
-    expect(cursor).not.toContain('photo-10');
+  it('round-trips a category-scoped page offset', () => {
+    const cursor = encodePhotoCursor('landscape', 20);
+    expect(cursor).not.toContain('20');
     expect(decodePhotoCursor(cursor, 'landscape')).toEqual({
       category: 'landscape',
-      featured: true,
-      featuredOrder: 2,
-      shotAt: '2026-06',
-      id: 'photo-10',
+      offset: 20,
     });
   });
 
-  it.each(['plain-text', 'photo-v1.not-base64', 'photo-v1.e30'])
+  it.each(['plain-text', 'photo-v1.not-base64', 'photo-v2.e30'])
     ('rejects malformed cursor %s', (cursor) => {
       expect(() => decodePhotoCursor(cursor, 'landscape')).toThrow(RangeError);
     });
 
   it('rejects a cursor replayed under another category', () => {
-    const cursor = encodePhotoCursor('portrait', {
-      _id: 'photo-1',
-      featured: false,
-      shotAt: '2026-01',
-    });
+    const cursor = encodePhotoCursor('portrait', 1);
     expect(() => decodePhotoCursor(cursor, 'landscape')).toThrow(RangeError);
   });
 });

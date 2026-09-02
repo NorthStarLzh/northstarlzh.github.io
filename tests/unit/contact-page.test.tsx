@@ -48,7 +48,7 @@ describe('localized contact page', () => {
     expect(html).toContain('data-testid="contact-section"');
     expect(html).toContain('<h1');
     expect(html).toContain('data-heading-level="h1"');
-    expect(html).toContain('>联系方式</h1>');
+    expect(html).toContain('>从一个清晰的想法开始</h1>');
     expect(html).toContain('href="mailto:portfolio-owner@example.com"');
     expect(html).not.toContain('<main');
     expect(html).not.toContain('role="alert"');

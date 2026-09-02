@@ -21,7 +21,7 @@
   "photography": {
     "eyebrow": "摄影作品展",
     "title": "让回忆有迹可循",
-    "intro": "按原始比例浏览风光与人像摄影作品。",
+    "intro": "快速浏览风光与人像作品，点击看完整原图。",
     "categoryLabel": "摄影作品分类",
     "categories": {
       "landscape": "风光摄影",
@@ -99,8 +99,8 @@
     "portfolio": "点击下载",
     "portfolioAria": "下载个人作品集",
     "resumeAria": "下载个人简历",
-    "portfolioPreview": "个人作品集 PDF 预览",
-    "resumePreview": "个人简历 PDF 预览"
+    "portfolioPreview": "个人作品集封面预览",
+    "resumePreview": "个人简历首页预览"
   },
   "dialogs": {
     "close": "关闭弹窗",
@@ -140,9 +140,32 @@
     "errorDescription": "内容服务暂时不可用，请稍后再试。"
   },
   "contact": {
-    "title": "联系方式",
-    "description": "欢迎通过电子邮件联系。",
+    "eyebrow": "取得联系",
+    "title": "从一个清晰的想法开始",
+    "description": "无论是想交流影像、研究，还是有一个仍在构思中的合作方向，都欢迎写信。",
     "emailLabel": "电子邮箱",
+    "emailAction": "写一封邮件",
+    "guideTitle": "不知道从哪里写起？",
+    "guideDescription": "下面四点任选几项即可，我能更快理解你的想法。",
+    "guideItems": {
+      "topic": {
+        "title": "你想聊什么？",
+        "description": "一句话说明是影像、研究、项目，还是其他想法。"
+      },
+      "identity": {
+        "title": "你是谁？",
+        "description": "留下你的称呼，以及个人、团队或机构背景。"
+      },
+      "expectation": {
+        "title": "你期待什么？",
+        "description": "交流、合作、委托，或只是一个简单的提问。"
+      },
+      "context": {
+        "title": "有哪些关键信息？",
+        "description": "可附上时间、地点、参考链接或相关材料。"
+      }
+    },
+    "guideNote": "不需要准备完整提案；一个清楚的开场也足够。",
     "errorTitle": "联系方式暂不可用",
     "errorDescription": "内容服务暂时不可用，请稍后再试。"
   },

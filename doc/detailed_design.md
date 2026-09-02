@@ -210,7 +210,7 @@ sanity/schemaTypes -> shared validation constants
 | `/zh/photography`、`/en/photography` | 摄影作品 | Server + Client | 分类、分页、Lightbox |
 | `/zh/research`、`/en/research` | 科研成果 | Server + Client | 列表与居中弹窗 |
 | `/zh/resume`、`/en/resume` | 个人简历 | Server | 教育、获奖与 PDF |
-| `/zh#contact`、`/en#contact` | 联系方式 | 首页锚点 | 不增加独立页面 |
+| `/zh/contact`、`/en/contact` | 联系方式 | Server | 邮箱入口与来信提示 |
 | `/studio` | 内容后台 | Client Tool | Sanity 身份验证保护 |
 | `/api/photos` | 摄影分页 API | Route Handler | 只读公开接口 |
 | `/api/revalidate` | 内容刷新 API | Route Handler | 仅接受签名 Webhook |
@@ -393,6 +393,7 @@ export interface ResearchRepository {
 - 定义内容 Schema、字段说明和校验；
 - 支持图片焦点、PDF 上传和排序字段；
 - 提供“保存并公开”操作；
+- 支持在摄影管理列表直接替换已公开原图，无需撤下公开状态；
 - 发布后调用内容刷新 Webhook。
 
 ### 9.2 后台结构
@@ -413,7 +414,7 @@ export interface ResearchRepository {
 | 个人资料 | 单例；中英文简介、头像、邮箱、学校、身份和主图必填；简历仅 PDF |
 | 教育经历 | 中英文机构和说明必填；排序为非负整数 |
 | 获奖经历 | 中英文名称与时间必填 |
-| 摄影作品 | 图片必填；替代文本、分类、年月、城市和介绍均选填，支持在后台批量上传 |
+| 摄影作品 | 图片必填；替代文本、分类、年月、城市和介绍均选填，支持在后台批量上传，以及直接覆盖已公开原图 |
 | 科研项目 | 双语名称和简介必填；图片 1 至 3 张；论文名称列表合法 |
 
 跨文档数量限制通过异步校验实现：
@@ -431,6 +432,10 @@ export interface ResearchRepository {
 3. Sanity 发送签名 Webhook；
 4. 前台按标签清除缓存；
 5. 后台显示成功或失败反馈。
+
+摄影管理列表中的“替换图片”会上传新资产后直接 patch 已公开文档的
+`image` 字段，保留分类、排序、精选和拍摄信息；如存在草稿，也会在同一
+事务中同步该图片，避免后续正常发布时恢复旧图。
 
 不提供独立内容审核、预约发布和公开预览流程。Sanity 内部历史能力可用于误删恢复，但不作为日常发布步骤。
 
@@ -478,7 +483,7 @@ interface AppShellProps {
 
 - 桌面与移动断点下入口完整；
 - 当前页面具有可访问状态；
-- 联系方式入口正确跳到本语言首页 `#contact`；
+- 联系方式入口正确跳到本语言 `/contact` 页面；
 - 键盘可以打开、遍历和关闭移动菜单；
 - 语言与主题开关可用，但各自行为由对应模块测试。
 
@@ -665,7 +670,7 @@ const [profile, hero, photos, projects, education, awards] =
 
 ## 15. 摄影模块
 
-摄影模块由相互独立的分类筛选、分页数据源、瀑布流和大图查看器组成。
+摄影模块由相互独立的分类筛选、分页数据源、分类概览墙、合集两端对齐相册流和大图查看器组成。
 
 ### 15.1 子模块边界
 
@@ -673,7 +678,7 @@ const [profile, hero, photos, projects, education, awards] =
 flowchart LR
     PAGE["PhotographyPage"] --> FILTER["CategoryFilter"]
     PAGE --> FEED["PhotoFeed"]
-    FEED --> GRID["MasonryGrid Adapter"]
+    FEED --> GRID["PhotoOverviewGrid Adapter"]
     FEED --> LOAD["Pagination Controller"]
     GRID --> VIEWER["PhotoViewer Adapter"]
     LOAD --> API["/api/photos"]
@@ -724,31 +729,38 @@ GET /api/photos?category=landscape&cursor=<opaque>&locale=zh
 ### 15.4 分页与排序
 
 - 建议每批 20 张，首屏批次也使用相同上限；
-- 精选照片按 `featuredOrder` 升序；
-- 其余照片按 `shotAt` 降序，再按文档 ID 稳定排序；
-- 游标编码排序键和 ID，不向客户端暴露查询语句；
+- 分类页已填写 `displayOrder` 的照片按编号升序展示；同一编号按分类和文档 ID 计算稳定随机顺序，既避免时间序偏差，也保证翻页不会重复或漏图；
+- 未填写 `displayOrder` 的历史照片排在已编号照片之后，并沿用“精选顺序、拍摄年月、文档 ID”的回退排序；
+- 游标编码分类作用域内的稳定页偏移，不向客户端暴露查询语句；
+- 为了让同号随机排序在每一页保持一致，仓储会读取当前分类的轻量图片元数据后再分页；图片文件仍由界面按需加载；
 - 新批次按 ID 去重后追加；
 - `hasMore=false` 后停止观察加载哨兵；
 - 加载失败保留已有照片并显示“重试”按钮。
 
-### 15.5 瀑布流适配器
+### 15.5 分类概览墙与合集相册流适配器
 
 ```ts
-interface MasonryGalleryProps {
+interface PhotoOverviewGridProps {
   photos: Photo[];
   locale: Locale;
   onOpen: (photoId: string) => void;
 }
 ```
 
-适配器负责把领域 `Photo` 映射为第三方图库需要的尺寸和 URL。业务页面不导入第三方图库类型。
+适配器负责把领域 `Photo` 映射为缩略图和查看器需要的尺寸与 URL。业务页面不导入第三方图库类型。
 
-布局规则：
+分类页概览墙规则：
 
-- 手机：1 至 2 列，按可用宽度自适应；
-- 平板：2 至 3 列；
-- 桌面：3 至 4 列；
-- 使用 CMS 返回的宽高比预留空间；
+- 使用固定 `4:3` 缩略图框，桌面 5 列、平板 4 列、手机 3 列，供用户快速扫览当页的多种作品；
+- 缩略图可以以 `object-fit: cover` 裁切预览，但点击后始终在大图查看器中展示不裁切的原始比例；
+- 分类页与翻页链接保持静态可导航，页面仍按每批 20 张加载。
+
+合集详情使用 `JustifiedGallery`，规则如下：
+
+- 按图片原始宽高比与容器宽度将照片分为连续的横向行；不裁切作品；
+- 每一完整行使用统一高度，并通过按比例分配宽度恰好铺满容器，避免列式瀑布流底边参差；
+- 使用动态规划选择最接近目标行高的分组；最后一行若会导致极端放大，则维持合理高度并左对齐；
+- 容器宽度变化时使用 `ResizeObserver` 重新计算行分组；
 - 图片使用 `sizes` 和 `srcset`，不请求明显超过展示宽度的资源。
 
 ### 15.6 加载更多控制器
@@ -806,9 +818,11 @@ interface PhotoViewerProps {
 - 失败、重试与完成状态；
 - 无 IntersectionObserver 的按钮降级。
 
-#### 瀑布流
+#### 分类概览墙与两端对齐相册流
 
-- 不同宽高比正确映射；
+- 分类页按 3/4/5 列规则渲染紧凑的 `4:3` 缩略图框，并从缩略图打开未裁切的大图；
+- 不同宽高比正确映射为完整、等高且满宽的行；
+- 图片顺序在重新分组后保持不变；
 - 图片尺寸属性存在，避免布局跳动；
 - 点击照片发出正确 ID。
 
@@ -877,7 +891,7 @@ interface ResearchDialogProps {
 ### 17.1 职责
 
 - 展示头像、个人简介、教育经历和获奖经历；
-- 提供单一 PDF 简历下载入口；
+- 在下载卡片中展示作品集与简历的静态首页预览，并提供 PDF 下载入口；
 - 首页摘要和完整简历页复用同一组展示组件。
 
 ### 17.2 组件拆分
@@ -890,18 +904,18 @@ ResumeModule
 └── ResumeDownload
 ```
 
-### 17.3 PDF 下载
+### 17.3 静态预览与 PDF 下载
 
-- 下载 URL 由内容仓储返回；
-- 链接使用 Sanity 文件资产的下载参数，避免在 Next.js 服务器中转大文件；
-- 文件名采用可读、稳定的名称，不解析 PDF 内容；
-- 文件缺失时隐藏按钮并显示当前语言提示；
-- 不在浏览器内嵌 PDF 阅读器。
+- 每份 PDF 只展示一张静态的首页预览图，不加载浏览器 PDF 阅读器、工具栏或页内滚动；
+- 预览图与对应 PDF 一起更新，保留原始宽高比并使用 `object-fit: contain`；
+- 下载链接使用稳定的可读文件名，不解析或翻译 PDF 内容；
+- 文件缺失时隐藏按钮并显示当前语言提示。
 
 ### 17.4 独立测试
 
 - 教育和获奖按后台排序字段升序；
 - 中英文内容选择正确；
+- 预览图可访问且页面不包含 `iframe`、`embed` 或 `object`；
 - PDF 链接存在时可下载；
 - 缺失 PDF 时不渲染失效链接；
 - 首页摘要和简历页共享组件但可使用不同展示密度。
@@ -912,13 +926,14 @@ ResumeModule
 
 - 展示公开邮箱；
 - 生成安全、合法的 `mailto:` 链接；
-- 提供首页 `contact` 锚点。
+- 提供独立的 `/contact` 页面；
+- 用静态的来信提示帮助访客说明议题、身份、期待和必要背景，不增加数据收集。
 
 ### 18.2 接口
 
 ```ts
 interface ContactSectionProps {
-  email: string;
+  profile: Profile;
   locale: Locale;
 }
 ```
@@ -929,6 +944,7 @@ interface ContactSectionProps {
 
 - 正确显示需求指定邮箱；
 - 链接使用 `mailto:`；
+- 显示四项可读的来信提示，并保留唯一邮件入口；
 - 区块 ID 为 `contact`；
 - 非法邮箱在内容映射层被拒绝；
 - 不产生网络请求或 Cookie。
@@ -1379,4 +1395,3 @@ flowchart LR
 - 涉及用户旅程时具备集成或端到端测试；
 - 不新增统计、追踪、未声明外部请求或公开秘密；
 - 相关需求可以在追踪矩阵中定位到实现与测试。
-

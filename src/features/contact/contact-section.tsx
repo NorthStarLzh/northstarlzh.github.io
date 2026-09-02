@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 
-import { Container, Section, Stack } from '@/components/layout';
+import { Container, Section } from '@/components/layout';
 import { AppImage } from '@/components/ui';
 import type { Locale, Profile } from '@/content/contracts';
 import { isValidEmail } from '@/content/contracts';
@@ -41,6 +41,12 @@ export function ContactSection({
     path: 'profile.avatar.alt',
   });
   const role = localize(profile.role, locale, { path: 'profile.role' });
+  const guideItems = [
+    messages.guideItems.topic,
+    messages.guideItems.identity,
+    messages.guideItems.expectation,
+    messages.guideItems.context,
+  ];
 
   return (
     <Section
@@ -49,49 +55,78 @@ export function ContactSection({
       id="contact"
     >
       <Container size="narrow">
-        <Stack className={styles.content} gap="md">
-          {createElement(
-            headingLevel,
-            { className: styles.title, 'data-heading-level': headingLevel },
-            messages.title,
-          )}
-          <p className={styles.description}>{messages.description}</p>
+        <div className={styles.content}>
+          <header className={styles.intro}>
+            <p className={styles.eyebrow}>{messages.eyebrow}</p>
+            {createElement(
+              headingLevel,
+              { className: styles.title, 'data-heading-level': headingLevel },
+              messages.title,
+            )}
+            <p className={styles.description}>{messages.description}</p>
+          </header>
 
-          <div className={styles.identity}>
-            <div className={styles.avatarFrame}>
-              <picture>
-                <source
-                  sizes="(min-width: 48rem) 8rem, 6.5rem"
-                  srcSet={toSrcSet(avatar)}
-                />
-                <AppImage
-                  alt={avatarAlt}
-                  className={styles.avatar}
-                  height={profile.avatar.height}
-                  loading="eager"
-                  sizes="(min-width: 48rem) 8rem, 6.5rem"
-                  src={avatar.src}
-                  unoptimized
-                  width={profile.avatar.width}
-                />
-              </picture>
+          <div className={styles.primary}>
+            <div className={styles.identity}>
+              <div className={styles.avatarFrame}>
+                <picture>
+                  <source
+                    sizes="4rem"
+                    srcSet={toSrcSet(avatar)}
+                  />
+                  <AppImage
+                    alt={avatarAlt}
+                    className={styles.avatar}
+                    height={profile.avatar.height}
+                    loading="eager"
+                    sizes="4rem"
+                    src={avatar.src}
+                    unoptimized
+                    width={profile.avatar.width}
+                  />
+                </picture>
+              </div>
+              <div>
+                <p className={styles.nickname}>{profile.nickname}</p>
+                <p className={styles.meta}>
+                  <span>{profile.institution}</span>
+                  <span aria-hidden="true" className={styles.metaSeparator}>·</span>
+                  <span>{role}</span>
+                </p>
+              </div>
             </div>
-            <p className={styles.nickname}>{profile.nickname}</p>
-            <p className={styles.meta}>
-              {profile.institution}
-              <span aria-hidden="true"> · </span>
-              {role}
-            </p>
+
+            <a
+              aria-label={`${messages.emailLabel}${labelSeparator}${email}`}
+              className={styles.email}
+              href={createMailtoHref(email)}
+            >
+              <span className={styles.emailAction}>{messages.emailAction}</span>
+              <span className={styles.emailAddress}>{email}</span>
+            </a>
           </div>
 
-          <a
-            aria-label={`${messages.emailLabel}${labelSeparator}${email}`}
-            className={styles.email}
-            href={createMailtoHref(email)}
-          >
-            {email}
-          </a>
-        </Stack>
+          <section className={styles.guide} aria-labelledby="contact-guide-title">
+            <div className={styles.guideHeader}>
+              <h2 id="contact-guide-title">{messages.guideTitle}</h2>
+              <p>{messages.guideDescription}</p>
+            </div>
+            <ol className={styles.guideList}>
+              {guideItems.map((item, index) => (
+                <li key={item.title} className={styles.guideItem}>
+                  <span aria-hidden="true" className={styles.guideNumber}>
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <p className={styles.guideNote}>{messages.guideNote}</p>
+          </section>
+        </div>
       </Container>
     </Section>
   );

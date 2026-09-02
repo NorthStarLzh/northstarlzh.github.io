@@ -66,6 +66,12 @@ describe('Studio schema and singleton structure', () => {
       title() { return rootList; },
       items() { return rootList; },
     };
+    const nestedList = {
+      id() { return nestedList; },
+      title() { return nestedList; },
+      items() { return nestedList; },
+    };
+    let listCallCount = 0;
     const listItem = {
       id() { return listItem; },
       title() { return listItem; },
@@ -78,7 +84,10 @@ describe('Studio schema and singleton structure', () => {
     const documentTypeListItem = {title() { return documentTypeListItem; }};
 
     structure({
-      list: () => rootList,
+      list: () => {
+        listCallCount += 1;
+        return listCallCount === 1 ? rootList : nestedList;
+      },
       listItem: () => listItem,
       document: () => document,
       divider: () => ({}),

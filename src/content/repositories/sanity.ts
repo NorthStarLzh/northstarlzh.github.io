@@ -40,11 +40,10 @@ import {
   FEATURED_RESEARCH_QUERY,
   HERO_PHOTO_DARK_QUERY,
   HERO_PHOTO_QUERY,
-  MAX_FEATURED_ORDER,
+  PHOTO_PAGE_QUERY,
   PROFILE_QUERY,
   RESEARCH_BY_ID_QUERY,
   contentFetchOptions,
-  createPhotoPageQuery,
   createSanityReadClient,
   decodePhotoCursor,
   encodePhotoCursor,
@@ -55,6 +54,7 @@ import {
   createE2EFixtureRepositories,
   isE2EFixtureMode,
 } from './e2e-fixtures';
+import {comparePhotosForCategory} from './photo-order';
 
 export const MAX_PHOTO_PAGE_SIZE = 20;
 
@@ -245,31 +245,26 @@ export class SanityPhotoRepository implements PhotoRepository {
     const raw = await fetchContent<unknown>(
       this.client,
       'photos',
-      createPhotoPageQuery(input.limit + 1),
-      {
-        category: input.category,
-        hasCursor: Boolean(cursor),
-        cursorFeatured: cursor?.featured ?? false,
-        cursorFeaturedOrder: cursor?.featuredOrder ?? MAX_FEATURED_ORDER,
-        cursorShotAt: cursor?.shotAt ?? '',
-        cursorId: cursor?.id ?? '',
-      },
+      PHOTO_PAGE_QUERY,
+      {category: input.category},
       contentFetchOptions(CONTENT_CACHE_TAGS.photos),
     );
-    const values = requireArray(raw, 'photos');
-    const hasMore = values.length > input.limit;
-    const pageValues = values.slice(0, input.limit);
-    const items = mapMany(
-      pageValues,
+    const ordered = mapMany(
+      raw,
       mapPhoto,
       this.logger,
       'photos',
       'photo',
-    );
-    const boundary = pageValues.at(-1);
-    const nextCursor = hasMore && boundary && typeof boundary === 'object'
-      ? encodePhotoCursor(input.category, boundary)
-      : null;
+    ).sort((left, right) => comparePhotosForCategory(left, right, input.category));
+    const offset = cursor?.offset ?? 0;
+    if (offset > ordered.length) {
+      throw new RangeError('Photo page cursor is outside the result set.');
+    }
+
+    const items = ordered.slice(offset, offset + input.limit);
+    const nextOffset = offset + items.length;
+    const hasMore = nextOffset < ordered.length;
+    const nextCursor = hasMore ? encodePhotoCursor(input.category, nextOffset) : null;
 
     return {items, nextCursor, hasMore};
   }

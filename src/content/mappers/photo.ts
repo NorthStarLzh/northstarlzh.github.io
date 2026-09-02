@@ -61,6 +61,20 @@ function parseOptionalYearMonth(value: unknown, id: string): string | undefined 
   return text;
 }
 
+function parseOptionalDisplayOrder(value: unknown, id: string): number | undefined {
+  if (value === undefined || value === null) return undefined;
+  const order = nonNegativeInteger(value, 'displayOrder', 'photo', id);
+  if (!Number.isSafeInteger(order)) {
+    throw new InvalidContentError(
+      'photo',
+      'displayOrder must be a safe non-negative integer.',
+      id,
+      'displayOrder.safe_non_negative_integer_required',
+    );
+  }
+  return order;
+}
+
 function parseOptionalLocalized(
   value: unknown,
   field: string,
@@ -84,6 +98,7 @@ export function mapPhoto(value: unknown): Photo {
   const featuredOrder = featured
     ? nonNegativeInteger(raw.featuredOrder, 'featuredOrder', 'photo', id)
     : undefined;
+  const displayOrder = parseOptionalDisplayOrder(raw.displayOrder, id);
   const shotAt = parseOptionalYearMonth(raw.shotAt, id);
   const city = parseOptionalLocalized(raw.city, 'city', id);
   const description = parseOptionalLocalized(raw.description, 'description', id);
@@ -93,6 +108,7 @@ export function mapPhoto(value: unknown): Photo {
     categories: parseCategories(raw.categories, id),
     featured,
     ...(featuredOrder === undefined ? {} : {featuredOrder}),
+    ...(displayOrder === undefined ? {} : {displayOrder}),
   };
   if (shotAt !== undefined) photo.shotAt = shotAt;
   if (city !== undefined) photo.city = city;

@@ -1,5 +1,6 @@
 import {ModuleState} from '@/components/feedback';
 import {Container, Section, Stack} from '@/components/layout';
+import {AppImage} from '@/components/ui';
 import type {Locale} from '@/content/contracts';
 import {messagesByLocale} from '@/i18n/messages';
 
@@ -8,6 +9,54 @@ import styles from './resume.module.css';
 
 export const PORTFOLIO_DOWNLOAD_FILENAME =
   'wind-flower-poetry-wine-tea-portfolio.pdf';
+
+interface ResumeDocumentCardProps {
+  downloadFilename: string;
+  downloadLabel: string;
+  downloadUrl: string;
+  previewAlt: string;
+  previewHeight: number;
+  previewSrc: string;
+  previewWidth: number;
+  title: string;
+}
+
+function ResumeDocumentCard({
+  downloadFilename,
+  downloadLabel,
+  downloadUrl,
+  previewAlt,
+  previewHeight,
+  previewSrc,
+  previewWidth,
+  title,
+}: ResumeDocumentCardProps) {
+  return (
+    <article className={styles.card}>
+      <div className={styles.cardPreview}>
+        <AppImage
+          alt={previewAlt}
+          className={styles.cardPreviewImage}
+          height={previewHeight}
+          loading="eager"
+          sizes="(min-width: 48rem) 32rem, calc(100vw - 3rem)"
+          src={previewSrc}
+          unoptimized
+          width={previewWidth}
+        />
+      </div>
+      <h2 className={styles.cardTitle}>{title}</h2>
+      <a
+        aria-label={downloadLabel}
+        className={styles.cardLink}
+        download={downloadFilename}
+        href={downloadUrl}
+      >
+        {downloadLabel}
+      </a>
+    </article>
+  );
+}
 
 export function ResumeErrorState({locale}: {locale: Locale}) {
   const messages = messagesByLocale[locale].resume;
@@ -25,7 +74,7 @@ export function ResumeErrorState({locale}: {locale: Locale}) {
   );
 }
 
-/** 参考图设计：页面仅展示两个下载卡片（个人作品集 / 个人简历）。 */
+/** 两张静态封面预览与直接下载链接，不嵌入 PDF 阅读器。 */
 export async function renderResumePage(locale: Locale) {
   const messages = messagesByLocale[locale];
 
@@ -35,48 +84,26 @@ export async function renderResumePage(locale: Locale) {
         <Stack gap="2xl">
           <h1 className={styles.srOnly}>{messages.resume.title}</h1>
           <div className={styles.cards}>
-            <article className={styles.card}>
-              <div className={styles.cardPreview}>
-                <iframe
-                  aria-label={messages.download.portfolioPreview}
-                  loading="lazy"
-                  src="/portfolio.pdf"
-                  title={messages.download.portfolioPreview}
-                />
-              </div>
-              <h2 className={styles.cardTitle}>
-                {messages.download.portfolioTitle}
-              </h2>
-              <a
-                aria-label={messages.download.portfolioAria}
-                className={styles.cardLink}
-                download={PORTFOLIO_DOWNLOAD_FILENAME}
-                href="/portfolio.pdf"
-              >
-                {messages.download.portfolio}
-              </a>
-            </article>
-            <article className={styles.card}>
-              <div className={styles.cardPreview}>
-                <iframe
-                  aria-label={messages.download.resumePreview}
-                  loading="lazy"
-                  src="/resume.pdf"
-                  title={messages.download.resumePreview}
-                />
-              </div>
-              <h2 className={styles.cardTitle}>
-                {messages.download.resumeTitle}
-              </h2>
-              <a
-                aria-label={messages.download.resumeAria}
-                className={styles.cardLink}
-                download={RESUME_DOWNLOAD_FILENAME}
-                href="/resume.pdf"
-              >
-                {messages.download.resume}
-              </a>
-            </article>
+            <ResumeDocumentCard
+              downloadFilename={PORTFOLIO_DOWNLOAD_FILENAME}
+              downloadLabel={messages.download.portfolioAria}
+              downloadUrl="/portfolio.pdf"
+              previewAlt={messages.download.portfolioPreview}
+              previewHeight={1080}
+              previewSrc="/portfolio-preview.webp"
+              previewWidth={1920}
+              title={messages.download.portfolioTitle}
+            />
+            <ResumeDocumentCard
+              downloadFilename={RESUME_DOWNLOAD_FILENAME}
+              downloadLabel={messages.download.resumeAria}
+              downloadUrl="/resume.pdf"
+              previewAlt={messages.download.resumePreview}
+              previewHeight={1700}
+              previewSrc="/resume-preview.webp"
+              previewWidth={1206}
+              title={messages.download.resumeTitle}
+            />
           </div>
         </Stack>
       </Container>

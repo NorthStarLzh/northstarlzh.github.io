@@ -29,7 +29,7 @@ describe('createMailtoHref', () => {
 });
 
 describe('ContactSection', () => {
-  it('exposes only the contact anchor and email without writes or requests', () => {
+  it('guides a mail-only introduction without writes or requests', () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch');
     const cookiesBefore = document.cookie;
     const { container } = render(
@@ -42,6 +42,9 @@ describe('ContactSection', () => {
     expect(container.querySelector('#contact')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: `电子邮箱：${PUBLIC_EMAIL}` }))
       .toHaveAttribute('href', `mailto:${PUBLIC_EMAIL}`);
+    expect(screen.getByRole('heading', { name: '不知道从哪里写起？' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: '你想聊什么？' })).toBeInTheDocument();
+    expect(screen.getByText('不需要准备完整提案；一个清楚的开场也足够。')).toBeInTheDocument();
     expect(container.querySelectorAll('form, input, textarea, button')).toHaveLength(0);
     expect(container.querySelectorAll('a')).toHaveLength(1);
     expect(fetchSpy).not.toHaveBeenCalled();

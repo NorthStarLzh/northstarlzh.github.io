@@ -269,11 +269,12 @@ describe('SanityPhotoRepository', () => {
     expect(client.calls[0].params).toEqual({limit: 5});
   });
 
-  it('builds stable page parameters, excludes bad documents, and advances past them', async () => {
+  it('orders a complete category, excludes bad documents, and advances by a stable offset', async () => {
     const client = new QueueClient([[
-      rawPhoto('photo-good', {featured: true, featuredOrder: 1, shotAt: '2026-07'}),
-      rawPhoto('photo-bad', {featured: true, featuredOrder: 2, shotAt: 'bad'}),
-      rawPhoto('photo-extra', {shotAt: '2026-06'}),
+      rawPhoto('photo-good', {displayOrder: 1, shotAt: '2026-07'}),
+      rawPhoto('photo-bad', {displayOrder: 1, shotAt: 'bad'}),
+      rawPhoto('photo-extra', {displayOrder: 2, shotAt: '2026-06'}),
+      rawPhoto('photo-later', {displayOrder: 3, shotAt: '2026-05'}),
     ]]);
     const {logger, entries} = collectingLogger();
     const result = await new SanityPhotoRepository(client, logger).listPage({
@@ -281,36 +282,23 @@ describe('SanityPhotoRepository', () => {
       limit: 2,
     });
 
-    expect(result.items.map(({id}) => id)).toEqual(['photo-good']);
+    expect(result.items.map(({id}) => id)).toEqual(['photo-good', 'photo-extra']);
     expect(result.hasMore).toBe(true);
     expect(result.nextCursor).not.toBeNull();
-    expect(decodePhotoCursor(result.nextCursor ?? '', 'landscape')).toMatchObject({
-      id: 'photo-bad',
-      featured: true,
-      featuredOrder: 2,
-      shotAt: 'bad',
-    });
-    expect(client.calls[0].params).toEqual({
+    expect(decodePhotoCursor(result.nextCursor ?? '', 'landscape')).toEqual({
       category: 'landscape',
-      hasCursor: false,
-      cursorFeatured: false,
-      cursorFeaturedOrder: 2_147_483_647,
-      cursorShotAt: '',
-      cursorId: '',
+      offset: 2,
     });
+    expect(client.calls[0].params).toEqual({category: 'landscape'});
     expect(client.calls[0].options.next.tags).toEqual(['photos']);
     expect(entries).toEqual([expect.objectContaining({
       validationCode: 'shotAt.year_month_required',
     })]);
   });
 
-  it('decodes the prior page boundary into the next parameterized query', async () => {
-    const cursor = encodePhotoCursor('portrait', {
-      _id: 'photo-20',
-      featured: false,
-      shotAt: '2025-12',
-    });
-    const client = new QueueClient([[]]);
+  it('decodes a prior page offset before reading the matching category', async () => {
+    const cursor = encodePhotoCursor('portrait', 1);
+    const client = new QueueClient([[rawPhoto('photo-20', {categories: ['portrait']})]]);
     const result = await new SanityPhotoRepository(client).listPage({
       category: 'portrait',
       cursor,
@@ -318,12 +306,7 @@ describe('SanityPhotoRepository', () => {
     });
 
     expect(result).toEqual({items: [], nextCursor: null, hasMore: false});
-    expect(client.calls[0].params).toMatchObject({
-      hasCursor: true,
-      cursorFeatured: false,
-      cursorShotAt: '2025-12',
-      cursorId: 'photo-20',
-    });
+    expect(client.calls[0].params).toEqual({category: 'portrait'});
   });
 
   it.each([
@@ -340,11 +323,7 @@ describe('SanityPhotoRepository', () => {
 
   it('rejects a cursor from another category before querying CMS', async () => {
     const client = new QueueClient([]);
-    const cursor = encodePhotoCursor('portrait', {
-      _id: 'photo-1',
-      featured: false,
-      shotAt: '2026-01',
-    });
+    const cursor = encodePhotoCursor('portrait', 1);
     await expect(new SanityPhotoRepository(client).listPage({
       category: 'landscape',
       cursor,

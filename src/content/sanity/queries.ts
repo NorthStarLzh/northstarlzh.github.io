@@ -14,6 +14,7 @@ const PHOTO_FIELDS = `
     "alt": ^.alt
   },
   categories,
+  displayOrder,
   shotAt,
   city,
   description,
@@ -111,58 +112,24 @@ export const FEATURED_PHOTOS_QUERY = defineQuery(`
     }
 `);
 
-const PHOTO_PAGE_QUERY_TEMPLATE = `
-  *[
-    _type == "photo" &&
-    $category in categories &&
-    (
-      $hasCursor == false ||
-      (
-        $cursorFeatured == true &&
-        (
-          featured != true ||
-          (
-            featured == true &&
-            (
-              coalesce(featuredOrder, 2147483647) > $cursorFeaturedOrder ||
-              (
-                coalesce(featuredOrder, 2147483647) == $cursorFeaturedOrder &&
-                (
-                  coalesce(shotAt, "") < $cursorShotAt ||
-                  (coalesce(shotAt, "") == $cursorShotAt && _id > $cursorId)
-                )
-              )
-            )
-          )
-        )
-      ) ||
-      (
-        $cursorFeatured == false &&
-        featured != true &&
-        (
-          coalesce(shotAt, "") < $cursorShotAt ||
-          (coalesce(shotAt, "") == $cursorShotAt && _id > $cursorId)
-        )
-      )
-    )
-  ] | order(
-    select(featured == true => 0, 1) asc,
-    select(featured == true => coalesce(featuredOrder, 2147483647), 2147483647) asc,
-    coalesce(shotAt, "") desc,
-    _id asc
-  )[0...__FETCH_LIMIT__]{
-    ${PHOTO_FIELDS}
-  }
-`;
-
-export function createPhotoPageQuery(fetchLimit: number): string {
-  if (!Number.isInteger(fetchLimit) || fetchLimit < 2 || fetchLimit > 21) {
-    throw new RangeError('Photo query fetch limit must be between 2 and 21.');
-  }
-  return defineQuery(PHOTO_PAGE_QUERY_TEMPLATE.replace('__FETCH_LIMIT__', String(fetchLimit)));
-}
-
-export const PHOTO_PAGE_QUERY = createPhotoPageQuery(21);
+/**
+ * Reads a category's lightweight image metadata before the repository applies
+ * its deterministic same-number shuffle and returns one page. Fetching the
+ * metadata set keeps that shuffle consistent across cursor pages; image files
+ * themselves remain lazy-loaded by the UI.
+ */
+export const PHOTO_PAGE_QUERY = defineQuery(`
+  *[_type == "photo" && $category in categories]
+    | order(
+      coalesce(displayOrder, 2147483647) asc,
+      select(featured == true => 0, 1) asc,
+      select(featured == true => coalesce(featuredOrder, 2147483647), 2147483647) asc,
+      coalesce(shotAt, "") desc,
+      _id asc
+    ){
+      ${PHOTO_FIELDS}
+    }
+`);
 
 export const FEATURED_RESEARCH_QUERY = defineQuery(`
   *[_type == "researchProject" && featured == true]

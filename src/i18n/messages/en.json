@@ -21,7 +21,7 @@
   "photography": {
     "eyebrow": "Photography exhibition",
     "title": "Making memories traceable",
-    "intro": "Explore landscape and portrait photographs in their original proportions.",
+    "intro": "Scan landscape and portrait work at a glance; open any image to see the full original.",
     "categoryLabel": "Photography categories",
     "categories": {
       "landscape": "Landscape photography",
@@ -99,8 +99,8 @@
     "portfolio": "Download",
     "portfolioAria": "Download portfolio",
     "resumeAria": "Download résumé",
-    "portfolioPreview": "Portfolio PDF preview",
-    "resumePreview": "Résumé PDF preview"
+    "portfolioPreview": "Portfolio cover preview",
+    "resumePreview": "Résumé first-page preview"
   },
   "dialogs": {
     "close": "Close dialog",
@@ -140,9 +140,32 @@
     "errorDescription": "The content service is temporarily unavailable. Please try again later."
   },
   "contact": {
-    "title": "Contact",
-    "description": "You are welcome to get in touch by email.",
+    "eyebrow": "Get in touch",
+    "title": "Start with a clear idea",
+    "description": "Whether you want to discuss images, research, or a collaboration still taking shape, you are welcome to write.",
     "emailLabel": "Email",
+    "emailAction": "Write an email",
+    "guideTitle": "Not sure how to begin?",
+    "guideDescription": "A few of these details are enough to make your note easier to understand.",
+    "guideItems": {
+      "topic": {
+        "title": "What would you like to discuss?",
+        "description": "A sentence about images, research, a project, or another idea is plenty."
+      },
+      "identity": {
+        "title": "Who are you?",
+        "description": "Share a preferred name and whether you are writing personally, for a team, or an organisation."
+      },
+      "expectation": {
+        "title": "What are you hoping for?",
+        "description": "An exchange, collaboration, commission, or simply a question."
+      },
+      "context": {
+        "title": "What context would help?",
+        "description": "A timeframe, location, reference link, or supporting material can help."
+      }
+    },
+    "guideNote": "You do not need a finished proposal; a clear opening is enough.",
     "errorTitle": "Contact is unavailable",
     "errorDescription": "The content service is temporarily unavailable. Please try again later."
   },

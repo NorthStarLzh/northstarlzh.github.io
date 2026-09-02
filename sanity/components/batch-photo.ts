@@ -6,8 +6,10 @@ export const PHOTO_CATEGORY_OPTIONS = [
 export type BatchPhotoCategory = (typeof PHOTO_CATEGORY_OPTIONS)[number]['value'];
 
 export interface BatchPhotoDefaults {
-  /** Optional category applied to every uploaded image. */
-  category?: BatchPhotoCategory;
+  /** Optional categories applied to every uploaded image. */
+  categories?: BatchPhotoCategory[];
+  /** Optional category-page ordering number applied to every uploaded image. */
+  displayOrder?: number | string;
   /** Optional shooting date (YYYY-MM) applied to every uploaded image. */
   shotAt?: string;
   /** Optional shooting city applied to both languages of every uploaded image. */
@@ -16,14 +18,17 @@ export interface BatchPhotoDefaults {
 
 const YEAR_MONTH_PATTERN = /^\d{4}-(0[1-9]|1[0-2])$/;
 
+export interface PhotoImageValue {
+  _type: 'image';
+  asset: {_type: 'reference'; _ref: string};
+  hotspot: {_type: 'sanity.imageHotspot'; x: number; y: number; width: number; height: number};
+}
+
 export interface BatchPhotoDocument {
   _type: 'photo';
-  image: {
-    _type: 'image';
-    asset: {_type: 'reference'; _ref: string};
-    hotspot: {_type: 'sanity.imageHotspot'; x: number; y: number; width: number; height: number};
-  };
+  image: PhotoImageValue;
   categories?: BatchPhotoCategory[];
+  displayOrder?: number;
   shotAt?: string;
   city?: {_type: 'localizedShortText'; zh: string; en: string};
 }
@@ -37,6 +42,36 @@ export function sanitizeShotAt(value: string | undefined): string | undefined {
   return trimmed.length === 0 || !YEAR_MONTH_PATTERN.test(trimmed) ? undefined : trimmed;
 }
 
+/** Normalises an optional non-negative integer category-page order. */
+export function sanitizeDisplayOrder(value: number | string | undefined): number | undefined {
+  if (typeof value === 'number') {
+    return Number.isSafeInteger(value) && value >= 0 ? value : undefined;
+  }
+
+  const trimmed = value?.trim() ?? '';
+  if (!/^\d+$/.test(trimmed)) return undefined;
+  const order = Number(trimmed);
+  return Number.isSafeInteger(order) ? order : undefined;
+}
+
+/**
+ * Builds a fresh image value for a replacement file. Resetting the hotspot is
+ * intentional: coordinates from the previous image are not meaningful for a
+ * file with different dimensions.
+ */
+export function buildPhotoImageValue(assetRef: string): PhotoImageValue {
+  const normalizedAssetRef = assetRef.trim();
+  if (normalizedAssetRef.length === 0) {
+    throw new TypeError('Photo image asset reference is required.');
+  }
+
+  return {
+    _type: 'image',
+    asset: {_type: 'reference', _ref: normalizedAssetRef},
+    hotspot: {_type: 'sanity.imageHotspot', x: 0.5, y: 0.5, width: 1, height: 1},
+  };
+}
+
 /**
  * Builds the minimal photo document stub for a freshly uploaded asset. Every
  * field beyond `image` is optional and only present when a default was given,
@@ -48,14 +83,15 @@ export function buildBatchPhotoDocument(
 ): BatchPhotoDocument {
   const document: BatchPhotoDocument = {
     _type: 'photo',
-    image: {
-      _type: 'image',
-      asset: {_type: 'reference', _ref: assetRef},
-      hotspot: {_type: 'sanity.imageHotspot', x: 0.5, y: 0.5, width: 1, height: 1},
-    },
+    image: buildPhotoImageValue(assetRef),
   };
 
-  if (defaults.category) document.categories = [defaults.category];
+  if (defaults.categories && defaults.categories.length > 0) {
+    document.categories = [...new Set(defaults.categories)];
+  }
+
+  const displayOrder = sanitizeDisplayOrder(defaults.displayOrder);
+  if (displayOrder !== undefined) document.displayOrder = displayOrder;
 
   const shotAt = sanitizeShotAt(defaults.shotAt);
   if (shotAt) document.shotAt = shotAt;

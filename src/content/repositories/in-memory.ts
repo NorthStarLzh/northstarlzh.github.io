@@ -13,6 +13,7 @@ import type {
   ResearchProject,
   ResearchRepository,
 } from '../contracts';
+import {comparePhotosForCategory} from './photo-order';
 
 const MEMORY_CURSOR_PREFIX = 'memory:';
 
@@ -32,22 +33,6 @@ function byFeaturedOrder<T extends { featuredOrder?: number }>(left: T, right: T
 function bySortOrder<T extends { sortOrder?: number }>(left: T, right: T): number {
   return (left.sortOrder ?? Number.MAX_SAFE_INTEGER) -
     (right.sortOrder ?? Number.MAX_SAFE_INTEGER);
-}
-
-function comparePhotos(left: Photo, right: Photo): number {
-  if (left.featured !== right.featured) {
-    return left.featured ? -1 : 1;
-  }
-
-  if (left.featured && right.featured) {
-    const featuredDifference = byFeaturedOrder(left, right);
-    if (featuredDifference !== 0) {
-      return featuredDifference;
-    }
-  }
-
-  const dateDifference = (right.shotAt ?? '').localeCompare(left.shotAt ?? '');
-  return dateDifference === 0 ? left.id.localeCompare(right.id) : dateDifference;
 }
 
 function decodeCursor(cursor: string | undefined): number {
@@ -139,7 +124,7 @@ export class InMemoryPhotoRepository implements PhotoRepository {
     const offset = decodeCursor(input.cursor);
     const matching = clone(this.photos)
       .filter(({ categories }) => categories.includes(input.category))
-      .sort(comparePhotos);
+      .sort((left, right) => comparePhotosForCategory(left, right, input.category));
 
     if (offset > matching.length) {
       throw new RangeError('Photo page cursor is outside the result set.');

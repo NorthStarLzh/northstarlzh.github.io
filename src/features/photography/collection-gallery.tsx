@@ -4,7 +4,7 @@ import {useState} from 'react';
 
 import type {Locale, PhotoCollection} from '@/content/contracts';
 
-import {MasonryGallery} from './masonry-gallery';
+import {JustifiedGallery} from './justified-gallery';
 import {PhotoViewer} from './photo-viewer';
 import type {PhotoViewerLabels} from './photo-viewer-contract';
 
@@ -15,8 +15,8 @@ export interface CollectionGalleryProps {
 }
 
 /**
- * Collection detail feed: a balanced waterfall of the collection's photos
- * plus the shared PPT-style viewer opened from any thumbnail.
+ * Collection detail feed: a ratio-preserving justified gallery plus the shared
+ * PPT-style viewer opened from any thumbnail.
  */
 export function CollectionGallery({
   collection,
@@ -27,7 +27,7 @@ export function CollectionGallery({
 
   return (
     <>
-      <MasonryGallery
+      <JustifiedGallery
         locale={locale}
         onOpen={setActiveId}
         photos={collection.photos}
