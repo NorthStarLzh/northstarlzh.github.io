@@ -12,7 +12,6 @@ const labels: Record<NavigationKey, string> = {
   home: 'Home',
   photography: 'Photography',
   research: 'Research',
-  resume: 'Résumé',
 };
 
 describe('application navigation configuration', () => {
@@ -24,7 +23,6 @@ describe('application navigation configuration', () => {
         '/zh/about',
         '/zh/photography',
         '/zh/research',
-        '/zh/resume',
         '/zh/contact',
       ],
     ],
@@ -35,7 +33,6 @@ describe('application navigation configuration', () => {
         '/en/about',
         '/en/photography',
         '/en/research',
-        '/en/resume',
         '/en/contact',
       ],
     ],
@@ -47,7 +44,6 @@ describe('application navigation configuration', () => {
       'about',
       'photography',
       'research',
-      'resume',
       'contact',
     ]);
     expect(navigation.map(({ href }) => href)).toEqual(expectedHrefs);
@@ -56,7 +52,6 @@ describe('application navigation configuration', () => {
       'About',
       'Photography',
       'Research',
-      'Résumé',
       'Contact',
     ]);
   });
@@ -66,20 +61,19 @@ describe('application navigation configuration', () => {
 
     createNavigation('zh', resolveLabel);
 
-    expect(resolveLabel).toHaveBeenCalledTimes(6);
+    expect(resolveLabel).toHaveBeenCalledTimes(5);
     expect(resolveLabel.mock.calls.flat()).toEqual([
       'home',
       'about',
       'photography',
       'research',
-      'resume',
       'contact',
     ]);
   });
 
   it('derives the current page from the URL path without module state', () => {
     const navigation = createNavigation('zh', (key) => labels[key]);
-    const [home, , photography, , , contact] = navigation;
+    const [home, , photography, , contact] = navigation;
 
     expect(isNavigationItemCurrent(home, '/zh/')).toBe(true);
     expect(isNavigationItemCurrent(home, '/zh/contact')).toBe(false);

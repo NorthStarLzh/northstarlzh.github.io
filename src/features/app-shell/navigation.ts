@@ -5,7 +5,6 @@ export type NavigationKey =
   | 'about'
   | 'photography'
   | 'research'
-  | 'resume'
   | 'contact';
 
 export interface NavigationItem {
@@ -16,7 +15,7 @@ export interface NavigationItem {
 
 interface NavigationDefinition {
   key: NavigationKey;
-  path: '' | '/about' | '/photography' | '/research' | '/resume' | '/contact';
+  path: '' | '/about' | '/photography' | '/research' | '/contact';
 }
 
 const NAVIGATION_DEFINITIONS = [
@@ -24,7 +23,6 @@ const NAVIGATION_DEFINITIONS = [
   { key: 'about', path: '/about' },
   { key: 'photography', path: '/photography' },
   { key: 'research', path: '/research' },
-  { key: 'resume', path: '/resume' },
   { key: 'contact', path: '/contact' },
 ] as const satisfies readonly NavigationDefinition[];
 

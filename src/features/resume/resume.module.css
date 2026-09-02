@@ -14,33 +14,37 @@
   }
 }
 
-/* 两个下载卡片使用静态封面预览，而不是嵌入式 PDF 阅读器。 */
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.page {
-  min-height: calc(100vh - 4.5rem);
-}
-
-@media (min-width: 75rem) {
-  .page {
-    min-height: 100vh;
-  }
-}
-
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
   gap: var(--space-xl);
+}
+
+.documents {
+  display: grid;
+  scroll-margin-top: var(--space-xl);
+  gap: var(--space-xl);
+}
+
+.documentsHeader {
+  display: grid;
+  max-width: 48rem;
+  gap: var(--space-sm);
+}
+
+.documentsHeader p,
+.documentsTitle {
+  margin: 0;
+}
+
+.documentsTitle {
+  font-size: var(--font-size-h2);
+  line-height: 1.1;
+}
+
+.documentsDescription {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lead);
 }
 
 .card {

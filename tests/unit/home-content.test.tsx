@@ -197,6 +197,9 @@ describe('home hero', () => {
     expect(screen.getByTestId('home-hero-copy')).toHaveTextContent(
       profileFixture.nickname,
     );
+    expect(screen.getByTestId('home-hero-copy')).toHaveTextContent(
+      messagesByLocale.en.home.identity,
+    );
   });
 
   it.each(['mobile', 'tablet', 'desktop'] as const)(

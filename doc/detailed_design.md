@@ -207,9 +207,10 @@ sanity/schemaTypes -> shared validation constants
 | --- | --- | --- | --- |
 | `/` | 语言入口 | Redirect | 重定向到 `/zh` |
 | `/zh`、`/en` | 首页 | Server + Client Islands | 默认中文；含开场动画 |
+| `/zh/about`、`/en/about` | 关于我 / CV | Server | 个人介绍、研究兴趣、教育背景与资料下载 |
 | `/zh/photography`、`/en/photography` | 摄影作品 | Server + Client | 分类、分页、Lightbox |
 | `/zh/research`、`/en/research` | 科研成果 | Server + Client | 列表与居中弹窗 |
-| `/zh/resume`、`/en/resume` | 个人简历 | Server | 教育、获奖与 PDF |
+| `/zh/resume`、`/en/resume` | 旧简历链接 | Redirect | 跳转到对应语言的 `/about#cv` |
 | `/zh/contact`、`/en/contact` | 联系方式 | Server | 邮箱入口与来信提示 |
 | `/studio` | 内容后台 | Client Tool | Sanity 身份验证保护 |
 | `/api/photos` | 摄影分页 API | Route Handler | 只读公开接口 |
@@ -452,7 +453,7 @@ export interface ResearchRepository {
 ### 10.1 职责
 
 - 渲染桌面导航和移动菜单；
-- 提供首页、摄影、科研、简历、联系方式入口；
+- 提供首页、关于我 / CV、摄影、科研、联系方式入口；
 - 承载语言与主题开关；
 - 管理跳过导航链接、当前页状态和移动菜单焦点。
 
@@ -460,7 +461,7 @@ export interface ResearchRepository {
 
 ```ts
 interface NavigationItem {
-  key: 'home' | 'photography' | 'research' | 'resume' | 'contact';
+  key: 'home' | 'about' | 'photography' | 'research' | 'contact';
   href: string;
   label: string;
 }
@@ -617,7 +618,7 @@ stateDiagram-v2
 
 ### 14.1 职责
 
-- 组合首屏、个人介绍、5 张精选摄影、3 个精选科研、简历摘要和联系方式；
+- 组合首屏摄影与一句清晰的个人定位；
 - 并行获取各区块数据；
 - 对非关键区块使用独立加载和错误边界；
 - 应用统一滚动出现效果，但不拥有语言或主题状态。
@@ -627,25 +628,17 @@ stateDiagram-v2
 ```text
 HomePage
 ├── IntroAnimation
-├── HeroSection
-├── ProfileSection
-├── FeaturedPhotoSection
-├── FeaturedResearchSection
-├── ResumeSummarySection
-└── ContactSection
+└── HeroSection
 ```
 
 ### 14.3 数据获取
 
 ```ts
-const [profile, hero, photos, projects, education, awards] =
+const [profile, hero, photos] =
   await Promise.all([
     profileRepository.getProfile(),
     photoRepository.getHeroPhoto(),
-    photoRepository.listFeatured(5),
-    researchRepository.listFeatured(3),
-    profileRepository.listEducation(),
-    profileRepository.listAwards(),
+    photoRepository.listFeatured(1),
   ]);
 ```
 
@@ -890,9 +883,9 @@ interface ResearchDialogProps {
 
 ### 17.1 职责
 
-- 展示头像、个人简介、教育经历和获奖经历；
-- 在下载卡片中展示作品集与简历的静态首页预览，并提供 PDF 下载入口；
-- 首页摘要和完整简历页复用同一组展示组件。
+- 为 About 页面提供个人资料、教育和获奖展示组件；
+- 在 About 页的 CV 区块展示作品集与简历的静态首页预览，并提供 PDF 下载入口；
+- 不保留独立的简历导航入口，旧链接跳转到 About 页的 CV 锚点。
 
 ### 17.2 组件拆分
 

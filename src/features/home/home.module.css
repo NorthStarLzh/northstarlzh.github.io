@@ -79,6 +79,19 @@
     0 4px 18px rgb(0 0 0 / 28%);
 }
 
+.heroCopy p {
+  max-width: min(100%, 36rem);
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1rem, 1.7vw, 1.25rem);
+  font-weight: 520;
+  line-height: 1.55;
+  text-align: right;
+  text-shadow:
+    0 1px 2px rgb(0 0 0 / 35%),
+    0 3px 12px rgb(0 0 0 / 30%);
+}
+
 @keyframes hero-rise {
   from {
     opacity: 0;

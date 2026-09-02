@@ -1,6 +1,7 @@
 {
   "home": {
     "title": "风花诗酒茶",
+    "identity": "我关注人工智能、交互设计与人的感知，也持续用摄影记录日常经验。",
     "featuredPhotography": "精选摄影",
     "profileTitle": "个人介绍",
     "viewAllPhotography": "查看全部摄影",
@@ -13,8 +14,14 @@
   },
   "about": {
     "eyebrow": "关于",
-    "title": "关于我",
-    "description": "个人简介、研究兴趣与教育背景。",
+    "title": "关于我 / CV",
+    "description": "个人简介、研究兴趣与教育背景，以及可下载的作品集和个人简历。",
+    "cvEyebrow": "资料下载",
+    "cvTitle": "CV",
+    "cvDescription": "下载个人作品集或个人简历。",
+    "legacyResumeTitle": "个人简历已并入 About / CV",
+    "legacyResumeDescription": "正在前往新的资料下载区；如未自动跳转，请使用下方链接。",
+    "legacyResumeAction": "前往 About / CV",
     "errorTitle": "个人介绍暂不可用",
     "errorDescription": "内容服务暂时不可用，请稍后再试。"
   },
@@ -47,7 +54,7 @@
   },
   "metadata": {
     "title": "风花诗酒茶",
-    "description": "个人作品网站开发预览"
+    "description": "刘子恒的个人网站，记录人工智能与设计研究、交互项目以及摄影创作。"
   },
   "navigation": {
     "brand": "风花诗酒茶",
@@ -57,10 +64,9 @@
     "menuTitle": "网站导航",
     "menuDescription": "访问全部页面并切换语言或主题。",
     "home": "首页",
-    "about": "关于我",
+    "about": "关于我 / CV",
     "photography": "摄影作品",
     "research": "科研成果",
-    "resume": "个人简历",
     "contact": "联系方式"
   },
   "buttons": {

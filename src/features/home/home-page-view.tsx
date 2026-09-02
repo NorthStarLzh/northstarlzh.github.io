@@ -100,6 +100,7 @@ function HeroSection({
       <div aria-hidden="true" className={styles.heroShade} />
       <Container className={styles.heroCopy} data-testid="home-hero-copy">
         <h1>{profile?.nickname ?? fallbackTitle ?? messages.home.title}</h1>
+        <p>{messages.home.identity}</p>
       </Container>
     </section>
   );

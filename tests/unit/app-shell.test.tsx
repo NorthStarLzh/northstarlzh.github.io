@@ -74,7 +74,7 @@ describe('AppShell navigation', () => {
     renderShell();
 
     const navigation = screen.getByRole('navigation', { name: '主导航' });
-    expect(within(navigation).getAllByRole('link')).toHaveLength(6);
+    expect(within(navigation).getAllByRole('link')).toHaveLength(5);
     expect(
       within(navigation).getByRole('link', { name: '科研成果' }),
     ).toHaveAttribute('aria-current', 'page');
@@ -134,7 +134,7 @@ describe('AppShell navigation', () => {
     const navigation = within(dialog).getByRole('navigation', {
       name: '移动端主导航',
     });
-    expect(within(navigation).getAllByRole('link')).toHaveLength(6);
+    expect(within(navigation).getAllByRole('link')).toHaveLength(5);
     expect(within(navigation).getByRole('link', { name: '联系方式' })).toHaveAttribute(
       'href',
       '/zh/contact',
@@ -149,7 +149,7 @@ describe('AppShell navigation', () => {
     await user.click(screen.getByRole('button', { name: '打开菜单' }));
     expect(screen.getByRole('dialog')).toBeInTheDocument();
 
-    navigationMock.pathname = '/zh/resume';
+    navigationMock.pathname = '/zh/about';
     view.rerender(
       <NextIntlClientProvider locale="zh" messages={messagesByLocale.zh}>
         <AppShell
@@ -158,7 +158,7 @@ describe('AppShell navigation', () => {
             messagesByLocale.zh.navigation[key],
           )}
         >
-          <h1>个人简历</h1>
+          <h1>关于我 / CV</h1>
         </AppShell>
       </NextIntlClientProvider>,
     );

@@ -9,7 +9,6 @@ const corePages = [
   '/zh/contact',
   '/zh/photography/landscape/',
   '/zh/research',
-  '/zh/resume',
 ] as const;
 
 test('core pages have no serious or critical axe violations', async ({ page }) => {
@@ -46,13 +45,11 @@ test('key pages match their light-theme visual baselines', async ({ page }) => {
       ? 'photography.png'
       : path.includes('research')
         ? 'research.png'
-        : path.includes('resume')
-          ? 'resume.png'
-          : path.includes('about')
-            ? 'about.png'
-            : path.includes('contact')
-              ? 'contact.png'
-              : 'home.png';
+        : path.includes('about')
+          ? 'about.png'
+          : path.includes('contact')
+            ? 'contact.png'
+            : 'home.png';
     await expect(page).toHaveScreenshot(snapshotName, { fullPage: true });
   }
 });

@@ -10,7 +10,7 @@ import '@/styles/globals.css';
 
 export const metadata: Metadata = {
   title: '风花诗酒茶',
-  description: 'Personal portfolio development preview',
+  description: '刘子恒的个人网站，记录人工智能与设计研究、交互项目以及摄影创作。',
 };
 
 export default async function RootLayout({

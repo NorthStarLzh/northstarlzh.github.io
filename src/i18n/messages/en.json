@@ -1,6 +1,7 @@
 {
   "home": {
     "title": "Wind, Flowers, Poetry, Wine & Tea",
+    "identity": "I explore artificial intelligence, interaction design, and human perception, while using photography to record everyday experience.",
     "featuredPhotography": "Featured photography",
     "profileTitle": "About",
     "viewAllPhotography": "View all photography",
@@ -13,8 +14,14 @@
   },
   "about": {
     "eyebrow": "About",
-    "title": "About me",
-    "description": "Profile, research interests, and education background.",
+    "title": "About / CV",
+    "description": "Profile, research interests, and education background, with a downloadable portfolio and CV.",
+    "cvEyebrow": "Documents",
+    "cvTitle": "CV",
+    "cvDescription": "Download the portfolio or CV.",
+    "legacyResumeTitle": "The résumé is now part of About / CV",
+    "legacyResumeDescription": "Taking you to the new documents section. If the redirect does not start, use the link below.",
+    "legacyResumeAction": "Go to About / CV",
     "errorTitle": "About is unavailable",
     "errorDescription": "The content service is temporarily unavailable. Please try again later."
   },
@@ -47,7 +54,7 @@
   },
   "metadata": {
     "title": "Wind, Flowers, Poetry, Wine & Tea",
-    "description": "Personal portfolio development preview"
+    "description": "Liu Ziheng's personal website, documenting AI and design research, interactive projects, and photography."
   },
   "navigation": {
     "brand": "Wind, Flowers, Poetry, Wine & Tea",
@@ -57,10 +64,9 @@
     "menuTitle": "Site navigation",
     "menuDescription": "Visit every page and change the language or theme.",
     "home": "Home",
-    "about": "About",
+    "about": "About / CV",
     "photography": "Photography",
     "research": "Research",
-    "resume": "Résumé",
     "contact": "Contact"
   },
   "buttons": {

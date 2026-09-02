@@ -21,4 +21,11 @@ export type {
   ResumeSummaryProps,
   ResumeVariant,
 } from './resume-module';
-export {renderResumePage, ResumeErrorState} from './resume-page-content';
+export {
+  ResumeDocumentPreviews,
+  ResumeErrorState,
+} from './resume-page-content';
+export type {
+  ResumeDocumentHeadingLevel,
+  ResumeDocumentPreviewsProps,
+} from './resume-page-content';

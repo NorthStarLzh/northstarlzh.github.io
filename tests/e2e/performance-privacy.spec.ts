@@ -118,7 +118,7 @@ test('pages create no tracking requests, cookies, or unexpected storage', async 
   const requests = new Set<string>();
   page.on('request', (request) => requests.add(request.url()));
 
-  for (const path of ['/zh', '/en/photography?category=portrait', '/zh/research', '/en/resume']) {
+  for (const path of ['/zh', '/en/photography?category=portrait', '/zh/research', '/en/about']) {
     await page.goto(path);
   }
 

@@ -9,7 +9,7 @@ const stashedApiDirectory = new URL('./api', `file://${stashDirectory}/`);
 
 async function runBuild() {
   return new Promise((resolve, reject) => {
-    const child = spawn(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['next', 'build'], {
+    const child = spawn(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['next', 'build', '--webpack'], {
       stdio: 'inherit',
       env: {
         ...process.env,

@@ -7,7 +7,7 @@ import { messagesByLocale } from '@/i18n/messages';
 
 import type { NavigationItem } from './navigation';
 
-const FOOTER_NAV_KEYS = new Set(['about', 'photography', 'research', 'resume']);
+const FOOTER_NAV_KEYS = new Set(['about', 'photography', 'research']);
 
 export interface AppFooterProps {
   locale: Locale;

@@ -10,7 +10,7 @@ import {
   HeroPhoto as HeroPhotoView,
   toSrcSet,
 } from '@/features/home';
-import { ProfileSummary } from '@/features/resume';
+import { ProfileSummary, ResumeDocumentPreviews } from '@/features/resume';
 import { routing } from '@/i18n/routing';
 
 import styles from './about.module.css';
@@ -100,6 +100,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
               locale={locale}
               profile={profile}
             />
+            <ResumeDocumentPreviews headingLevel="h2" locale={locale} />
           </Stack>
         </Section>
       </Container>

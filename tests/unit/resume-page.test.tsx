@@ -2,7 +2,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 
 import {
-  renderResumePage,
+  ResumeDocumentPreviews,
   ResumeErrorState,
 } from '@/features/resume';
 import {
@@ -10,17 +10,18 @@ import {
 } from '@/features/resume/resume-page-content';
 import { RESUME_DOWNLOAD_FILENAME } from '@/features/resume/resume-download';
 
-describe('localized résumé page', () => {
+describe('localized CV document previews', () => {
   it.each([
-    ['zh', '个人简历', '个人作品集', '个人简历'],
-    ['en', 'Résumé', 'Portfolio', 'Résumé'],
+    ['zh', 'CV', '个人作品集', '个人简历'],
+    ['en', 'CV', 'Portfolio', 'Résumé'],
   ] as const)(
     'server-renders two static preview cards in %s',
-    async (locale, pageTitle, portfolioTitle, resumeTitle) => {
-      const page = await renderResumePage(locale);
-      const html = renderToStaticMarkup(page);
+    (locale, pageTitle, portfolioTitle, resumeTitle) => {
+      const html = renderToStaticMarkup(
+        <ResumeDocumentPreviews headingLevel="h1" locale={locale} />,
+      );
 
-      expect(html).toContain(pageTitle);
+      expect(html).toContain(`id="cv-title">${pageTitle}</h1>`);
       expect(html).toContain(`>${portfolioTitle}</h2>`);
       expect(html).toContain(`>${resumeTitle}</h2>`);
       expect(html).toContain('href="/portfolio.pdf"');

@@ -26,8 +26,8 @@ import AboutPage from '@/app/[locale]/about/page';
 
 const messages: Record<string, string> = {
   eyebrow: 'About',
-  title: 'About me',
-  description: 'Profile, research interests, and education background.',
+  title: 'About / CV',
+  description: 'Profile, research interests, and education background, with a downloadable portfolio and CV.',
   errorTitle: 'About is unavailable',
   errorDescription: 'The content service is temporarily unavailable.',
 };
@@ -53,9 +53,15 @@ describe('localized about page', () => {
     });
     const html = renderToStaticMarkup(page);
 
-    expect(html).toContain('id="about-title">About me</h1>');
+    expect(html).toContain('id="about-title">About / CV</h1>');
     expect(html).toContain(`>${profileFixture.nickname}</h2>`);
     expect(html).toContain(profileFixture.institution);
+    expect(html).toContain('id="cv"');
+    expect(html).toContain('>CV</h2>');
+    expect(html).toContain('>Portfolio</h3>');
+    expect(html).toContain('>Résumé</h3>');
+    expect(html).toContain('href="/portfolio.pdf"');
+    expect(html).toContain('href="/resume.pdf"');
     expect(html).toContain('<picture');
     expect(html).not.toContain('<main');
     expect(html).not.toContain('role="alert"');

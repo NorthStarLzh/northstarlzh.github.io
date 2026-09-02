@@ -59,10 +59,10 @@ describe('internationalized interface messages', () => {
     expect(messagesByLocale.zh.navigation.photography).toBe('摄影作品');
     expect(messagesByLocale.en.navigation.photography).toBe('Photography');
     expect(messagesByLocale.zh.metadata.description).toBe(
-      '个人作品网站开发预览',
+      '刘子恒的个人网站，记录人工智能与设计研究、交互项目以及摄影创作。',
     );
     expect(messagesByLocale.en.metadata.description).toBe(
-      'Personal portfolio development preview',
+      "Liu Ziheng's personal website, documenting AI and design research, interactive projects, and photography.",
     );
     expect(formatYearMonth('2026-07', 'zh')).toBe('2026年7月');
     expect(formatYearMonth('2026-07', 'en')).toBe('July 2026');

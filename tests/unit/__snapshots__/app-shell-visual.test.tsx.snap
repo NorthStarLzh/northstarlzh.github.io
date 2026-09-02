@@ -42,7 +42,7 @@ exports[`application shell visual stories > matches the desktop navigation viewp
               class="app-shell__navigation-link"
               href="/zh/about"
             >
-              关于我
+              关于我 / CV
             </a>
           </li>
           <li>
@@ -60,14 +60,6 @@ exports[`application shell visual stories > matches the desktop navigation viewp
               href="/zh/research"
             >
               科研成果
-            </a>
-          </li>
-          <li>
-            <a
-              class="app-shell__navigation-link"
-              href="/zh/resume"
-            >
-              个人简历
             </a>
           </li>
           <li>
@@ -199,7 +191,7 @@ exports[`application shell visual stories > matches the mobile navigation viewpo
               class="app-shell__navigation-link"
               href="/zh/about"
             >
-              关于我
+              关于我 / CV
             </a>
           </li>
           <li>
@@ -217,14 +209,6 @@ exports[`application shell visual stories > matches the mobile navigation viewpo
               href="/zh/research"
             >
               科研成果
-            </a>
-          </li>
-          <li>
-            <a
-              class="app-shell__navigation-link"
-              href="/zh/resume"
-            >
-              个人简历
             </a>
           </li>
           <li>
@@ -356,7 +340,7 @@ exports[`application shell visual stories > matches the tablet navigation viewpo
               class="app-shell__navigation-link"
               href="/zh/about"
             >
-              关于我
+              关于我 / CV
             </a>
           </li>
           <li>
@@ -374,14 +358,6 @@ exports[`application shell visual stories > matches the tablet navigation viewpo
               href="/zh/research"
             >
               科研成果
-            </a>
-          </li>
-          <li>
-            <a
-              class="app-shell__navigation-link"
-              href="/zh/resume"
-            >
-              个人简历
             </a>
           </li>
           <li>
