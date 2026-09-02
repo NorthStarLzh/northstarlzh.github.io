@@ -16,6 +16,7 @@ test('research dialogs cover one to three images, long scrolling, Escape, and fo
     await trigger.click();
     const dialog = page.getByRole('dialog');
     await expect(dialog).toBeVisible();
+    await expect(dialog).toHaveCSS('background-color', 'rgb(255, 255, 255)');
     await expect(dialog.locator('.research-dialog__images')).toHaveAttribute(
       'data-image-count',
       String(imageCount),

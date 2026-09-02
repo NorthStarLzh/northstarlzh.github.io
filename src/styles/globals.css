@@ -47,6 +47,7 @@
   --ds-color-surface: rgb(0 0 0 / 4%);
   --color-surface: var(--ds-color-surface);
   --color-surface-raised: rgb(0 0 0 / 6%);
+  --color-dialog-surface: #ffffff;
   --color-text: #000000;
   --color-text-muted: rgb(0 0 0 / 60%);
   --color-text-tertiary: rgb(0 0 0 / 45%);
@@ -122,6 +123,7 @@
   --color-bg: #000000;
   --ds-color-surface: rgb(255 255 255 / 6%);
   --color-surface-raised: rgb(255 255 255 / 10%);
+  --color-dialog-surface: #181818;
   --color-text: #ffffff;
   --color-text-muted: rgb(255 255 255 / 60%);
   --color-text-tertiary: rgb(255 255 255 / 45%);
@@ -799,7 +801,7 @@ a:hover {
     overflow: hidden;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    background: var(--color-surface-raised);
+    background: var(--color-dialog-surface);
     box-shadow: var(--shadow-dialog);
     color: var(--color-text);
     transform: translate(-50%, -50%);

@@ -203,6 +203,8 @@ describe('research mapper', () => {
       .toThrow(InvalidContentError);
     expect(mapResearchProject(rawResearch({papers: [], noPublishedPapers: true})).papers)
       .toEqual([]);
+    expect(mapResearchProject(rawResearch({papers: null, noPublishedPapers: true})).papers)
+      .toEqual([]);
     expect(() => mapResearchProject(rawResearch({
       papers: [{_key: 'paper-1', title: {zh: '', en: 'Paper'}}],
     }))).toThrow(InvalidContentError);

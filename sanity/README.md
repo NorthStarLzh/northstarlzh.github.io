@@ -18,3 +18,28 @@ history/restore recovery entry points.
 Project-side access control must be configured in Sanity Manage: invite only the
 website owner, do not enable public write grants, and add the preview origin to CORS.
 These external controls cannot be proven from repository code.
+
+## Publish content to GitHub Pages
+
+GitHub Pages serves a static export, so content is read from Sanity during each
+Pages build. The **保存并公开** action writes the document to Sanity, but it
+does not by itself update the public site.
+
+For immediate updates, run **Deploy to GitHub Pages** from the repository's
+Actions tab. For automatic updates, create a Sanity document webhook in
+Sanity Manage → API → Webhooks with these settings:
+
+- URL: `https://api.github.com/repos/NorthStarLzh/northstarlzh.github.io/dispatches`
+- Method: `POST`
+- Dataset: `development`
+- Events: create, update, and delete; leave drafts disabled.
+- Filter: `_type in ["profile", "education", "award", "photo", "photoCollection", "researchProject"]`
+- Projection: `{ "event_type": "sanity-update" }`
+- Headers: `Accept: application/vnd.github+json`,
+  `Authorization: Bearer <GitHub fine-grained token>`.
+
+The GitHub token must be restricted to this repository and granted only
+**Contents: write**, which is required to create a `repository_dispatch` event.
+Store it only in the webhook header—never in this repository or a `NEXT_PUBLIC_`
+environment variable. A successful delivery returns HTTP `204` and starts the
+existing Pages workflow.

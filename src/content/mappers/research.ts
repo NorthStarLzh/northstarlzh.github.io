@@ -31,7 +31,17 @@ export function mapResearchProject(value: unknown): ResearchProject {
     );
   }
   const images = raw.images.map((image) => mapImageAsset(image, 'researchProject', id));
-  if (!Array.isArray(raw.papers)) {
+  let papers: PaperResult[];
+  if (Array.isArray(raw.papers)) {
+    papers = raw.papers.map((paper) => mapPaper(paper, id));
+  } else if (
+    raw.noPublishedPapers === true &&
+    (raw.papers === null || raw.papers === undefined)
+  ) {
+    // Sanity omits a hidden array field from the GROQ result as null. The
+    // explicit marker makes that absence equivalent to an empty result list.
+    papers = [];
+  } else {
     throw new InvalidContentError(
       'researchProject',
       'papers must be an array.',
@@ -39,7 +49,6 @@ export function mapResearchProject(value: unknown): ResearchProject {
       'papers.array_required',
     );
   }
-  const papers = raw.papers.map((paper) => mapPaper(paper, id));
   if (papers.length === 0 && raw.noPublishedPapers !== true) {
     throw new InvalidContentError(
       'researchProject',

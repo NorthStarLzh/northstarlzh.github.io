@@ -19,6 +19,7 @@ describe('design tokens', () => {
     for (const token of [
       '--color-bg',
       '--color-surface',
+      '--color-dialog-surface',
       '--color-text',
       '--color-text-muted',
       '--color-border',
@@ -39,5 +40,15 @@ describe('design tokens', () => {
     expect(styles).toContain('animation-name: ds-dialog-sheet-in');
     expect(styles).toContain('@keyframes ds-dialog-sheet-in');
     expect(styles).toContain('transform: translate(-50%, 0.75rem)');
+  });
+
+  it('uses an opaque, theme-aware reading surface for dialogs', () => {
+    expect(styles).toMatch(/:root\s*\{[\s\S]*?--color-dialog-surface:\s*#ffffff/u);
+    expect(styles).toMatch(
+      /\[data-theme='dark'\]\s*\{[\s\S]*?--color-dialog-surface:\s*#181818/u,
+    );
+    expect(styles).toMatch(
+      /\.ds-dialog-content\s*\{[\s\S]*?background:\s*var\(--color-dialog-surface\)/u,
+    );
   });
 });
